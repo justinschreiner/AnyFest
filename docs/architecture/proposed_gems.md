@@ -41,3 +41,15 @@ To allow users to upload images for the background of their templates.
 ### Purpose
 
 To add authentication to the User model.
+
+## jquery-minicolors-rails
+
+### Purpose
+
+To allow users to pick colors for their text and delineators when making templates.
+
+## imgkit
+
+### Purpose
+
+To be able to export finished lineups as images.
