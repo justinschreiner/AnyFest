@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FestivalsController < ApplicationController
-  def list
+  def index
     @festivals = Festival.all
   end
 
@@ -14,14 +14,14 @@ class FestivalsController < ApplicationController
   end
 
   def festival_params
-    params.require(:festivals).permit(:title, :price, :subject_id, :description)
+    params.require(:festivals).permit(:name, :location)
   end
 
   def create
     @festival = Festival.new(festival_params)
 
     if @festival.save
-      redirect_to action: 'list'
+      redirect_to action: 'index'
     else
       render action: 'new'
     end
@@ -32,7 +32,7 @@ class FestivalsController < ApplicationController
   end
 
   def festival_param
-    params.require(:festival).permit(:title, :price, :subject_id, :description)
+    params.require(:festival).permit(:name, :location)
   end
 
   def update
@@ -45,7 +45,7 @@ class FestivalsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     Festival.find(params[:id]).destroy
     redirect_to action: 'list'
   end

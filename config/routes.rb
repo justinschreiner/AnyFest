@@ -2,5 +2,4 @@
 
 Rails.application.routes.draw do
   resources :festivals
-  root 'festivals#show'
 end
