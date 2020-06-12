@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FestivalController < ApplicationController
+class FestivalsController < ApplicationController
   def list
     @festivals = Festival.all
   end
