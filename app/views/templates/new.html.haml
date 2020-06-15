@@ -1,0 +1,16 @@
+%h1 Add new Template
+= form_tag action: 'create' do
+  %p
+    %label{for: "name"}> Name
+    \:
+    = text_field 'templates', 'name'
+  %p
+    %label{for: "background_img"}> Background Image
+    \:
+    = text_field 'templates', 'background_img'
+  %p
+    %label{for: "background_color"}> Background Color
+    \:
+    = text_field 'templates', 'background_color'
+
+  = submit_tag "Create"

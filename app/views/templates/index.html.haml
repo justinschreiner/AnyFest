@@ -1,0 +1,3 @@
+%ul#festivals
+  - @templates.each do |t|
+    %li= link_to t.name, {action: 'show', id: t.id}
