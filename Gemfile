@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.1"
@@ -56,3 +56,5 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "standard", group: [:development, :test]
 
 gem "haml-rails", "~> 2.0"
+
+gem 'trestle'
