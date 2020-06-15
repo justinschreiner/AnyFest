@@ -1,0 +1,13 @@
+version: "3"
+services:
+  app:
+    image: brandnewbox/bnb-ruby:2.7-postgresql
+    command: bundle exec puma -C config/puma.rb
+    env_file: .docker-development-vars
+    volumes:
+      - .:/app:cached
+      - bundle_cache:/usr/local/bundle:cached
+    ports:
+      - "3000:3000"
+volumes:
+  bundle_cache:
