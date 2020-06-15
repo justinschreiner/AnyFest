@@ -1,8 +1,9 @@
 class CreateTemplates < ActiveRecord::Migration[6.0]
   def change
     create_table :templates do |t|
-
-      t.timestamps
+      t.column :name, :string
+      t.column :background_img, :string
+      t.column :background_color, :string
     end
   end
 end

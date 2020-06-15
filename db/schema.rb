@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_192236) do
+ActiveRecord::Schema.define(version: 2020_06_15_195003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,12 @@ ActiveRecord::Schema.define(version: 2020_06_12_192236) do
   create_table "festivals", force: :cascade do |t|
     t.string "name"
     t.string "location"
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string "name"
+    t.string "background_img"
+    t.string "background_color"
   end
 
 end
