@@ -31,14 +31,10 @@ class FestivalsController < ApplicationController
     @festival = Festival.find(params[:id])
   end
 
-  def festival_param
-    params.require(:festival).permit(:name, :location)
-  end
-
   def update
     @festival = Festival.find(params[:id])
 
-    if @festival.update_attributes(festival_param)
+    if @festival.update_attributes(festival_params)
       redirect_to action: 'show', id: @festival
     else
       render action: 'edit'
