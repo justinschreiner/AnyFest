@@ -5,7 +5,7 @@ class CreateTemplates < ActiveRecord::Migration[6.0]
       t.column :background_color, :string
 
       t.belongs_to :festival, foreign_key: true
-      # t.belongs_to :user, foreign_key: true
+      t.belongs_to :user, foreign_key: true
     end
   end
 end

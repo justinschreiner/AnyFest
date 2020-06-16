@@ -24,7 +24,9 @@ ActiveRecord::Schema.define(version: 2020_06_16_181609) do
     t.string "name"
     t.string "background_color"
     t.bigint "festival_id"
+    t.bigint "user_id"
     t.index ["festival_id"], name: "index_templates_on_festival_id"
+    t.index ["user_id"], name: "index_templates_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,4 +42,5 @@ ActiveRecord::Schema.define(version: 2020_06_16_181609) do
   end
 
   add_foreign_key "templates", "festivals"
+  add_foreign_key "templates", "users"
 end
