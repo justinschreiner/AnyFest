@@ -11,10 +11,6 @@ class FestivalsController < ApplicationController
     @festival = Festival.new
   end
 
-  def festival_params
-    params.require(:festivals).permit(:name, :location)
-  end
-
   def create
     @festival = Festival.new(festival_params)
 
@@ -42,5 +38,10 @@ class FestivalsController < ApplicationController
   def destroy
     Festival.find(params[:id]).destroy
     redirect_to action: 'list'
+  end
+
+  private
+  def festival_params
+    params.require(:festivals).permit(:name, :location)
   end
 end

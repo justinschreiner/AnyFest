@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  resources :festivals
+  resources :festivals, :templates
+  root "templates#index"
 end
