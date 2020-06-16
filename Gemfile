@@ -58,3 +58,5 @@ gem "standard", group: [:development, :test]
 gem "haml-rails", "~> 2.0"
 
 gem 'trestle'
+
+gem 'jquery-rails'

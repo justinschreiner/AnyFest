@@ -1,12 +1,10 @@
 %h1 Add new Festival
 = form_tag action: 'create' do
   %p
-    %label{for: "name"}> Name
-    \:
+    %label{for: "name"} Name
     = text_field 'festivals', 'name'
   %p
-    %label{for: "location"}> Loation
-    \:
+    %label{for: "location"} Location
     = text_field 'festivals', 'location'
 
   = submit_tag "Create"
