@@ -10,4 +10,4 @@
     %label{for: "template_festival_id"} Festival
     = f.collection_select(:festival_id, @festivals, :id, :name, prompt: true)
 
-  = f.submit "Create"
+  = f.submit "Create", class: "btn btn-primary"
