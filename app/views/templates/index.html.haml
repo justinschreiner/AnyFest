@@ -2,3 +2,9 @@
   - @templates.each do |t|
     %li= link_to t.name, {action: 'show', id: t.id}
 = link_to "Add new", {action: 'new'}
+
+= link_to destroy_session_path(:admin), :method => :delete do
+  %i.fa.fa-sign-out
+  Logout
+
+= link_to "trestle", trestle.festivals_admin_index_path

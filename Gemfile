@@ -61,6 +61,7 @@ gem "haml-rails", "~> 2.0"
 
 # Allows admin to alter tables
 gem 'trestle'
+gem 'trestle-auth'
 
 # Secures user and admin accounts with authorization
 gem 'devise'
