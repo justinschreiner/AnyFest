@@ -53,8 +53,14 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+# Cleans up code with --fix command
 gem "standard", group: [:development, :test]
 
+# Converts .erb files to .haml files
 gem "haml-rails", "~> 2.0"
 
+# Allows admin to alter tables
 gem 'trestle'
+
+# Secures user and admin accounts with authorization
+gem 'devise'
