@@ -12,10 +12,6 @@ class TemplatesController < ApplicationController
     @festivals = Festival.all
   end
 
-  def template_params
-    params.require(:templates).permit(:name, :background_img, :background_color, :festival_id)
-  end
-
   def create
     @template = Template.new(template_params)
 
@@ -27,22 +23,27 @@ class TemplatesController < ApplicationController
     end
   end
 
-  # def edit
-  #   @template = Template.find(params[:id])
-  # end
+  def edit
+    @template = Template.find(params[:id])
+  end
 
-  # def update
-  #   @template = Template.find(params[:id])
+  def update
+    @template = Template.find(params[:id])
 
-  #   if @template.update_attributes(template_params)
-  #     redirect_to action: 'show', id: @template
-  #   else
-  #     render action: 'edit'
-  #   end
-  # end
+    if @template.update_attributes(template_params)
+      redirect_to action: 'show', id: @template
+    else
+      render action: 'edit'
+    end
+  end
 
-  # def destroy
-  #   Template.find(params[:id]).destroy
-  #   redirect_to action: 'list'
-  # end
+  def destroy
+    Template.find(params[:id]).destroy
+    redirect_to action: 'list'
+  end
+
+  private
+  def template_params
+    params.require(:templates).permit(:name, :background_img, :background_color, :festival_id)
+  end
 end
