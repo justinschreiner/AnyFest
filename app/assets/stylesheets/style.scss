@@ -58,3 +58,15 @@ a {
     outline: none;
   }
 }
+
+#big-text {
+  font-size: 10em;
+  padding: 0;
+  margin: 0;
+  #any {
+    color: #ffe66d;
+  }
+  #fest {
+    color: #ff6b6b;
+  }
+}
