@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(version: 2020_06_15_195003) do
 
   create_table "templates", force: :cascade do |t|
     t.string "name"
-    t.string "background_img"
     t.string "background_color"
-    t.integer "festival_id"
+    t.bigint "festival_id"
+    t.index ["festival_id"], name: "index_templates_on_festival_id"
   end
 
+  add_foreign_key "templates", "festivals"
 end

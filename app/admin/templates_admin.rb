@@ -15,7 +15,6 @@ Trestle.resource(:templates) do
   #
   form do |template|
     text_field :name
-    text_field :background_img
     text_field :background_color
     select :festival_id, Festival.all
   end

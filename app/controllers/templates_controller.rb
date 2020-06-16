@@ -44,6 +44,6 @@ class TemplatesController < ApplicationController
 
   private
   def template_params
-    params.require(:templates).permit(:name, :background_img, :background_color, :festival_id)
+    params.require(:template).permit(:name, :background_color, :festival_id)
   end
 end

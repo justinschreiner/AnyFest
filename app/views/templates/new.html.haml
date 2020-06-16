@@ -1,16 +1,13 @@
 %h1 Add new Template
-= form_tag action: 'create' do
+= form_with model: @template, local: true do |f|
   %p
-    %label{for: "name"} Name
-    = text_field 'templates', 'name'
+    %label{for: "template_name"} Name
+    = f.text_field :name
   %p
-    %label{for: "background_img"} Background Image
-    = text_field 'templates', 'background_img'
+    %label{for: "template_background_color"} Background Color
+    = f.text_field :background_color
   %p
-    %label{for: "background_color"} Background Color
-    = text_field 'templates', 'background_color'
-  %p
-    %label{for: "background_color"} Background Color
-    = collection_select(:templates, :festival_id, Festival.all, :id, :name)
+    %label{for: "template_festival_id"} Festival
+    = f.collection_select(:festival_id, @festivals, :id, :name, prompt: true)
 
-  = submit_tag "Create"
+  = f.submit "Create"
