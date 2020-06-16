@@ -10,7 +10,7 @@
     %label{for: "background_color"} Background Color
     = text_field 'templates', 'background_color'
   %p
-    %label{for: "festival_id"} Festival
-    = text_field 'templates', 'background_color'
+    %label{for: "background_color"} Background Color
+    = collection_select(:templates, :festival_id, Festival.all, :id, :name)
 
   = submit_tag "Create"

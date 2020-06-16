@@ -9,10 +9,11 @@ class TemplatesController < ApplicationController
 
   def new
     @template = Template.new
+    @festivals = Festival.all
   end
 
   def template_params
-    params.require(:templates).permit(:name, :background_img, :background_color)
+    params.require(:templates).permit(:name, :background_img, :background_color, :festival_id)
   end
 
   def create
@@ -21,6 +22,7 @@ class TemplatesController < ApplicationController
     if @template.save
       redirect_to action: 'index'
     else
+      @festivals = Festival.all
       render action: 'new'
     end
   end

@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2020_06_15_195003) do
     t.string "background_img"
     t.string "background_color"
     t.integer "festival_id"
-    t.integer "user_id"
   end
 
 end

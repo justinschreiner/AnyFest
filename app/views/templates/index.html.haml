@@ -1,3 +1,4 @@
 %ul#templates
   - @templates.each do |t|
     %li= link_to t.name, {action: 'show', id: t.id}
+= link_to "Add new", {action: 'new'}
