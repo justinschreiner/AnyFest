@@ -42,6 +42,6 @@ class FestivalsController < ApplicationController
 
   private
   def festival_params
-    params.require(:festivals).permit(:name, :location)
+    params.require(:festival).permit(:name, :location)
   end
 end
