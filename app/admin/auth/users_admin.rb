@@ -1,7 +1,7 @@
-Trestle.resource(:admins, model: Admin, scope: Auth) do
+Trestle.resource(:users, model: User, scope: Auth) do
   menu do
     group :configuration, priority: :last do
-      item :admins, icon: "fa fa-users"
+      item :users, icon: "fa fa-users"
     end
   end
 
@@ -10,6 +10,7 @@ Trestle.resource(:admins, model: Admin, scope: Auth) do
       avatar_for(administrator)
     end
     column :email, link: true
+    column :is_admin?
     actions do |a|
       a.delete unless a.instance == current_user
     end
@@ -17,7 +18,7 @@ Trestle.resource(:admins, model: Admin, scope: Auth) do
 
   form do |administrator|
     text_field :email
-
+    check_box :is_admin?
     row do
       col(sm: 6) { password_field :password }
       col(sm: 6) { password_field :password_confirmation }
