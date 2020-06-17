@@ -4,7 +4,7 @@ body {
   color: white;
   font-family: "Nunito", sans-serif;
   margin: 0;
-  font-size: 1.75vh;
+  font-size: 1vw;
 }
 
 #navbar {
@@ -41,21 +41,26 @@ body {
   }
 }
 
+.notice,
+.alert {
+  margin: 1em;
+}
+
 #content {
-  padding: 10vh 20vh;
+  padding: 10vh 10vw;
 
   h1 {
-    font-size: 6vh;
+    font-size: 3vw;
     color: white;
   }
 
   h2 {
-    font-size: 5vh;
+    font-size: 2.5vw;
     color: white;
   }
 
   h3 {
-    font-size: 4vh;
+    font-size: 2vw;
     color: white;
   }
 
@@ -83,19 +88,21 @@ body {
   .form-control {
     background-color: white;
     border: 2px solid #ff6b6b;
-    border-radius: 5px;
+    border-radius: 3vh;
     color: #1a535c;
-    width: 30%;
+    width: 30vw;
     margin: 1em 0;
-    font-size: 30;
+    font-size: 1vw;
+    padding: 0.5vw 2vh;
 
     transition: border 0.4s ease-in-out;
 
     &:focus {
       background-color: white;
       border: 2px solid #1a535c;
-      border-radius: 5px;
+      border-radius: 10px;
       outline: none;
+      border-radius: 3vh;
     }
   }
 
