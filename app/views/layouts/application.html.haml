@@ -9,6 +9,8 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'application', "http://fonts.googleapis.com/css?family=Nunito"
   %body
+    -if (user_signed_in?)
+      = render "layouts/navbar"
     %p.notice= notice
     %p.alert= alert
     #content
