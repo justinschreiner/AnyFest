@@ -71,18 +71,23 @@
     margin: 0;
     #any {
       color: #ffe66d;
-      font-size: 10em;
+      font-size: 7vw;
     }
     #fest {
       color: #ff6b6b;
-      font-size: 10em;
+      font-size: 7vw;
     }
   }
 
   #login {
     margin-left: 20vw;
     a {
-      margin-top: 5vh;
+      margin-top: 1vh;
+      margin-left: 0.25vw;
+      display: inline-block;
+    }
+    .btn {
+      margin-top: 1vh;
     }
   }
 }
