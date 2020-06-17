@@ -129,16 +129,11 @@ Trestle.configure do |config|
   #
   # config.debug_form_errors = true
 
-  Trestle.configure do |config|
-    # Optional, but it is always nice to give folks the option of
-    # logging out:
-    config.hook("view.header") do
-      render "head"
-    end
-    # ...
+  # # Optional, but it is always nice to give folks the option of
+  # # logging out:
+  config.hook("view.header") do
+    render "head"
   end
-  require 'trestle-devise/controller_methods'
-  Trestle::ApplicationController.send(:include, Trestle::Auth::ControllerMethods)
 
   # == Authentication Options
   #
@@ -148,15 +143,16 @@ Trestle.configure do |config|
 
   # Specify the Devise/Warden mapping/scope.
   #
-  config.auth.warden.scope = :admin
+  config.auth.warden.scope = :user
 
   # Specify the user class to be used by trestle-auth.
   #
-  config.auth.user_class = -> { Admin }
+  config.auth.user_class = -> { User }
+  config.auth.user_scope = -> { User.where(is_admin: true)}
 
   # Specify the Trestle admin for managing administrator users.
   #
-  config.auth.user_admin = -> { :"auth/admins" }
+  config.auth.user_admin = -> { :"auth/users" }
 
   # Customize the rendering of user avatars. Can be disabled by setting to false.
   # Defaults to the Gravatar based on the user's email address.
@@ -227,4 +223,6 @@ Trestle.configure do |config|
   # Enable or disable remember me functionality. Defaults to true.
   #
   # config.auth.remember.enabled = false
+
+
 end

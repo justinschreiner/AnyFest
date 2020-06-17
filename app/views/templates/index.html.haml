@@ -3,5 +3,7 @@
     %li= link_to t.name, {action: 'show', id: t.id}
 = link_to "Add new", {action: 'new'}
 
-#trestle
-  = link_to "trestle", trestle.festivals_admin_index_path
+- if (user_signed_in?)
+  - if (current_user.is_admin?)
+    #trestle
+      = link_to "trestle", trestle.root_path
