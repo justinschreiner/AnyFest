@@ -1,6 +1,5 @@
 class TemplatesController < ApplicationController
   before_action :authenticate_user!
-  
   def index
     @q = Festival.ransack(params[:q])
     @festivals = @q.result(distinct: true)
