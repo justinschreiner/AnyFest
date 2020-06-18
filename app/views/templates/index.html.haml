@@ -9,6 +9,7 @@
     - @festivals.each do |f|
       %li= link_to f.name, {action: 'show', id: f.id}
   #add
+    = "Don't see your festval? " 
     = link_to "Add New Festival", new_festival_path
   %h1
     = "Make your Lineup now!"

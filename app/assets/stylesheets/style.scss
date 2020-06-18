@@ -82,7 +82,6 @@ body {
     font-weight: 900;
     font-size: 1em;
     border-radius: 10vw;
-    padding: 1vh 1vw;
     text-decoration: none;
     cursor: pointer;
   }
@@ -144,7 +143,7 @@ body {
       .form-control {
         font-size: 1em;
         border-radius: 10vw;
-        padding: 2.25vh 1vw;
+        padding: 1vh 1vw;
         width: 60%;
       }
     }
@@ -155,10 +154,23 @@ body {
     }
   }
 
-  #festival-index {
+  #festivals-index {
+    #search {
+      .form-control,
+      .btn {
+        display: inline-block;
+      }
+      .form-control {
+        font-size: 1em;
+        border-radius: 10vw;
+        padding: 1vh 1vw;
+        width: 60%;
+      }
+    }
+
     li {
       list-style-type: none;
-      font-size: 6vh;
+      font-size: 3vh;
     }
   }
 }
