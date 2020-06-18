@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_161417) do
+ActiveRecord::Schema.define(version: 2020_06_18_155553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_06_17_161417) do
     t.string "name"
     t.string "background_color"
     t.bigint "festival_id"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.index ["festival_id"], name: "index_templates_on_festival_id"
     t.index ["user_id"], name: "index_templates_on_user_id"
   end

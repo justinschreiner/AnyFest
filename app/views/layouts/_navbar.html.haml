@@ -1,0 +1,11 @@
+%ul#navbar
+    %li#anyfest
+        = link_to root_path do
+            %span#any= "Any"
+            %span#fest= "Fest"
+    %li#home
+        = link_to "Home", root_path
+    %li#logout
+        = link_to destroy_session_path(:user), method: :delete do
+            %i.fa.fa-sign-out
+            Logout

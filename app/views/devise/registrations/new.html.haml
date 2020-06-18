@@ -1,0 +1,20 @@
+= render "devise/shared/anyfest"
+#login
+  %h1 Create an Account!
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = render "devise/shared/error_messages", resource: resource
+    .field.form-group
+      = f.label :email, "email"
+      %br/
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"
+    .field.form-group
+      = f.label :password, "password"
+      %br/
+      = f.password_field :password, autocomplete: "new-password", class: "form-control"
+    .field.form-group
+      = f.label :password_confirmation, "confirm password"
+      %br/
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"
+    .actions
+      = f.submit "SIGN UP", class: "btn btn-primary"
+  = render "devise/shared/links"
