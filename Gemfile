@@ -67,4 +67,4 @@ gem 'trestle-auth'
 gem 'devise'
 
 # Bootstrap elements for visual appeal
-gem 'bootstrap', '~> 4.5.0'
+gem 'bootstrap-sass'
