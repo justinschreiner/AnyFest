@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_18_180603) do
+ActiveRecord::Schema.define(version: 2020_06_18_191317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,22 @@ ActiveRecord::Schema.define(version: 2020_06_18_180603) do
   create_table "festivals", force: :cascade do |t|
     t.string "name"
     t.string "location"
+  end
+
+  create_table "sections", force: :cascade do |t|
+    t.string "name"
+    t.string "act_type"
+    t.string "text_colors", default: [], array: true
+    t.boolean "alternating_colors"
+    t.string "delineator"
+    t.string "delineator_color"
+    t.integer "max_act_count"
+    t.integer "x_offset"
+    t.integer "y_offset"
+    t.integer "width"
+    t.integer "height"
+    t.bigint "template_id"
+    t.index ["template_id"], name: "index_sections_on_template_id"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -53,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_06_18_180603) do
   end
 
   add_foreign_key "days", "templates"
+  add_foreign_key "sections", "templates"
   add_foreign_key "templates", "festivals"
   add_foreign_key "templates", "users"
 end
