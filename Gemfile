@@ -65,6 +65,3 @@ gem 'trestle-auth'
 
 # Secures user and admin accounts with authorization
 gem 'devise'
-
-# Bootstrap elements for visual appeal
-gem 'bootstrap'
