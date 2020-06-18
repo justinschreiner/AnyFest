@@ -148,5 +148,16 @@ body {
         width: 60%;
       }
     }
+    #results {
+      padding-left: 3vw;
+      list-style-type: none;
+    }
+  }
+
+  #festival-index {
+    li {
+      list-style-type: none;
+      font-size: 6vh;
+    }
   }
 }
