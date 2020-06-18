@@ -65,3 +65,6 @@ gem 'trestle-auth'
 
 # Secures user and admin accounts with authorization
 gem 'devise'
+
+# Allows search functionallity
+gem 'ransack'
