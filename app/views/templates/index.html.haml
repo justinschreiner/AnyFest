@@ -1,9 +1,10 @@
-- if (user_signed_in?)
-  - if (current_user.is_admin?)
-    #trestle
-      = link_to "trestle", trestle.root_path
 %h1
   = "Search Festivals"
+#search
+  = search_form_for @q do |f|
+    = f.search_field :name_cont, class: "form-control input-lg"
+    = f.submit "SEARCH", class: "btn btn-primary"
+
 %h1
   = "Make your Lineup now!"
 %ul#templates
@@ -12,3 +13,8 @@
 %h1
   = "Want to make your own Template?"
 = link_to "ADD TEMPLATE", {action: 'new'}, class: "btn btn-primary"
+
+- if (user_signed_in?)
+  - if (current_user.is_admin?)
+    #trestle
+      = link_to "trestle", trestle.root_path
