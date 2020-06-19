@@ -152,6 +152,14 @@ body {
       padding-left: 3vw;
       list-style-type: none;
     }
+    #preview {
+      display: inline-block;
+      padding-right: 1vw;
+      img {
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
+    }
   }
 
   #festivals-index {
@@ -185,6 +193,7 @@ body {
     }
     #or {
       color: #ff6b6b;
+      margin-top: 0.5em;
     }
   }
 

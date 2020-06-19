@@ -6,17 +6,17 @@
       = f.search_field :name_cont, class: "form-control input-lg"
       = f.submit "SEARCH", class: "btn btn-primary"
   - if (params[:q]).present?
-    #results
-      - @festivals.each do |f|
-        %li= link_to f.name, {action: 'show', id: f.id}
+    %li= link_to f.name, {action: 'show', id: f.id}
   #add
     = "Don't see your festval? " 
     = link_to "Add New Festival", new_festival_path
   %h1
     = "Make your Lineup now!"
   %ul#templates
-    - @templates.each do |t|
-      %li= link_to t.name, {action: 'show', id: t.id}
+    - @templates.each do |tem|
+      - if(tem.background_image.attached?)
+        #preview
+          =image_tag(tem.background_image, size: "210x280")
   %h1
     = "Want to make your own Template?"
   = link_to "ADD TEMPLATE", {action: 'new'}, class: "btn btn-primary"
