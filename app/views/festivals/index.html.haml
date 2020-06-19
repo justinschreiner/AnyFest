@@ -1,4 +1,12 @@
-%ul#festivals
-  - @festivals.each do |f|
-    %li= link_to f.name, {action: 'show', id: f.id}
+#festivals-index
+  %h1= "Festivals"
+  = "Don't see yours?"
+  = link_to "Add it!", {action: :new}
+  #search
+    = search_form_for(@q) do |f|
+      = f.search_field :name_cont, class: "form-control input-lg"
+      = f.submit "SEARCH", class: "btn btn-primary"
+  %ul#results
+    - @festivals.each do |f|
+      %li= link_to f.name, {action: 'show', id: f.id}
 
