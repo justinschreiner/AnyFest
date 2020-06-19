@@ -6,12 +6,9 @@
     %label{for: "template_background_color"} Background Color
     = f.text_field :background_color, class: "form-control input-lg"
   .form-group
-    %label{for: "festivalSelect"} Festival
-    %select#festivalSelect.form-control
-      - @festivals.each do |f|
-        %option{value: f.id}
-          = f.name
+    %label{for: "template_festival_id"} Festival
+    = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
   .form-group
     = f.hidden_field :user_id, value: current_user.id
-        
+
   = f.submit "Create", class: "btn btn-primary"

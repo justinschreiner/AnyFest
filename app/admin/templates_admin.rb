@@ -17,6 +17,7 @@ Trestle.resource(:templates) do
     text_field :name
     text_field :background_color
     select :festival_id, Festival.all
+    select :user_id, User.all
   end
 
   # By default, all parameters passed to the update and create actions will be
