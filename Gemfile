@@ -69,4 +69,8 @@ gem 'devise'
 # Allows search functionallity
 gem 'ransack'
 
+# Allows variants of images uploaded with active storage
+gem 'image_processing'
+
+# Allows trestle to link with active storage
 gem 'trestle-active_storage'

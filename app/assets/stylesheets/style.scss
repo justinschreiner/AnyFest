@@ -191,6 +191,10 @@ body {
   #show-template {
     #image {
       padding-top: 30px;
+      img {
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
     }
   }
 }

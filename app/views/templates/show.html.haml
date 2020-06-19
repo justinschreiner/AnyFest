@@ -5,4 +5,4 @@
         = @template.festival.name
     #image
         - if(@template.background_image.attached?)
-            =image_tag(url_for(@template.background_image))
+            =image_tag(@template.background_image.variant(resize_to_limit: [300, 400]))
