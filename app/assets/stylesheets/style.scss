@@ -173,4 +173,18 @@ body {
       font-size: 3vh;
     }
   }
+
+  #template-form {
+    #background {
+      margin-left: 3em;
+    }
+    #image {
+      #file {
+        margin: 1em 0;
+      }
+    }
+    #or {
+      color: #ff6b6b;
+    }
+  }
 }

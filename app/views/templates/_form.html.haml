@@ -1,23 +1,29 @@
-= form_with model: @template, local: true do |f|
-  .form-group
-    %h3
-      %label{for: "template_name"} Name
-    = f.text_field :name, class: "form-control input-lg"
-  .form-group
-    %h3
-      %label{for: "template_background_image"} Background Image
-    = f.file_field :background_image
-  .form-group
-    %h3
-      %label{for: "template_background_color"} Background Color
-    = f.text_field :background_color, class: "form-control input-lg"
-  .form-group
-    %h3
-      %label{for: "template_festival_id"} Festival
-    = "Don't see your festival?"
-    = link_to "Add it", new_festival_path
-    = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
-  .form-group
-    = f.hidden_field :user_id, value: current_user.id
+#template-form
+    = form_with model: @template, local: true do |f|
+        .form-group
+            %h3
+                %label{for: "template_festival_id"} Festival
+            = "Don't see your festival?"
+            = link_to "Add it", new_festival_path
+            = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
+        .form-group
+            %h3
+                %label{for: "template_name"} Name
+            = f.text_field :name, class: "form-control input-lg"
+        %h2 Background
+        #background 
+            .form-group#image
+                %h3
+                %label{for: "template_background_image"} Background Image
+                %br
+                #file
+                    = f.file_field :background_image
+            %h3#or OR
+            .form-group#color
+                %h3
+                %label{for: "template_background_color"} Background Color (hex)
+                = f.text_field :background_color, class: "form-control input-lg"
+        .form-group
+            = f.hidden_field :user_id, value: current_user.id
 
-  = f.submit "Create", class: "btn btn-primary"
+        = f.submit "Create", class: "btn btn-primary"
