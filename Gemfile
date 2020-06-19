@@ -68,3 +68,5 @@ gem 'devise'
 
 # Allows search functionallity
 gem 'ransack'
+
+gem 'trestle-active_storage'

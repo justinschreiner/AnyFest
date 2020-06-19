@@ -246,6 +246,9 @@ GEM
       kaminari (>= 1.1.0)
       railties (>= 4.2.0)
       sprockets-rails (>= 2.0.0)
+    trestle-active_storage (3.0.0)
+      rails (>= 5.2, < 7)
+      trestle (~> 0.9.0, >= 0.9.3)
     trestle-auth (0.4.0)
       bcrypt (~> 3.1.7)
       trestle (~> 0.9.0)
@@ -298,6 +301,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   standard
   trestle
+  trestle-active_storage
   trestle-auth
   turbolinks (~> 5)
   tzinfo-data
