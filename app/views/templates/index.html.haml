@@ -6,7 +6,9 @@
       = f.search_field :name_cont, class: "form-control input-lg"
       = f.submit "SEARCH", class: "btn btn-primary"
   - if (params[:q]).present?
-    %li= link_to f.name, {action: 'show', id: f.id}
+    #results
+      - @festivals.each do |f|
+        %li= link_to f.name, {action: 'show', id: f.id}
   #add
     = "Don't see your festval? " 
     = link_to "Add New Festival", new_festival_path
@@ -16,7 +18,8 @@
     - @templates.each do |tem|
       - if(tem.background_image.attached?)
         #preview
-          =image_tag(tem.background_image, size: "210x280")
+          = link_to(tem) do
+            = image_tag(tem.background_image, size: "210x280")
   %h1
     = "Want to make your own Template?"
   = link_to "ADD TEMPLATE", {action: 'new'}, class: "btn btn-primary"
