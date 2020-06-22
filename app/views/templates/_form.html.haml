@@ -23,7 +23,5 @@
                 %h3
                 %label{for: "template_background_color"} Background Color (hex)
                 = f.text_field :background_color, class: "form-control input-lg"
-        .form-group
-            = f.hidden_field :user_id, value: current_user.id
 
         = f.submit "Create", class: "btn btn-primary"
