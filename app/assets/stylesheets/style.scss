@@ -47,7 +47,7 @@ body {
 }
 
 #content {
-  padding: 10vh 10vw;
+  padding: 0 10vw;
 
   h1 {
     font-size: 3vw;
@@ -152,6 +152,14 @@ body {
       padding-left: 3vw;
       list-style-type: none;
     }
+    #preview {
+      display: inline-block;
+      padding-right: 1vw;
+      img {
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
+    }
   }
 
   #festivals-index {
@@ -171,6 +179,31 @@ body {
     li {
       list-style-type: none;
       font-size: 3vh;
+    }
+  }
+
+  #template-form {
+    #background {
+      margin-left: 3em;
+    }
+    #image {
+      #file {
+        margin: 1em 0;
+      }
+    }
+    #or {
+      color: #ff6b6b;
+      margin-top: 0.5em;
+    }
+  }
+
+  #show-template {
+    #image {
+      padding-top: 30px;
+      img {
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
     }
   }
 }

@@ -3,6 +3,10 @@ Trestle.resource(:templates) do
     item :templates, icon: "fa fa-star"
   end
 
+  active_storage_fields do
+    [:background_image]
+  end
+
   # Customize the table columns shown on the index view.
   #
   # table do
@@ -14,9 +18,11 @@ Trestle.resource(:templates) do
   # Customize the form fields shown on the new/edit views.
   #
   form do |template|
-    text_field :name
-    text_field :background_color
+    select :user_id, User.all
     select :festival_id, Festival.all
+    text_field :name
+    active_storage_field :background_image
+    text_field :background_color
   end
 
   # By default, all parameters passed to the update and create actions will be

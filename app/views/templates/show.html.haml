@@ -1,4 +1,8 @@
-%h1#name
-    = @template.name
-%h2#festival
-    = @template.festival.name
+#show-template
+    %h1#name
+        = @template.name
+    %h2#festival
+        = @template.festival.name
+    #image
+        - if(@template.background_image.attached?)
+            =image_tag(@template.background_image.variant(resize_to_limit: [300, 400]))
