@@ -1,10 +1,11 @@
 #position-sections
     %h1 Create Sections for your Template
     #form
-        %h2 Sections
+        %h3 Add Sections
         .container 
-            = content_tag :div, @template.name, class: 'drag-drop', data: { draggable: true, resizable: true }
+            = content_tag :div, "Day", class: 'drag-drop', data: { draggable: true, resizable: true }
+            = content_tag :div, "Section", class: 'drag-drop', data: { draggable: true, resizable: true }
     #preview
-        %h2 Preview 
+        %h3 Preview 
         - if(@template.background_image.attached?)
             = image_tag(@template.background_image, size: "210x280", class: "dropzone")
