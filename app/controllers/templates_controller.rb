@@ -11,8 +11,8 @@ class TemplatesController < ApplicationController
   end
 
   def new
-    @template = current_user.templates.new
-    @festivals = Festival.all
+    @template = current_user.templates.create
+    redirect_to template_build_path(template_id: @template, id: :create_template, action: 'create')
   end
 
   def create
