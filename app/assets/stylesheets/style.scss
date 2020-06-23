@@ -211,24 +211,36 @@ body {
   }
 
   #position-sections {
-    .container {
-      width: 40%;
-      height: 500px;
-      background-color: #444;
+    #form {
+      width: 25%;
+      float: left;
+      .container {
+        background-color: #444;
+        height: 400px;
+        .drag-drop {
+          color: white;
+          font-size: 20px;
+          font-family: sans-serif;
+          padding: 20px;
+          touch-action: none;
+          background-color: rgba(0, 0, 0, 0.3);
+          border: 2px solid #000;
+
+          width: 120px;
+
+          /* This makes things *much* easier */
+          box-sizing: border-box;
+        }
+      }
     }
-    .drag-drop {
-      background-color: #29e;
-      color: white;
-      font-size: 20px;
-      font-family: sans-serif;
-      border-radius: 8px;
-      padding: 20px;
-      touch-action: none;
-
-      width: 120px;
-
-      /* This makes things *much* easier */
-      box-sizing: border-box;
+    #preview {
+      width: 70%;
+      float: right;
+      img {
+        width: 80%;
+        height: auto;
+        object-fit: contain;
+      }
     }
   }
 
