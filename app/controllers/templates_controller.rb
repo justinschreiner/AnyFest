@@ -11,7 +11,9 @@ class TemplatesController < ApplicationController
   end
 
   def new
-    @template = current_user.templates.create
+    @template = current_user.templates.new
+    @template.festival_id = 1
+    @template.save
     redirect_to template_build_path(template_id: @template, id: :create_template, action: 'create')
   end
 
@@ -34,7 +36,7 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
 
     if @template.update_attributes(template_params)
-      redirect_to action: 'show', id: @template
+      redirect_to template_build_path(template_id: @template, id: :position_sections)
     else
       render action: 'edit'
     end
