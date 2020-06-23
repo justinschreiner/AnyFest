@@ -1,8 +1,11 @@
-%h1 Create Sections for your Template
-These sections are where acts will populate for users who use your template!
-#form
-    form stuff will go here 
-#preview
-    %h2 Preview 
-    - if(@template.background_image.attached?)
-        = image_tag(@template.background_image, size: "210x280")
+#position-sections
+    %h1 Create Sections for your Template
+    These sections are where acts will populate for users who use your template!
+    #form
+        form stuff will go here
+        .container 
+            = content_tag :div, @template.name, class: 'drag-drop', data: { draggable: true }
+    #preview
+        %h2 Preview 
+        - if(@template.background_image.attached?)
+            = image_tag(@template.background_image, size: "210x280")
