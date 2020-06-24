@@ -106,8 +106,7 @@ interact(".dropzone").dropzone({
 interact("#trash").dropzone({
   // only accept elements matching this CSS selector
   accept: ".drag-drop",
-  // Require a 75% element overlap for a drop to be possible
-  overlap: 0.25,
+  overlap: 0.01,
 
   // listen for drop related events:
 
@@ -122,11 +121,13 @@ interact("#trash").dropzone({
     // feedback the possibility of a drop
     dropzoneElement.classList.add("drop-target");
     draggableElement.classList.add("can-drop");
+    draggableElement.style.backgroundColor = "rgba(200, 0, 0, 0.7)";
   },
   ondragleave: function (event) {
     // remove the drop feedback style
     event.target.classList.remove("drop-target");
     event.relatedTarget.classList.remove("can-drop");
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   },
   ondrop: function (event) {
     event.target.parentNode.removeChild(event.relatedTarget);
