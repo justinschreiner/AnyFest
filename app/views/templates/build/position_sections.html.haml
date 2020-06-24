@@ -3,8 +3,8 @@
     #form
         %h3 Add Sections
         .container 
-            = content_tag :div, "Day", class: 'drag-drop', data: { draggable: true, resizable: true }
-            = content_tag :div, "Section", class: 'drag-drop', data: { draggable: true, resizable: true }
+            = content_tag :div, "Day", class: 'item'
+            = content_tag :div, "Section", class: 'item'
     #preview
         %h3 Preview 
         - if(@template.background_image.attached?)

@@ -221,7 +221,8 @@ body {
         height: 400px;
         justify-content: center;
 
-        .drag-drop {
+        .drag-drop,
+        .item {
           color: #fff;
           font-size: 20px;
           font-family: sans-serif;
@@ -231,12 +232,19 @@ body {
           background-color: rgba(0, 0, 0, 0.3);
           border: 2px solid #000;
 
+          /* for box resizing */
+          box-sizing: border-box;
+        }
+
+        .item {
           width: 80%;
           height: 20%;
           margin-left: 10%;
           margin-top: 25%;
-          /* for box resizing */
-          box-sizing: border-box;
+
+          &:hover {
+            cursor: move;
+          }
         }
       }
     }
