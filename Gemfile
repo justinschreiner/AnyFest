@@ -77,3 +77,6 @@ gem 'trestle-active_storage'
 
 # Allows multi-page forms
 gem 'wicked'
+
+# Allows use of font awesome icons
+gem "font-awesome-rails"

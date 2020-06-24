@@ -5,6 +5,8 @@
         .container 
             = content_tag :div, "Day", class: 'item'
             = content_tag :div, "Section", class: 'item'
+            #trash.dropzone
+                = fa_icon "trash"
     #preview
         %h3 Preview 
         - if(@template.background_image.attached?)
