@@ -102,6 +102,40 @@ interact(".dropzone").dropzone({
   },
 });
 
+// Day dropzone
+interact("#day").dropzone({
+  // only accept elements matching this CSS selector
+  accept: ".section-drag",
+  // Require a 75% element overlap for a drop to be possible
+  overlap: 0.75,
+
+  // listen for drop related events:
+
+  ondropactivate: function (event) {
+    // add active dropzone feedback
+    event.target.classList.add("drop-active");
+  },
+  ondragenter: function (event) {
+    var draggableElement = event.relatedTarget;
+    var dropzoneElement = event.target;
+
+    // feedback the possibility of a drop
+    dropzoneElement.style.border = "2px solid #fff";
+    draggableElement.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.style.border = "2px solid #000";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+  ondrop: function (event) {},
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.style.border = "2px solid #000";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+});
+
 // Trashcan
 interact("#trash").dropzone({
   // only accept elements matching this CSS selector
@@ -174,6 +208,12 @@ interact(".item")
       element.style.top = 0;
       element.className = "";
       element.classList.add("drag-drop");
+      if (element.id == "day") {
+        element.classList.add("dropzone");
+        element.classList.add("day-drop");
+      } else {
+        element.classList.add("section-drag");
+      }
 
       // Add the cloned object to the document
       const container = document.querySelector(".container");

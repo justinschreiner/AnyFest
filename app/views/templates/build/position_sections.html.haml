@@ -1,13 +1,15 @@
 #position-sections
     %h1 Create Sections for your Template
-    #form
-        %h3 Add Sections
-        .container 
-            = content_tag :div, "Day", class: 'item'
-            = content_tag :div, "Section", class: 'item'
-            #trash.dropzone
-                = fa_icon "trash"
     #preview
         %h3 Preview 
         - if(@template.background_image.attached?)
             = image_tag(@template.background_image, size: "210x280", class: "dropzone")
+    #form
+        %h3 Add Sections
+        .container 
+            #day.item
+                Day
+            #section.item
+                Section
+            #trash.dropzone
+                = fa_icon "trash"
