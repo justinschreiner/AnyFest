@@ -169,11 +169,7 @@ interact("#trash").dropzone({
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   },
   ondrop: function (event) {
-    document
-      .getElementById("form")
-      .removeChild(
-        document.getElementById(event.relatedTarget.getAttribute("data-id"))
-      );
+    deleteFormFields(event.relatedTarget);
     event.target.parentNode.removeChild(event.relatedTarget);
   },
   ondropdeactivate: function (event) {
@@ -311,4 +307,11 @@ window.updateFormFields = function (box) {
   yOffset.setAttribute("value", barRect.top);
   width.setAttribute("value", barRect.right - barRect.left);
   height.setAttribute("value", barRect.bottom - barRect.top);
+};
+
+window.deleteFormFields = function (box) {
+  var form = document.getElementById("form");
+  var fieldId = box.getAttribute("data-id");
+  var field = document.getElementById(fieldId);
+  form.removeChild(field);
 };
