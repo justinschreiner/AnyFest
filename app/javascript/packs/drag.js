@@ -169,6 +169,11 @@ interact("#trash").dropzone({
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   },
   ondrop: function (event) {
+    document
+      .getElementById("form")
+      .removeChild(
+        document.getElementById(event.relatedTarget.getAttribute("data-id"))
+      );
     event.target.parentNode.removeChild(event.relatedTarget);
   },
   ondropdeactivate: function (event) {
@@ -251,12 +256,16 @@ window.createFormFields = function (box) {
   // Create input fields
   var xOffset = document.createElement("input");
   xOffset.setAttribute("type", "hidden");
+  xOffset.setAttribute("for", "x_offset");
   var yOffset = document.createElement("input");
   yOffset.setAttribute("type", "hidden");
+  yOffset.setAttribute("for", "y_offset");
   var width = document.createElement("input");
   width.setAttribute("type", "hidden");
+  width.setAttribute("for", "width");
   var height = document.createElement("input");
   height.setAttribute("type", "hidden");
+  height.setAttribute("for", "height");
 
   // Populate hidden fields
   var barRect = box.getBoundingClientRect();
