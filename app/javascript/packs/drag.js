@@ -37,10 +37,8 @@ interact(".drag-drop")
 
         target.setAttribute("data-x", x);
         target.setAttribute("data-y", y);
-        // target.textContent =
-        //   Math.round(event.rect.width) +
-        //   "\u00D7" +
-        //   Math.round(event.rect.height);
+
+        updateFormFields(target);
       },
     },
     modifiers: [
@@ -94,7 +92,14 @@ interact(".dropzone").dropzone({
     event.target.classList.remove("drop-target");
     event.relatedTarget.classList.remove("can-drop");
   },
-  ondrop: function (event) {},
+  ondrop: function (event) {
+    // Add new hidden form field for this section if one does not exist
+    if (event.relatedTarget.getAttribute("data-id") == null) {
+      createFormFields(event.relatedTarget);
+    } else {
+      updateFormFields(event.relatedTarget);
+    }
+  },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
     event.target.classList.remove("drop-active");
@@ -234,5 +239,67 @@ interact(".item")
         position.y = Number(transform[2]);
       }
     }
+
     interaction.start({ name: "drag" }, event.interactable, element);
   });
+
+// Create form fields for a new section
+window.createFormFields = function (box) {
+  var time = Date.now();
+  box.setAttribute("data-id", time);
+
+  // Create input fields
+  var xOffset = document.createElement("input");
+  xOffset.setAttribute("type", "hidden");
+  var yOffset = document.createElement("input");
+  yOffset.setAttribute("type", "hidden");
+  var width = document.createElement("input");
+  width.setAttribute("type", "hidden");
+  var height = document.createElement("input");
+  height.setAttribute("type", "hidden");
+
+  // Populate hidden fields
+  var barRect = box.getBoundingClientRect();
+  xOffset.setAttribute("value", barRect.left);
+  yOffset.setAttribute("value", barRect.top);
+  width.setAttribute("value", barRect.right - barRect.left);
+  height.setAttribute("value", barRect.bottom - barRect.top);
+
+  // Label hidden fields
+  xOffset.setAttribute("class", "x_offset");
+  yOffset.setAttribute("class", "y_offset");
+  width.setAttribute("class", "width");
+  height.setAttribute("class", "height");
+
+  // Create div class to hold these
+  var container = document.createElement("div");
+  container.setAttribute("id", time);
+
+  // Append hidden fields
+  container.appendChild(xOffset);
+  container.appendChild(yOffset);
+  container.appendChild(width);
+  container.appendChild(height);
+
+  // Append container
+  document.getElementById("form").appendChild(container);
+};
+
+// Update form fields for a section whose size or position has changed
+window.updateFormFields = function (box) {
+  var queryId = box.getAttribute("data-id");
+
+  // Find input fields
+  var fields = document.getElementById(queryId);
+  var xOffset = fields.getElementsByClassName("x_offset")[0];
+  var yOffset = fields.getElementsByClassName("y_offset")[0];
+  var width = fields.getElementsByClassName("width")[0];
+  var height = fields.getElementsByClassName("height")[0];
+
+  // Update hidden fields
+  var barRect = box.getBoundingClientRect();
+  xOffset.setAttribute("value", barRect.left);
+  yOffset.setAttribute("value", barRect.top);
+  width.setAttribute("value", barRect.right - barRect.left);
+  height.setAttribute("value", barRect.bottom - barRect.top);
+};
