@@ -95,7 +95,7 @@ interact(".dropzone").dropzone({
   ondrop: function (event) {
     // Add new hidden form field for this section if one does not exist
     if (event.relatedTarget.getAttribute("data-id") == null) {
-      createFormFields(event.relatedTarget);
+      createDayFormFields(event.relatedTarget);
     } else {
       updateFormFields(event.relatedTarget);
     }
@@ -133,7 +133,15 @@ interact("#day").dropzone({
     event.target.style.border = "2px solid #000";
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   },
-  ondrop: function (event) {},
+  ondrop: function (event) {
+    if (event.relatedTarget.getAttribute("data-id") == null) {
+      if (event.relatedTarget.className == "day") {
+        createDayFormFields(event.relatedTarget);
+      }
+    } else {
+      updateFormFields(event.relatedTarget);
+    }
+  },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
     event.target.style.border = "2px solid #000";
@@ -181,6 +189,7 @@ interact("#trash").dropzone({
 
 const position = { x: 300, y: 300 };
 
+// Creates new sections by dragging out of the sidebar
 interact(".item")
   .draggable({
     inertia: true,
@@ -245,23 +254,23 @@ interact(".item")
   });
 
 // Create form fields for a new section
-window.createFormFields = function (box) {
+window.createDayFormFields = function (box) {
   var time = Date.now();
   box.setAttribute("data-id", time);
 
   // Create input fields
   var xOffset = document.createElement("input");
   xOffset.setAttribute("type", "hidden");
-  xOffset.setAttribute("for", "x_offset");
+  xOffset.setAttribute("name", "template[days_attributes][][x_offset]");
   var yOffset = document.createElement("input");
   yOffset.setAttribute("type", "hidden");
-  yOffset.setAttribute("for", "y_offset");
+  yOffset.setAttribute("name", "template[days_attributes][][y_offset]");
   var width = document.createElement("input");
   width.setAttribute("type", "hidden");
-  width.setAttribute("for", "width");
+  width.setAttribute("name", "template[days_attributes][][width]");
   var height = document.createElement("input");
   height.setAttribute("type", "hidden");
-  height.setAttribute("for", "height");
+  height.setAttribute("name", "template[days_attributes][][height]");
 
   // Populate hidden fields
   var barRect = box.getBoundingClientRect();
@@ -279,6 +288,11 @@ window.createFormFields = function (box) {
   // Create div class to hold these
   var container = document.createElement("div");
   container.setAttribute("id", time);
+  if (box.id == "day") {
+    container.setAttribute("class", "day");
+  } else {
+    container.setAttribute("class", "section");
+  }
 
   // Append hidden fields
   container.appendChild(xOffset);
