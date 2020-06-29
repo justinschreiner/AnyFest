@@ -323,6 +323,7 @@ window.updateFormFields = function (box) {
   height.setAttribute("value", barRect.bottom - barRect.top);
 };
 
+// Delete form field elements when sections are removed
 window.deleteFormFields = function (box) {
   var form = document.getElementById("form");
   var fieldId = box.getAttribute("data-id");
