@@ -1,8 +1,7 @@
 import interact from "interactjs";
 
-var dragMoveListener;
-
-dragMoveListener = function (event) {
+// Allows boxes to be dragged
+window.dragMoveListener = function (event) {
   var target, x, y;
   target = event.target;
   x = (parseFloat(target.getAttribute("data-x")) || position.x || 0) + event.dx;
@@ -13,8 +12,7 @@ dragMoveListener = function (event) {
   return target.setAttribute("data-y", y);
 };
 
-window.dragMoveListener = dragMoveListener;
-
+// Allows boxes to be resized
 interact(".drag-drop")
   .resizable({
     edges: { left: true, right: true, bottom: true, top: true },
@@ -67,151 +65,7 @@ interact(".drag-drop")
     ],
   });
 
-interact(".dropzone").dropzone({
-  // only accept elements matching this CSS selector
-  accept: ".drag-drop",
-  // Require a 75% element overlap for a drop to be possible
-  overlap: 0.75,
-
-  // listen for drop related events:
-
-  ondropactivate: function (event) {
-    // add active dropzone feedback
-    event.target.classList.add("drop-active");
-  },
-  ondragenter: function (event) {
-    var draggableElement = event.relatedTarget;
-    var dropzoneElement = event.target;
-
-    // feedback the possibility of a drop
-    dropzoneElement.classList.add("drop-target");
-    draggableElement.classList.add("can-drop");
-  },
-  ondragleave: function (event) {
-    // remove the drop feedback style
-    event.target.classList.remove("drop-target");
-    event.relatedTarget.classList.remove("can-drop");
-  },
-  ondrop: function (event) {
-    // Add new hidden form field for this section if one does not exist
-    if (event.relatedTarget.getAttribute("data-id") == null) {
-      if (event.relatedTarget.classList.contains("day-drop")) {
-        createDayFormFields(event.relatedTarget);
-      } else {
-        createSectionFormFields(event.relatedTarget, event.target);
-      }
-    } else {
-      if (event.relatedTarget.classList.contains("day-drop")) {
-        updateDayFormFields(event.relatedTarget);
-      } else {
-        updateSectionFormFields(event.relatedTarget);
-      }
-    }
-  },
-  ondropdeactivate: function (event) {
-    // remove active dropzone feedback
-    event.target.classList.remove("drop-active");
-    event.target.classList.remove("drop-target");
-  },
-});
-
-// Day dropzone
-interact("#day").dropzone({
-  // only accept elements matching this CSS selector
-  accept: ".section-drag",
-  // Require a 75% element overlap for a drop to be possible
-  overlap: 0.75,
-
-  // listen for drop related events:
-
-  ondropactivate: function (event) {
-    // add active dropzone feedback
-    event.target.classList.add("drop-active");
-    if (event.relatedTarget.getAttribute("data-id") != null) {
-      // deleteSectionFormFields(event.relatedTarget, event.target);
-      if (event.target.getAttribute("data-id") != null) {
-        deleteSectionFormFields(event.relatedTarget, event.target);
-        // console.log("related", event.relatedTarget.getAttribute("data-id"));
-        // console.log("target", event.target.getAttribute("data-id"));
-      }
-    }
-  },
-  ondragenter: function (event) {
-    var draggableElement = event.relatedTarget;
-    var dropzoneElement = event.target;
-
-    // feedback the possibility of a drop
-    dropzoneElement.style.border = "2px solid #fff";
-    draggableElement.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-  },
-  ondragleave: function (event) {
-    // remove the drop feedback style
-    event.target.style.border = "2px solid #000";
-    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-  },
-  ondrop: function (event) {
-    if (event.relatedTarget.getAttribute("data-id") == null) {
-      if (event.relatedTarget.className == "day") {
-        createDayFormFields(event.relatedTarget);
-      } else {
-        createSectionFormFields(event.relatedTarget, event.target);
-      }
-    } else {
-      if (event.relatedTarget.classList.contains("day-drop")) {
-        updateDayFormFields(event.relatedTarget);
-      } else {
-        createSectionFormFields(event.relatedTarget, event.target);
-      }
-    }
-  },
-  ondropdeactivate: function (event) {
-    // remove active dropzone feedback
-    event.target.style.border = "2px solid #000";
-    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-  },
-});
-
-// Trashcan
-interact("#trash").dropzone({
-  // only accept elements matching this CSS selector
-  accept: ".drag-drop",
-  overlap: 0.01,
-
-  // listen for drop related events:
-
-  ondropactivate: function (event) {
-    // add active dropzone feedback
-    event.target.classList.add("drop-active");
-  },
-  ondragenter: function (event) {
-    var draggableElement = event.relatedTarget;
-    var dropzoneElement = event.target;
-
-    // feedback the possibility of a drop
-    dropzoneElement.classList.add("drop-target");
-    draggableElement.classList.add("can-drop");
-    draggableElement.style.backgroundColor = "rgba(200, 0, 0, 0.7)";
-  },
-  ondragleave: function (event) {
-    // remove the drop feedback style
-    event.target.classList.remove("drop-target");
-    event.relatedTarget.classList.remove("can-drop");
-    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-  },
-  ondrop: function (event) {
-    deleteFormFields(event.relatedTarget);
-    event.target.parentNode.removeChild(event.relatedTarget);
-  },
-  ondropdeactivate: function (event) {
-    // remove active dropzone feedback
-    event.target.classList.remove("drop-active");
-    event.target.classList.remove("drop-target");
-  },
-});
-
-const position = { x: 300, y: 300 };
-
-// Creates new sections by dragging out of the sidebar
+// Creates new sections or days by dragging out of the sidebar
 interact(".item")
   .draggable({
     inertia: true,
@@ -275,6 +129,102 @@ interact(".item")
     interaction.start({ name: "drag" }, event.interactable, element);
   });
 
+// Template image dropzone
+interact(".dropzone").dropzone({
+  accept: ".drag-drop",
+  overlap: 0.75,
+
+  // listen for drop related events:
+  ondropactivate: function (event) {},
+  ondragenter: function (event) {},
+  ondragleave: function (event) {},
+  ondrop: function (event) {
+    // Add new hidden form field for this section if one does not exist
+    if (event.relatedTarget.getAttribute("data-id") == null) {
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        createDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    } else {
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        updateDayFormFields(event.relatedTarget);
+      } else {
+        updateSectionFormFields(event.relatedTarget);
+      }
+    }
+  },
+  ondropdeactivate: function (event) {},
+});
+
+// Day dropzone for sections
+interact("#day").dropzone({
+  accept: ".section-drag",
+  overlap: 0.75,
+
+  // listen for drop related events:
+  ondropactivate: function (event) {
+    if (event.relatedTarget.getAttribute("data-id") != null) {
+      if (event.target.getAttribute("data-id") != null) {
+        deleteSectionFormFields(event.relatedTarget, event.target);
+      }
+    }
+  },
+  ondragenter: function (event) {
+    // feedback the possibility of a drop
+    event.target.style.border = "2px solid #fff";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.style.border = "2px solid #000";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+  ondrop: function (event) {
+    if (event.relatedTarget.getAttribute("data-id") == null) {
+      if (event.relatedTarget.className == "day") {
+        createDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    } else {
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        updateDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    }
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.style.border = "2px solid #000";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+});
+
+// Trashcan dropzone
+interact("#trash").dropzone({
+  accept: ".drag-drop",
+  overlap: 0.01,
+
+  // listen for drop related events:
+  ondropactivate: function (event) {},
+  ondragenter: function (event) {
+    event.relatedTarget.style.backgroundColor = "rgba(200, 0, 0, 0.7)";
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+  ondrop: function (event) {
+    deleteFormFields(event.relatedTarget);
+    event.target.parentNode.removeChild(event.relatedTarget);
+  },
+  ondropdeactivate: function (event) {},
+});
+
+const position = { x: 300, y: 300 };
+
 // Create form fields for a new section
 window.createDayFormFields = function (box) {
   var time = Date.now();
@@ -326,25 +276,7 @@ window.createDayFormFields = function (box) {
   document.getElementById("form").appendChild(container);
 };
 
-// Update form fields for a section whose size or position has changed
-window.updateDayFormFields = function (box) {
-  var queryId = box.getAttribute("data-id");
-
-  // Find input fields
-  var fields = document.getElementById(queryId);
-  var xOffset = fields.getElementsByClassName("x_offset")[0];
-  var yOffset = fields.getElementsByClassName("y_offset")[0];
-  var width = fields.getElementsByClassName("width")[0];
-  var height = fields.getElementsByClassName("height")[0];
-
-  // Update hidden fields
-  var barRect = box.getBoundingClientRect();
-  xOffset.setAttribute("value", barRect.left);
-  yOffset.setAttribute("value", barRect.top);
-  width.setAttribute("value", barRect.right - barRect.left);
-  height.setAttribute("value", barRect.bottom - barRect.top);
-};
-
+// Creates hidden form fields for sections inside of days
 window.createSectionFormFields = function (box, parent_box) {
   var time = Date.now();
   box.setAttribute("data-id", time);
@@ -404,6 +336,25 @@ window.createSectionFormFields = function (box, parent_box) {
   formFields.appendChild(container);
 };
 
+// Update form fields for a section whose size or position has changed
+window.updateDayFormFields = function (box) {
+  var queryId = box.getAttribute("data-id");
+
+  // Find input fields
+  var fields = document.getElementById(queryId);
+  var xOffset = fields.getElementsByClassName("x_offset")[0];
+  var yOffset = fields.getElementsByClassName("y_offset")[0];
+  var width = fields.getElementsByClassName("width")[0];
+  var height = fields.getElementsByClassName("height")[0];
+
+  // Update hidden fields
+  var barRect = box.getBoundingClientRect();
+  xOffset.setAttribute("value", barRect.left);
+  yOffset.setAttribute("value", barRect.top);
+  width.setAttribute("value", barRect.right - barRect.left);
+  height.setAttribute("value", barRect.bottom - barRect.top);
+};
+
 // Delete form field elements when sections are removed
 window.deleteFormFields = function (box) {
   var form = document.getElementById("form");
@@ -415,5 +366,7 @@ window.deleteFormFields = function (box) {
 window.deleteSectionFormFields = function (box, parent_box) {
   var day = document.getElementById(parent_box.getAttribute("data-id"));
   var section = document.getElementById(box.getAttribute("data-id"));
-  day.removeChild(section);
+  if (day.contains(section)) {
+    day.removeChild(section);
+  }
 };
