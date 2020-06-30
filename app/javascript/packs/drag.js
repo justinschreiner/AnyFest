@@ -135,7 +135,13 @@ interact(".dropzone").dropzone({
   overlap: 0.75,
 
   // listen for drop related events:
-  ondropactivate: function (event) {},
+  ondropactivate: function (event) {
+    if (event.relatedTarget.classList.contains("section-drag")) {
+      if (event.relatedTarget.getAttribute("data-id") != null) {
+        deleteSectionWithoutDay(event.relatedTarget);
+      }
+    }
+  },
   ondragenter: function (event) {},
   ondragleave: function (event) {},
   ondrop: function (event) {
@@ -144,14 +150,13 @@ interact(".dropzone").dropzone({
       if (event.relatedTarget.classList.contains("day-drop")) {
         createDayFormFields(event.relatedTarget);
       } else {
-        console.log("now is your time");
         createSectionFormFields(event.relatedTarget, event.target);
       }
     } else {
       if (event.relatedTarget.classList.contains("day-drop")) {
         updateDayFormFields(event.relatedTarget);
       } else {
-        updateSectionFormFields(event.relatedTarget);
+        createSectionFormFields(event.relatedTarget, event.target);
       }
     }
   },
@@ -284,7 +289,7 @@ window.createSectionFormFields = function (box, parent_box) {
 
   var queryId = parent_box.getAttribute("data-id");
   if (queryId == null) {
-    queryId = parent_box.id;
+    queryId = "form";
   }
   var formFields = document.getElementById(queryId);
 
@@ -371,6 +376,15 @@ window.deleteSectionFormFields = function (box, parent_box) {
   var day = document.getElementById(parent_box.getAttribute("data-id"));
   var section = document.getElementById(box.getAttribute("data-id"));
   if (day.contains(section)) {
+    day.removeChild(section);
+  }
+};
+
+window.deleteSectionWithoutDay = function (box) {
+  var section = document.getElementById(box.getAttribute("data-id"));
+  var day = document.getElementById("form");
+  if (day.contains(section)) {
+    console.log("passes all checks");
     day.removeChild(section);
   }
 };
