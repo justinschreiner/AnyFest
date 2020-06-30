@@ -144,6 +144,7 @@ interact(".dropzone").dropzone({
       if (event.relatedTarget.classList.contains("day-drop")) {
         createDayFormFields(event.relatedTarget);
       } else {
+        console.log("now is your time");
         createSectionFormFields(event.relatedTarget, event.target);
       }
     } else {
@@ -282,6 +283,9 @@ window.createSectionFormFields = function (box, parent_box) {
   box.setAttribute("data-id", time);
 
   var queryId = parent_box.getAttribute("data-id");
+  if (queryId == null) {
+    queryId = parent_box.id;
+  }
   var formFields = document.getElementById(queryId);
 
   // Create input fields
