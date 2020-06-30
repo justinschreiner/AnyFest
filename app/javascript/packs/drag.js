@@ -143,13 +143,7 @@ interact(".dropzone").dropzone({
   overlap: 0.75,
 
   // listen for drop related events:
-  ondropactivate: function (event) {
-    if (event.relatedTarget.classList.contains("section-drag")) {
-      if (event.relatedTarget.getAttribute("data-id") != null) {
-        deleteSectionWithoutDay(event.relatedTarget);
-      }
-    }
-  },
+  ondropactivate: function (event) {},
   ondragenter: function (event) {},
   ondragleave: function (event) {},
   ondrop: function (event) {
@@ -231,8 +225,12 @@ interact("#trash").dropzone({
     // remove the drop feedback style, if mouse is up it means user dropped element in trash
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
     if (mouseDown == 0) {
-      deleteFormFields(event.relatedTarget);
       event.target.parentNode.removeChild(event.relatedTarget);
+      if (event.relatedTarget.classList.contains("day")) {
+        deleteFormFields(event.relatedTarget);
+      } else {
+        deleteSectionWithoutDay(event.relatedTarget);
+      }
     }
   },
   ondrop: function (event) {},
