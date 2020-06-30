@@ -13,121 +13,129 @@ window.dragMoveListener = function (event) {
 };
 
 // Allows boxes to be resized
-interact(".drag-drop")
-  .resizable({
-    edges: { left: true, right: true, bottom: true, top: true },
-    listeners: {
-      move(event) {
-        var target = event.target;
-        var x = parseFloat(target.getAttribute("data-x")) || position.x || 0;
-        var y = parseFloat(target.getAttribute("data-y")) || position.y || 0;
+window.addEventListener("DOMContentLoaded", (event) => {
+  interact(".drag-drop")
+    .resizable({
+      edges: { left: true, right: true, bottom: true, top: true },
+      listeners: {
+        move(event) {
+          var target = event.target;
+          var x = parseFloat(target.getAttribute("data-x")) || position.x || 0;
+          var y = parseFloat(target.getAttribute("data-y")) || position.y || 0;
 
-        // update the element's style
-        target.style.width = event.rect.width + "px";
-        target.style.height = event.rect.height + "px";
+          // update the element's style
+          target.style.width = event.rect.width + "px";
+          target.style.height = event.rect.height + "px";
 
-        // translate when resizing from top or left edges
-        x += event.deltaRect.left;
-        y += event.deltaRect.top;
+          // translate when resizing from top or left edges
+          x += event.deltaRect.left;
+          y += event.deltaRect.top;
 
-        target.style.webkitTransform = target.style.transform =
-          "translate(" + x + "px," + y + "px)";
+          target.style.webkitTransform = target.style.transform =
+            "translate(" + x + "px," + y + "px)";
+          target.setAttribute("data-x", x);
+          target.setAttribute("data-y", y);
 
-        target.setAttribute("data-x", x);
-        target.setAttribute("data-y", y);
-
-        updateDayFormFields(target);
+          updateDayFormFields(target);
+        },
       },
-    },
-    modifiers: [
-      // keep the edges inside the parent
-      interact.modifiers.restrictEdges({
-        // outer: "parent",
-      }),
+      modifiers: [
+        // keep the edges inside the parent
+        interact.modifiers.restrict({
+          restriction: document.querySelector("img"),
+        }),
 
-      // minimum size
-      interact.modifiers.restrictSize({
-        min: { width: 100, height: 50 },
-      }),
-    ],
+        // minimum size
+        interact.modifiers.restrictSize({
+          min: { width: 100, height: 50 },
+        }),
+      ],
 
-    inertia: true,
-  })
-  .draggable({
-    inertia: true,
-    autoScroll: true,
-    onmove: dragMoveListener,
-    modifiers: [
-      interact.modifiers.restrictRect({
-        // restriction: "parent",
-        endOnly: true,
-      }),
-    ],
-  });
+      inertia: true,
+    })
+    .draggable({
+      inertia: true,
+      autoScroll: true,
+      onmove: dragMoveListener,
+      modifiers: [
+        interact.modifiers.restrictRect({
+          restriction: document.querySelector("img"),
+          endOnly: true,
+        }),
+      ],
+    });
+});
 
 // Creates new sections or days by dragging out of the sidebar
-interact(".item")
-  .draggable({
-    inertia: true,
-    autoScroll: true,
-    manualStart: true,
-    listeners: {
-      move(event) {
-        position.x += event.dx;
-        position.y += event.dy;
-        event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+window.addEventListener("DOMContentLoaded", (event) => {
+  interact(".item")
+    .draggable({
+      inertia: true,
+      autoScroll: true,
+      manualStart: true,
+      modifiers: [
+        interact.modifiers.restrict({
+          restriction: document.querySelector("img"),
+          endOnly: true,
+        }),
+      ],
+      listeners: {
+        move(event) {
+          position.x += event.dx;
+          position.y += event.dy;
+          event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+        },
       },
-    },
-  })
-  .on("move", function (event) {
-    const { currentTarget, interaction } = event;
-    let element = currentTarget;
+    })
+    .on("move", function (event) {
+      const { currentTarget, interaction } = event;
+      let element = currentTarget;
 
-    // If we are dragging an item from the sidebar, its transform value will be ''
-    // We need to clone it, and then start moving the clone
-    if (
-      interaction.pointerIsDown &&
-      !interaction.interacting() &&
-      currentTarget.style.transform === ""
-    ) {
-      element = currentTarget.cloneNode(true);
+      // If we are dragging an item from the sidebar, its transform value will be ''
+      // We need to clone it, and then start moving the clone
+      if (
+        interaction.pointerIsDown &&
+        !interaction.interacting() &&
+        currentTarget.style.transform === ""
+      ) {
+        element = currentTarget.cloneNode(true);
 
-      // Add absolute positioning so that cloned object lives
-      // right on top of the original object
-      element.style.position = "absolute";
-      element.style.left = 0;
-      element.style.top = 0;
-      element.className = "";
-      element.classList.add("drag-drop");
-      if (element.id == "day") {
-        element.classList.add("dropzone");
-        element.classList.add("day-drop");
-      } else {
-        element.classList.add("section-drag");
+        // Add absolute positioning so that cloned object lives
+        // right on top of the original object
+        element.style.position = "absolute";
+        element.style.left = 0;
+        element.style.top = 0;
+        element.className = "";
+        element.classList.add("drag-drop");
+        if (element.id == "day") {
+          element.classList.add("dropzone");
+          element.classList.add("day-drop");
+        } else {
+          element.classList.add("section-drag");
+        }
+
+        // Add the cloned object to the document
+        const container = document.querySelector(".container");
+        container && container.appendChild(element);
+
+        const { offsetTop, offsetLeft } = currentTarget;
+        position.x = offsetLeft;
+        position.y = offsetTop;
+
+        // If we are moving an already existing item, we need to make sure
+        // the position object has the correct values before we start dragging it
+      } else if (interaction.pointerIsDown && !interaction.interacting()) {
+        const regex = /translate\(([\d]+)px, ([\d]+)px\)/i;
+        const transform = regex.exec(currentTarget.style.transform);
+
+        if (transform && transform.length > 1) {
+          position.x = Number(transform[1]);
+          position.y = Number(transform[2]);
+        }
       }
-
-      // Add the cloned object to the document
-      const container = document.querySelector(".container");
-      container && container.appendChild(element);
-
-      const { offsetTop, offsetLeft } = currentTarget;
-      position.x = offsetLeft;
-      position.y = offsetTop;
-
-      // If we are moving an already existing item, we need to make sure
-      // the position object has the correct values before we start dragging it
-    } else if (interaction.pointerIsDown && !interaction.interacting()) {
-      const regex = /translate\(([\d]+)px, ([\d]+)px\)/i;
-      const transform = regex.exec(currentTarget.style.transform);
-
-      if (transform && transform.length > 1) {
-        position.x = Number(transform[1]);
-        position.y = Number(transform[2]);
-      }
-    }
-
-    interaction.start({ name: "drag" }, event.interactable, element);
-  });
+      interaction.start({ name: "drag" }, event.interactable, element);
+    });
+});
 
 // Template image dropzone
 interact(".dropzone").dropzone({
@@ -192,6 +200,7 @@ interact("#day").dropzone({
         createDayFormFields(event.relatedTarget);
       } else {
         createSectionFormFields(event.relatedTarget, event.target);
+        // updateSectionParent(event.relatedTarget, event.target);
       }
     } else {
       if (event.relatedTarget.classList.contains("day-drop")) {
@@ -211,7 +220,7 @@ interact("#day").dropzone({
 // Trashcan dropzone
 interact("#trash").dropzone({
   accept: ".drag-drop",
-  overlap: 0.01,
+  overlap: 0.1,
 
   // listen for drop related events:
   ondropactivate: function (event) {},
@@ -219,13 +228,14 @@ interact("#trash").dropzone({
     event.relatedTarget.style.backgroundColor = "rgba(200, 0, 0, 0.7)";
   },
   ondragleave: function (event) {
-    // remove the drop feedback style
+    // remove the drop feedback style, if mouse is up it means user dropped element in trash
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+    if (mouseDown == 0) {
+      deleteFormFields(event.relatedTarget);
+      event.target.parentNode.removeChild(event.relatedTarget);
+    }
   },
-  ondrop: function (event) {
-    deleteFormFields(event.relatedTarget);
-    event.target.parentNode.removeChild(event.relatedTarget);
-  },
+  ondrop: function (event) {},
   ondropdeactivate: function (event) {},
 });
 
@@ -364,6 +374,10 @@ window.updateDayFormFields = function (box) {
   height.setAttribute("value", barRect.bottom - barRect.top);
 };
 
+window.updateSectionParent = function (box, parent_box) {
+  parent_box.appendChild(box);
+};
+
 // Delete form field elements when sections are removed
 window.deleteFormFields = function (box) {
   var form = document.getElementById("form");
@@ -384,7 +398,14 @@ window.deleteSectionWithoutDay = function (box) {
   var section = document.getElementById(box.getAttribute("data-id"));
   var day = document.getElementById("form");
   if (day.contains(section)) {
-    console.log("passes all checks");
     day.removeChild(section);
   }
+};
+
+var mouseDown = 0;
+window.onmousedown = function () {
+  ++mouseDown;
+};
+window.onmouseup = function () {
+  --mouseDown;
 };
