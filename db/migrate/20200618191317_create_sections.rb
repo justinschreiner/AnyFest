@@ -14,7 +14,7 @@ class CreateSections < ActiveRecord::Migration[6.0]
       t.column :width, :integer
       t.column :height, :integer
 
-      t.belongs_to :template, foreign_key: true
+      t.belongs_to :day, foreign_key: true
     end
   end
 end

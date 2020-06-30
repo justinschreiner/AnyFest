@@ -50,14 +50,8 @@ class TemplatesController < ApplicationController
   private
   def template_params
     params.require(:template).permit(:name, :background_color, :festival_id, :background_image, 
-      days_attributes: [:x_offset, :y_offset, :width, :height])
+      days_attributes: [:x_offset, :y_offset, :width, :height, 
+        sections_attributes:[:x_offset, :y_offset, :width, :height] ])
   end
 
 end
-
-# {templates{days_attributes{x_offset=402.347412109375,
-#  y_offset=263.132568359375,
-#  width=260.578125,
-#  height=411.453125}},
-#  commit=Create,
-#  id=57}

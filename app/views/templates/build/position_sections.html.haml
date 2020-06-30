@@ -1,18 +1,20 @@
 #position-sections
-    = form_with model: @template do |f|
-        = f.fields_for :sections, :days do |ff|
-            %h1 Create Sections for your Template
-            #preview
-                %h3 Preview 
-                - if(@template.background_image.attached?)
-                    = image_tag(@template.background_image, size: "210x280", class: "dropzone")
-            #form
-                %h3 Add Sections
-                .container 
-                    #day.item
-                        Day
-                    #section.item
-                        Section
-                    #trash.dropzone
-                        = fa_icon "trash"
-            = f.submit "Create", class: "btn btn-primary"
+    = form_with model: @template, local: true do |t|
+        %h1 Create Sections for your Template
+        #preview
+            %h3 Preview 
+            - if(@template.background_image.attached?)
+                = image_tag(@template.background_image, size: "210x280", class: "dropzone")
+        #form
+            %h3 Add Sections
+            .container 
+                #day.item
+                    Day
+                #section.item
+                    Section
+                #trash.dropzone
+                    = fa_icon "trash"
+                = t.fields_for :days do |d|
+                    = d.fields_for :sections do |s|
+                        attach fields
+        = t.submit "Create", class: "btn btn-primary"

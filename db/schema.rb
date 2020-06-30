@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 2020_06_23_151827) do
     t.integer "y_offset"
     t.integer "width"
     t.integer "height"
-    t.bigint "template_id"
-    t.index ["template_id"], name: "index_sections_on_template_id"
+    t.bigint "day_id"
+    t.index ["day_id"], name: "index_sections_on_day_id"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_151827) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "days", "templates"
-  add_foreign_key "sections", "templates"
+  add_foreign_key "sections", "days"
   add_foreign_key "templates", "festivals"
   add_foreign_key "templates", "users"
 end

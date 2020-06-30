@@ -38,7 +38,7 @@ interact(".drag-drop")
         target.setAttribute("data-x", x);
         target.setAttribute("data-y", y);
 
-        updateFormFields(target);
+        updateDayFormFields(target);
       },
     },
     modifiers: [
@@ -95,9 +95,17 @@ interact(".dropzone").dropzone({
   ondrop: function (event) {
     // Add new hidden form field for this section if one does not exist
     if (event.relatedTarget.getAttribute("data-id") == null) {
-      createDayFormFields(event.relatedTarget);
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        createDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
     } else {
-      updateFormFields(event.relatedTarget);
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        updateDayFormFields(event.relatedTarget);
+      } else {
+        updateSectionFormFields(event.relatedTarget);
+      }
     }
   },
   ondropdeactivate: function (event) {
@@ -137,9 +145,15 @@ interact("#day").dropzone({
     if (event.relatedTarget.getAttribute("data-id") == null) {
       if (event.relatedTarget.className == "day") {
         createDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
       }
     } else {
-      updateFormFields(event.relatedTarget);
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        updateDayFormFields(event.relatedTarget);
+      } else {
+        updateSectionFormFields(event.relatedTarget);
+      }
     }
   },
   ondropdeactivate: function (event) {
@@ -305,7 +319,7 @@ window.createDayFormFields = function (box) {
 };
 
 // Update form fields for a section whose size or position has changed
-window.updateFormFields = function (box) {
+window.updateDayFormFields = function (box) {
   var queryId = box.getAttribute("data-id");
 
   // Find input fields
@@ -321,6 +335,65 @@ window.updateFormFields = function (box) {
   yOffset.setAttribute("value", barRect.top);
   width.setAttribute("value", barRect.right - barRect.left);
   height.setAttribute("value", barRect.bottom - barRect.top);
+};
+
+window.createSectionFormFields = function (box, parent_box) {
+  var time = Date.now();
+  box.setAttribute("data-id", time);
+
+  var queryId = parent_box.getAttribute("data-id");
+  var formFields = document.getElementById(queryId);
+
+  // Create input fields
+  var xOffset = document.createElement("input");
+  xOffset.setAttribute("type", "hidden");
+  xOffset.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][x_offset]"
+  );
+  var yOffset = document.createElement("input");
+  yOffset.setAttribute("type", "hidden");
+  yOffset.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][y_offset]"
+  );
+  var width = document.createElement("input");
+  width.setAttribute("type", "hidden");
+  width.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][width]"
+  );
+  var height = document.createElement("input");
+  height.setAttribute("type", "hidden");
+  height.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][height]"
+  );
+
+  // Populate hidden fields
+  var barRect = box.getBoundingClientRect();
+  xOffset.setAttribute("value", barRect.left);
+  yOffset.setAttribute("value", barRect.top);
+  width.setAttribute("value", barRect.right - barRect.left);
+  height.setAttribute("value", barRect.bottom - barRect.top);
+
+  // Label hidden fields
+  xOffset.setAttribute("class", "x_offset");
+  yOffset.setAttribute("class", "y_offset");
+  width.setAttribute("class", "width");
+  height.setAttribute("class", "height");
+
+  // Append hidden field container
+  var container = document.createElement("div");
+  container.setAttribute("id", box.getAttribute("data-id"));
+  container.setAttribute("class", "section");
+
+  container.appendChild(xOffset);
+  container.appendChild(yOffset);
+  container.appendChild(width);
+  container.appendChild(height);
+
+  formFields.appendChild(container);
 };
 
 // Delete form field elements when sections are removed
