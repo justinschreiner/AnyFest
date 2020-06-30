@@ -127,6 +127,14 @@ interact("#day").dropzone({
   ondropactivate: function (event) {
     // add active dropzone feedback
     event.target.classList.add("drop-active");
+    if (event.relatedTarget.getAttribute("data-id") != null) {
+      // deleteSectionFormFields(event.relatedTarget, event.target);
+      if (event.target.getAttribute("data-id") != null) {
+        deleteSectionFormFields(event.relatedTarget, event.target);
+        // console.log("related", event.relatedTarget.getAttribute("data-id"));
+        // console.log("target", event.target.getAttribute("data-id"));
+      }
+    }
   },
   ondragenter: function (event) {
     var draggableElement = event.relatedTarget;
@@ -152,7 +160,7 @@ interact("#day").dropzone({
       if (event.relatedTarget.classList.contains("day-drop")) {
         updateDayFormFields(event.relatedTarget);
       } else {
-        updateSectionFormFields(event.relatedTarget);
+        createSectionFormFields(event.relatedTarget, event.target);
       }
     }
   },
@@ -402,4 +410,10 @@ window.deleteFormFields = function (box) {
   var fieldId = box.getAttribute("data-id");
   var field = document.getElementById(fieldId);
   form.removeChild(field);
+};
+
+window.deleteSectionFormFields = function (box, parent_box) {
+  var day = document.getElementById(parent_box.getAttribute("data-id"));
+  var section = document.getElementById(box.getAttribute("data-id"));
+  day.removeChild(section);
 };
