@@ -36,11 +36,12 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
 
     if @template.update_attributes(template_params)
-      if (template_params['days_attributes'].blank?)
-        redirect_to template_build_path(template_id: @template, id: :position_sections)
-      else
-        redirect_to template_build_path(template_id: @template, id: :section_settings)
-      end
+      # if (template_params['days_attributes'].blank?)
+      #   redirect_to template_build_path(template_id: @template, id: :position_sections)
+      # else
+      #   redirect_to template_build_path(template_id: @template, id: :section_settings)
+      # end
+      redirect_to template_build_path(template_id: @template, id: :position_sections)
     else
       render action: 'edit'
     end

@@ -1,5 +1,5 @@
 #position-sections
-    = form_with model: @template, local: true do |t|
+    = form_with model: @template, url: wizard_path, method: :put do |t|
         %h1 Create Sections for your Template
         #preview
             %h3 Preview 
@@ -17,4 +17,4 @@
                 = t.fields_for :days do |d|
                     = d.fields_for :sections do |s|
                         attach fields
-        = t.submit "Create", class: "btn btn-primary"
+        = t.submit "CONTINUE", class: "btn btn-primary"

@@ -13,9 +13,6 @@ class Templates::BuildController < ApplicationController
     def update
       @template = Template.find(params[:template_id])
       params[:template][:status] = 'active' if step == steps.last
-      if @template.update_attributes(params[:template])
-        redirect_to next_wizard_step
-      end
       render_wizard @template
     end
   
