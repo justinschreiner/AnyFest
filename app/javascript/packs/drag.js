@@ -258,12 +258,18 @@ window.createDayFormFields = function (box) {
   height.setAttribute("type", "hidden");
   height.setAttribute("name", "template[days_attributes][][height]");
 
-  // Populate hidden fields
+  // Prepare variables for setting height and width
   var barRect = box.getBoundingClientRect();
-  xOffset.setAttribute("value", barRect.left);
-  yOffset.setAttribute("value", barRect.top);
-  width.setAttribute("value", barRect.right - barRect.left);
-  height.setAttribute("value", barRect.bottom - barRect.top);
+  var image = document.getElementsByTagName("img")[0];
+  var imageRect = image.getBoundingClientRect();
+  var imageWidth = imageRect.right - imageRect.left;
+  var imageHeight = imageRect.bottom - imageRect.top;
+
+  // Populate hidden fields as a percentage of the image
+  xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
+  yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
+  width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
+  height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
 
   // Label hidden fields
   xOffset.setAttribute("class", "x_offset");
@@ -327,12 +333,18 @@ window.createSectionFormFields = function (box, parent_box) {
     "template[days_attributes][][sections_attributes][][height]"
   );
 
-  // Populate hidden fields
+  // Prepare variables for setting height and width
   var barRect = box.getBoundingClientRect();
-  xOffset.setAttribute("value", barRect.left);
-  yOffset.setAttribute("value", barRect.top);
-  width.setAttribute("value", barRect.right - barRect.left);
-  height.setAttribute("value", barRect.bottom - barRect.top);
+  var image = document.getElementsByTagName("img")[0];
+  var imageRect = image.getBoundingClientRect();
+  var imageWidth = imageRect.right - imageRect.left;
+  var imageHeight = imageRect.bottom - imageRect.top;
+
+  // Populate hidden fields as a percentage of the image
+  xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
+  yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
+  width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
+  height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
 
   // Label hidden fields
   xOffset.setAttribute("class", "x_offset");
@@ -364,12 +376,18 @@ window.updateDayFormFields = function (box) {
   var width = fields.getElementsByClassName("width")[0];
   var height = fields.getElementsByClassName("height")[0];
 
-  // Update hidden fields
+  // Prepare variables for setting height and width
   var barRect = box.getBoundingClientRect();
-  xOffset.setAttribute("value", barRect.left);
-  yOffset.setAttribute("value", barRect.top);
-  width.setAttribute("value", barRect.right - barRect.left);
-  height.setAttribute("value", barRect.bottom - barRect.top);
+  var image = document.getElementsByTagName("img")[0];
+  var imageRect = image.getBoundingClientRect();
+  var imageWidth = imageRect.right - imageRect.left;
+  var imageHeight = imageRect.bottom - imageRect.top;
+
+  // Populate hidden fields as a percentage of the image
+  xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
+  yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
+  width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
+  height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
 };
 
 window.updateSectionParent = function (box, parent_box) {
