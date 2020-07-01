@@ -26,6 +26,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
           // update the element's style
           target.style.width = event.rect.width + "px";
           target.style.height = event.rect.height + "px";
+          event.target.style.padding = "0";
 
           // translate when resizing from top or left edges
           x += event.deltaRect.left;
@@ -47,7 +48,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
         // minimum size
         interact.modifiers.restrictSize({
-          min: { width: 100, height: 50 },
+          min: { width: 70, height: 30 },
         }),
       ],
 
