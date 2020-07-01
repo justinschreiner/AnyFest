@@ -1,5 +1,7 @@
 class TemplatesController < ApplicationController
+  include ActionView::Helpers::UrlHelper
   before_action :authenticate_user!
+  
   def index
     @q = Festival.ransack(params[:q])
     @festivals = @q.result(distinct: true)
@@ -11,9 +13,7 @@ class TemplatesController < ApplicationController
   end
 
   def new
-    @template = current_user.templates.new
-    @template.festival_id = 1
-    @template.save
+    @template = current_user.templates.create
     redirect_to template_build_path(template_id: @template, id: :create_template, action: 'create')
   end
 
@@ -36,7 +36,11 @@ class TemplatesController < ApplicationController
     @template = Template.find(params[:id])
 
     if @template.update_attributes(template_params)
-      redirect_to template_build_path(template_id: @template, id: :position_sections)
+      if (template_params['days_attributes'].blank?)
+        redirect_to template_build_path(template_id: @template, id: :position_sections)
+      else
+        redirect_to template_build_path(template_id: @template, id: :section_settings)
+      end
     else
       render action: 'edit'
     end
