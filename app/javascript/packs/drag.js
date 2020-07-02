@@ -85,6 +85,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
           position.x += event.dx;
           position.y += event.dy;
           event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+          event.target.setAttribute("data-x", position.x);
+          event.target.setAttribute("data-y", position.y);
         },
       },
     })
