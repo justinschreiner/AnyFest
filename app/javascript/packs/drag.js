@@ -1,20 +1,19 @@
 import interact from "interactjs";
 
-window.addEventListener("DOMContentLoaded", (event) => {
-  // Allows boxes to be dragged
-  window.dragMoveListener = function (event) {
-    var target, x, y;
-    target = event.target;
-    x =
-      (parseFloat(target.getAttribute("data-x")) || position.x || 0) + event.dx;
-    y =
-      (parseFloat(target.getAttribute("data-y")) || position.y || 0) + event.dy;
-    target.style.webkitTransform = target.style.transform =
-      "translate(" + x + "px, " + y + "px)";
-    target.setAttribute("data-x", x);
-    return target.setAttribute("data-y", y);
-  };
+// Allows boxes to be dragged
+window.dragMoveListener = function (event) {
+  var target, x, y;
+  target = event.target;
+  x = (parseFloat(target.getAttribute("data-x")) || position.x || 0) + event.dx;
+  y = (parseFloat(target.getAttribute("data-y")) || position.y || 0) + event.dy;
+  target.style.webkitTransform = target.style.transform =
+    "translate(" + x + "px, " + y + "px)";
+  target.setAttribute("data-x", x);
+  return target.setAttribute("data-y", y);
+};
 
+// Wrapping these functions so that the page fully loads and we can query for the preview image
+window.addEventListener("DOMContentLoaded", (event) => {
   // Allows boxes to be resized and dragged
   interact(".drag-drop")
     .resizable({
@@ -138,294 +137,294 @@ window.addEventListener("DOMContentLoaded", (event) => {
       }
       interaction.start({ name: "drag" }, event.interactable, element);
     });
-
-  // Template image dropzone, accepts days and sections
-  interact(".dropzone").dropzone({
-    accept: ".drag-drop",
-    overlap: 0.75,
-
-    // listen for drop related events:
-    ondropactivate: function (event) {},
-    ondragenter: function (event) {},
-    ondragleave: function (event) {},
-    ondrop: function (event) {
-      // Add new hidden form field for this section if one does not exist
-      if (event.relatedTarget.getAttribute("data-id") == null) {
-        if (event.relatedTarget.classList.contains("day-drop")) {
-          createDayFormFields(event.relatedTarget);
-        } else {
-          createSectionFormFields(event.relatedTarget, event.target);
-        }
-      } else {
-        if (event.relatedTarget.classList.contains("day-drop")) {
-          updateDayFormFields(event.relatedTarget);
-        } else {
-          createSectionFormFields(event.relatedTarget, event.target);
-        }
-      }
-    },
-    ondropdeactivate: function (event) {},
-  });
-
-  // Day dropzone, only accepts sections
-  interact("#day").dropzone({
-    accept: ".section-drag",
-    overlap: 0.75,
-
-    // listen for drop related events:
-    ondropactivate: function (event) {
-      if (event.relatedTarget.getAttribute("data-id") != null) {
-        if (event.target.getAttribute("data-id") != null) {
-          deleteSectionFormFields(event.relatedTarget, event.target);
-        }
-      }
-    },
-    ondragenter: function (event) {
-      // feedback the possibility of a drop
-      event.target.style.border = "2px solid #fff";
-      event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-    },
-    ondragleave: function (event) {
-      // remove the drop feedback style
-      event.target.style.border = "2px solid #000";
-      event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-    },
-    ondrop: function (event) {
-      if (event.relatedTarget.getAttribute("data-id") == null) {
-        if (event.relatedTarget.className == "day") {
-          createDayFormFields(event.relatedTarget);
-        } else {
-          createSectionFormFields(event.relatedTarget, event.target);
-        }
-      } else {
-        if (event.relatedTarget.classList.contains("day-drop")) {
-          updateDayFormFields(event.relatedTarget);
-        } else {
-          createSectionFormFields(event.relatedTarget, event.target);
-        }
-      }
-    },
-    ondropdeactivate: function (event) {
-      // remove active dropzone feedback
-      event.target.style.border = "2px solid #000";
-      event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-    },
-  });
-
-  // Trashcan dropzone, accepts days and sections
-  interact("#trash").dropzone({
-    accept: ".drag-drop",
-    overlap: 0.1,
-
-    // listen for drop related events:
-    ondropactivate: function (event) {},
-    ondragenter: function (event) {
-      event.relatedTarget.style.backgroundColor = "rgba(200, 0, 0, 0.7)";
-    },
-    ondragleave: function (event) {
-      // remove the drop feedback style, if mouse is up it means user dropped element in trash
-      event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
-      if (mouseDown == 0) {
-        event.target.parentNode.removeChild(event.relatedTarget);
-        if (event.relatedTarget.classList.contains("day")) {
-          deleteFormFields(event.relatedTarget);
-        } else {
-          deleteSectionWithoutDay(event.relatedTarget);
-        }
-      }
-    },
-    ondrop: function (event) {},
-    ondropdeactivate: function (event) {},
-  });
-
-  const position = { x: 300, y: 300 };
-
-  // Create form fields for a new section
-  window.createDayFormFields = function (box) {
-    var time = Date.now();
-    box.setAttribute("data-id", time);
-
-    // Create input fields
-    var xOffset = document.createElement("input");
-    xOffset.setAttribute("type", "hidden");
-    xOffset.setAttribute("name", "template[days_attributes][][x_offset]");
-    var yOffset = document.createElement("input");
-    yOffset.setAttribute("type", "hidden");
-    yOffset.setAttribute("name", "template[days_attributes][][y_offset]");
-    var width = document.createElement("input");
-    width.setAttribute("type", "hidden");
-    width.setAttribute("name", "template[days_attributes][][width]");
-    var height = document.createElement("input");
-    height.setAttribute("type", "hidden");
-    height.setAttribute("name", "template[days_attributes][][height]");
-
-    // Prepare variables for setting height and width
-    var barRect = box.getBoundingClientRect();
-    var image = document.getElementsByTagName("img")[0];
-    var imageRect = image.getBoundingClientRect();
-    var imageWidth = imageRect.right - imageRect.left;
-    var imageHeight = imageRect.bottom - imageRect.top;
-
-    // Populate hidden fields as a percentage of the image
-    xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
-    yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
-    width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
-    height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
-
-    // Label hidden fields
-    xOffset.setAttribute("class", "x_offset");
-    yOffset.setAttribute("class", "y_offset");
-    width.setAttribute("class", "width");
-    height.setAttribute("class", "height");
-
-    // Create div class to hold these
-    var container = document.createElement("div");
-    container.setAttribute("id", time);
-    if (box.id == "day") {
-      container.setAttribute("class", "day");
-    } else {
-      container.setAttribute("class", "section");
-    }
-
-    // Append hidden fields
-    container.appendChild(xOffset);
-    container.appendChild(yOffset);
-    container.appendChild(width);
-    container.appendChild(height);
-
-    // Append container
-    document.getElementById("form").appendChild(container);
-  };
-
-  // Creates hidden form fields for sections inside of days
-  window.createSectionFormFields = function (box, parent_box) {
-    var time = Date.now();
-    box.setAttribute("data-id", time);
-
-    var queryId = parent_box.getAttribute("data-id");
-    if (queryId == null) {
-      queryId = "form";
-    }
-    var formFields = document.getElementById(queryId);
-
-    // Create input fields
-    var xOffset = document.createElement("input");
-    xOffset.setAttribute("type", "hidden");
-    xOffset.setAttribute(
-      "name",
-      "template[days_attributes][][sections_attributes][][x_offset]"
-    );
-    var yOffset = document.createElement("input");
-    yOffset.setAttribute("type", "hidden");
-    yOffset.setAttribute(
-      "name",
-      "template[days_attributes][][sections_attributes][][y_offset]"
-    );
-    var width = document.createElement("input");
-    width.setAttribute("type", "hidden");
-    width.setAttribute(
-      "name",
-      "template[days_attributes][][sections_attributes][][width]"
-    );
-    var height = document.createElement("input");
-    height.setAttribute("type", "hidden");
-    height.setAttribute(
-      "name",
-      "template[days_attributes][][sections_attributes][][height]"
-    );
-
-    // Prepare variables for setting height and width
-    var barRect = box.getBoundingClientRect();
-    var image = document.getElementsByTagName("img")[0];
-    var imageRect = image.getBoundingClientRect();
-    var imageWidth = imageRect.right - imageRect.left;
-    var imageHeight = imageRect.bottom - imageRect.top;
-
-    // Populate hidden fields as a percentage of the image
-    xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
-    yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
-    width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
-    height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
-
-    // Label hidden fields
-    xOffset.setAttribute("class", "x_offset");
-    yOffset.setAttribute("class", "y_offset");
-    width.setAttribute("class", "width");
-    height.setAttribute("class", "height");
-
-    // Append hidden field container
-    var container = document.createElement("div");
-    container.setAttribute("id", box.getAttribute("data-id"));
-    container.setAttribute("class", "section");
-
-    container.appendChild(xOffset);
-    container.appendChild(yOffset);
-    container.appendChild(width);
-    container.appendChild(height);
-
-    formFields.appendChild(container);
-  };
-
-  // Update form fields for a section whose size or position has changed
-  window.updateDayFormFields = function (box) {
-    var queryId = box.getAttribute("data-id");
-
-    // Find input fields
-    var fields = document.getElementById(queryId);
-    var xOffset = fields.getElementsByClassName("x_offset")[0];
-    var yOffset = fields.getElementsByClassName("y_offset")[0];
-    var width = fields.getElementsByClassName("width")[0];
-    var height = fields.getElementsByClassName("height")[0];
-
-    // Prepare variables for setting height and width
-    var barRect = box.getBoundingClientRect();
-    var image = document.getElementsByTagName("img")[0];
-    var imageRect = image.getBoundingClientRect();
-    var imageWidth = imageRect.right - imageRect.left;
-    var imageHeight = imageRect.bottom - imageRect.top;
-
-    // Populate hidden fields as a percentage of the image
-    xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
-    yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
-    width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
-    height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
-  };
-
-  window.updateSectionParent = function (box, parent_box) {
-    parent_box.appendChild(box);
-  };
-
-  // Delete form field elements when sections are removed
-  window.deleteFormFields = function (box) {
-    var form = document.getElementById("form");
-    var fieldId = box.getAttribute("data-id");
-    var field = document.getElementById(fieldId);
-    form.removeChild(field);
-  };
-
-  window.deleteSectionFormFields = function (box, parent_box) {
-    var day = document.getElementById(parent_box.getAttribute("data-id"));
-    var section = document.getElementById(box.getAttribute("data-id"));
-    if (day.contains(section)) {
-      day.removeChild(section);
-    }
-  };
-
-  window.deleteSectionWithoutDay = function (box) {
-    var section = document.getElementById(box.getAttribute("data-id"));
-    var day = document.getElementById("form");
-    if (day.contains(section)) {
-      day.removeChild(section);
-    }
-  };
-
-  // Keeps track of whether or not the user is clicking
-  // Used to see if the user has dropped something in the trash
-  var mouseDown = 0;
-  window.onmousedown = function () {
-    ++mouseDown;
-  };
-  window.onmouseup = function () {
-    --mouseDown;
-  };
 });
+
+// Template image dropzone, accepts days and sections
+interact(".dropzone").dropzone({
+  accept: ".drag-drop",
+  overlap: 0.75,
+
+  // listen for drop related events:
+  ondropactivate: function (event) {},
+  ondragenter: function (event) {},
+  ondragleave: function (event) {},
+  ondrop: function (event) {
+    // Add new hidden form field for this section if one does not exist
+    if (event.relatedTarget.getAttribute("data-id") == null) {
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        createDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    } else {
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        updateDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    }
+  },
+  ondropdeactivate: function (event) {},
+});
+
+// Day dropzone, only accepts sections
+interact("#day").dropzone({
+  accept: ".section-drag",
+  overlap: 0.75,
+
+  // listen for drop related events:
+  ondropactivate: function (event) {
+    if (event.relatedTarget.getAttribute("data-id") != null) {
+      if (event.target.getAttribute("data-id") != null) {
+        deleteSectionFormFields(event.relatedTarget, event.target);
+      }
+    }
+  },
+  ondragenter: function (event) {
+    // feedback the possibility of a drop
+    event.target.style.border = "2px solid #fff";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.style.border = "2px solid #000";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+  ondrop: function (event) {
+    if (event.relatedTarget.getAttribute("data-id") == null) {
+      if (event.relatedTarget.className == "day") {
+        createDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    } else {
+      if (event.relatedTarget.classList.contains("day-drop")) {
+        updateDayFormFields(event.relatedTarget);
+      } else {
+        createSectionFormFields(event.relatedTarget, event.target);
+      }
+    }
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.style.border = "2px solid #000";
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+  },
+});
+
+// Trashcan dropzone, accepts days and sections
+interact("#trash").dropzone({
+  accept: ".drag-drop",
+  overlap: 0.1,
+
+  // listen for drop related events:
+  ondropactivate: function (event) {},
+  ondragenter: function (event) {
+    event.relatedTarget.style.backgroundColor = "rgba(200, 0, 0, 0.7)";
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style, if mouse is up it means user dropped element in trash
+    event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+    if (mouseDown == 0) {
+      event.target.parentNode.removeChild(event.relatedTarget);
+      if (event.relatedTarget.classList.contains("day")) {
+        deleteFormFields(event.relatedTarget);
+      } else {
+        deleteSectionWithoutDay(event.relatedTarget);
+      }
+    }
+  },
+  ondrop: function (event) {},
+  ondropdeactivate: function (event) {},
+});
+
+const position = { x: 300, y: 300 };
+
+// Create form fields for a new section
+window.createDayFormFields = function (box) {
+  var time = Date.now();
+  box.setAttribute("data-id", time);
+
+  // Create input fields
+  var xOffset = document.createElement("input");
+  xOffset.setAttribute("type", "hidden");
+  xOffset.setAttribute("name", "template[days_attributes][][x_offset]");
+  var yOffset = document.createElement("input");
+  yOffset.setAttribute("type", "hidden");
+  yOffset.setAttribute("name", "template[days_attributes][][y_offset]");
+  var width = document.createElement("input");
+  width.setAttribute("type", "hidden");
+  width.setAttribute("name", "template[days_attributes][][width]");
+  var height = document.createElement("input");
+  height.setAttribute("type", "hidden");
+  height.setAttribute("name", "template[days_attributes][][height]");
+
+  // Prepare variables for setting height and width
+  var barRect = box.getBoundingClientRect();
+  var image = document.getElementsByTagName("img")[0];
+  var imageRect = image.getBoundingClientRect();
+  var imageWidth = imageRect.right - imageRect.left;
+  var imageHeight = imageRect.bottom - imageRect.top;
+
+  // Populate hidden fields as a percentage of the image
+  xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
+  yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
+  width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
+  height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
+
+  // Label hidden fields
+  xOffset.setAttribute("class", "x_offset");
+  yOffset.setAttribute("class", "y_offset");
+  width.setAttribute("class", "width");
+  height.setAttribute("class", "height");
+
+  // Create div class to hold these
+  var container = document.createElement("div");
+  container.setAttribute("id", time);
+  if (box.id == "day") {
+    container.setAttribute("class", "day");
+  } else {
+    container.setAttribute("class", "section");
+  }
+
+  // Append hidden fields
+  container.appendChild(xOffset);
+  container.appendChild(yOffset);
+  container.appendChild(width);
+  container.appendChild(height);
+
+  // Append container
+  document.getElementById("form").appendChild(container);
+};
+
+// Creates hidden form fields for sections inside of days
+window.createSectionFormFields = function (box, parent_box) {
+  var time = Date.now();
+  box.setAttribute("data-id", time);
+
+  var queryId = parent_box.getAttribute("data-id");
+  if (queryId == null) {
+    queryId = "form";
+  }
+  var formFields = document.getElementById(queryId);
+
+  // Create input fields
+  var xOffset = document.createElement("input");
+  xOffset.setAttribute("type", "hidden");
+  xOffset.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][x_offset]"
+  );
+  var yOffset = document.createElement("input");
+  yOffset.setAttribute("type", "hidden");
+  yOffset.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][y_offset]"
+  );
+  var width = document.createElement("input");
+  width.setAttribute("type", "hidden");
+  width.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][width]"
+  );
+  var height = document.createElement("input");
+  height.setAttribute("type", "hidden");
+  height.setAttribute(
+    "name",
+    "template[days_attributes][][sections_attributes][][height]"
+  );
+
+  // Prepare variables for setting height and width
+  var barRect = box.getBoundingClientRect();
+  var image = document.getElementsByTagName("img")[0];
+  var imageRect = image.getBoundingClientRect();
+  var imageWidth = imageRect.right - imageRect.left;
+  var imageHeight = imageRect.bottom - imageRect.top;
+
+  // Populate hidden fields as a percentage of the image
+  xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
+  yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
+  width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
+  height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
+
+  // Label hidden fields
+  xOffset.setAttribute("class", "x_offset");
+  yOffset.setAttribute("class", "y_offset");
+  width.setAttribute("class", "width");
+  height.setAttribute("class", "height");
+
+  // Append hidden field container
+  var container = document.createElement("div");
+  container.setAttribute("id", box.getAttribute("data-id"));
+  container.setAttribute("class", "section");
+
+  container.appendChild(xOffset);
+  container.appendChild(yOffset);
+  container.appendChild(width);
+  container.appendChild(height);
+
+  formFields.appendChild(container);
+};
+
+// Update form fields for a section whose size or position has changed
+window.updateDayFormFields = function (box) {
+  var queryId = box.getAttribute("data-id");
+
+  // Find input fields
+  var fields = document.getElementById(queryId);
+  var xOffset = fields.getElementsByClassName("x_offset")[0];
+  var yOffset = fields.getElementsByClassName("y_offset")[0];
+  var width = fields.getElementsByClassName("width")[0];
+  var height = fields.getElementsByClassName("height")[0];
+
+  // Prepare variables for setting height and width
+  var barRect = box.getBoundingClientRect();
+  var image = document.getElementsByTagName("img")[0];
+  var imageRect = image.getBoundingClientRect();
+  var imageWidth = imageRect.right - imageRect.left;
+  var imageHeight = imageRect.bottom - imageRect.top;
+
+  // Populate hidden fields as a percentage of the image
+  xOffset.setAttribute("value", (barRect.left - imageRect.left) / imageWidth);
+  yOffset.setAttribute("value", (barRect.top - imageRect.top) / imageHeight);
+  width.setAttribute("value", (barRect.right - barRect.left) / imageWidth);
+  height.setAttribute("value", (barRect.bottom - barRect.top) / imageHeight);
+};
+
+window.updateSectionParent = function (box, parent_box) {
+  parent_box.appendChild(box);
+};
+
+// Delete form field elements when sections are removed
+window.deleteFormFields = function (box) {
+  var form = document.getElementById("form");
+  var fieldId = box.getAttribute("data-id");
+  var field = document.getElementById(fieldId);
+  form.removeChild(field);
+};
+
+window.deleteSectionFormFields = function (box, parent_box) {
+  var day = document.getElementById(parent_box.getAttribute("data-id"));
+  var section = document.getElementById(box.getAttribute("data-id"));
+  if (day.contains(section)) {
+    day.removeChild(section);
+  }
+};
+
+window.deleteSectionWithoutDay = function (box) {
+  var section = document.getElementById(box.getAttribute("data-id"));
+  var day = document.getElementById("form");
+  if (day.contains(section)) {
+    day.removeChild(section);
+  }
+};
+
+// Keeps track of whether or not the user is clicking
+// Used to see if the user has dropped something in the trash
+var mouseDown = 0;
+window.onmousedown = function () {
+  ++mouseDown;
+};
+window.onmouseup = function () {
+  --mouseDown;
+};

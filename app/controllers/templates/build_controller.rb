@@ -16,7 +16,6 @@ class Templates::BuildController < ApplicationController
       # updating the status to the wizard step, will help for knowing what validations should have taken place to this point
       params[:template][:status] = step.to_s
       params[:template][:status] = "active" if step == steps.last
-
       @template.update_attributes(template_params)
       render_wizard @template
     end
