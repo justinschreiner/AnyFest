@@ -11,20 +11,11 @@
                 %h2
                     %label{for: "template_name"} Name
                 = f.text_field :name, class: "form-control input-lg"
-            %h2 Background
-            #background 
-                .form-group.custom-file#image
-                    %h3
-                    %label{for: "template_background_image"} Background Image
-                    %br
-                    #file
-                        = f.file_field :background_image, {onchange: "previewFile()"}
-                %h3#or OR
-                .form-group#color
-                    %h3
-                    %label{for: "template_background_color"} Background Color (hex)
-                    = f.text_field :background_color, class: "form-control input-lg"
-
+            %h2 
+                %label{for: "template_background_image"} Background Image
+            #file
+                = f.file_field :background_image, {onchange: "previewFile()"}
+            // stretch goal: be able to choose a solid color for a background if you don't have an image
             = f.submit "Create", class: "btn btn-primary"
     #preview
         %h2

@@ -186,17 +186,13 @@ body {
     #form {
       width: 50%;
       float: left;
-      #background {
-        margin-left: 3em;
-      }
       #image {
         #file {
           margin: 1em 0;
         }
       }
-      #or {
-        color: #ff6b6b;
-        margin-top: 0.5em;
+      .btn {
+        margin-top: 2em;
       }
     }
     #preview {
