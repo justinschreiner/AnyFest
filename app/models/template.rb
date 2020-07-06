@@ -5,9 +5,22 @@ class Template < ApplicationRecord
     has_one_attached :background_image
     accepts_nested_attributes_for :days
 
-    validates :name, presence: true, if: :active?
+    validates :festival_id, :name, :background_image, presence: true, if: :active_or_create?
+    validates :days,                                  presence: true, if: :position_or_create?
 
     def active?
         status == 'active'
+    end
+
+    def active_or_create?
+        (status == "create_template") || active?
+    end
+
+    def position_or_create?
+        (status == "position_sections") || active?
+    end
+
+    def settings_or_create?
+        (status == "section_settings") || active?
     end
 end
