@@ -1,5 +1,5 @@
 #position-sections
-    = form_with model: @template, url: wizard_path do |t|
+    = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         %h1 Create Sections for your Template
         #preview
             %h3 Preview 

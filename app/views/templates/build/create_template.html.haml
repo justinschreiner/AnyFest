@@ -1,6 +1,6 @@
 #template-form
     #form
-        = form_with model: @template, url: wizard_path do |f|
+        = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |f|
             .form-group
                 %h2
                     %label{for: "template_festival_id"} Festival
