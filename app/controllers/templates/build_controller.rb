@@ -1,7 +1,7 @@
 class Templates::BuildController < ApplicationController
     include Wicked::Wizard
   
-    steps :create_template, :position_sections #, :section_settings
+    steps :create_template, :position_sections, :section_settings
   
     def show
       @template = Template.find(params[:template_id])

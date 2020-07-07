@@ -262,6 +262,42 @@ body {
     }
   }
 
+  #section-settings {
+    #instance {
+      height: 40vh;
+      width: 80%;
+      background-color: #fff;
+      border: 2px solid #ff6b6b;
+      border-radius: 5em;
+      margin-bottom: 5%;
+      padding: 2% 10%;
+
+      #form {
+        color: #1a535c;
+        width: 40%;
+        float: left;
+      }
+      #container {
+        width: 40%;
+        float: right;
+      }
+      img {
+        position: absolute;
+      }
+      #surrounding-day,
+      #section {
+        border: 1px solid #000;
+        position: absolute;
+      }
+      #surrounding-day {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+      #section {
+        background-color: rgba(0, 255, 0, 0.8);
+      }
+    }
+  }
+
   #show-template {
     #image {
       padding-top: 30px;
