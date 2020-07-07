@@ -184,8 +184,6 @@ body {
 
   #template-form {
     #form {
-      width: 50%;
-      float: left;
       #image {
         #file {
           margin: 1em 0;
@@ -196,8 +194,6 @@ body {
       }
     }
     #preview {
-      width: 50%;
-      float: right;
       img {
         width: 80%;
         height: auto;
@@ -208,8 +204,6 @@ body {
 
   #position-sections {
     #form {
-      width: 25%;
-      float: left;
       .container {
         background-color: #fff;
         border-radius: 5vh;
@@ -246,8 +240,8 @@ body {
         }
 
         .drag-drop {
-          width: 13%;
-          height: 10%;
+          width: 60%;
+          height: 13%;
         }
 
         i {
@@ -258,11 +252,9 @@ body {
       }
     }
     #preview {
-      width: 70%;
-      float: right;
       img {
-        width: 80%;
-        height: auto;
+        width: 50vw;
+        height: 70vh;
         object-fit: contain;
       }
     }
