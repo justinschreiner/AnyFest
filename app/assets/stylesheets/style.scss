@@ -195,8 +195,8 @@ body {
     }
     #preview {
       img {
-        width: 80%;
-        height: auto;
+        width: 20vw;
+        height: 40vh;
         object-fit: contain;
       }
     }
@@ -253,9 +253,8 @@ body {
     }
     #preview {
       img {
-        width: 50vw;
-        height: 70vh;
-        object-fit: contain;
+        width: 30vw;
+        height: 60vh;
       }
     }
     .btn {
