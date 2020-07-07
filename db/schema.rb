@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_155656) do
+ActiveRecord::Schema.define(version: 2020_06_23_151827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 2020_06_19_155656) do
     t.integer "y_offset"
     t.integer "width"
     t.integer "height"
-    t.bigint "template_id"
-    t.index ["template_id"], name: "index_sections_on_template_id"
+    t.bigint "day_id"
+    t.index ["day_id"], name: "index_sections_on_day_id"
   end
 
   create_table "templates", force: :cascade do |t|
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_155656) do
     t.string "background_color"
     t.bigint "festival_id"
     t.bigint "user_id", null: false
+    t.string "status"
     t.index ["festival_id"], name: "index_templates_on_festival_id"
     t.index ["user_id"], name: "index_templates_on_user_id"
   end
@@ -91,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_155656) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "days", "templates"
-  add_foreign_key "sections", "templates"
+  add_foreign_key "sections", "days"
   add_foreign_key "templates", "festivals"
   add_foreign_key "templates", "users"
 end

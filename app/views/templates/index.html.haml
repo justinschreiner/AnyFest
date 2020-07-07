@@ -8,7 +8,7 @@
   - if (params[:q]).present?
     #results
       - @festivals.each do |f|
-        %li= link_to f.name, {action: 'show', id: f.id}
+        %li= link_to f.name, festival_path(f)
   #add
     Don't see your festval?
     = link_to "Add New Festival", new_festival_path
@@ -22,8 +22,8 @@
             = image_tag(tem.background_image, size: "210x280")
   %h1
     Want to make your own Template?
-  = link_to "ADD TEMPLATE", {action: 'new'}, class: "btn btn-primary"
-
+  = link_to "ADD TEMPLATE", new_template_path, class: "btn btn-primary"
+  
   - if (user_signed_in?)
     - if (current_user.is_admin?)
       #trestle

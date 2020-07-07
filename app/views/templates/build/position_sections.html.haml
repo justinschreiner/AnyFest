@@ -1,0 +1,23 @@
+= javascript_pack_tag 'drag' # including only here because it doesn't run properly when declared globaly
+#position-sections
+    = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
+        %h1 Create Sections for your Template
+        .row-container
+            .row
+                #preview.col-8.order-2
+                    %h3 Preview 
+                    - if(@template.background_image.attached?)
+                        = image_tag(@template.background_image, class: "dropzone", id: "preview_image")
+                #form.col-3.order-1
+                    %h3 Add Sections
+                    .container 
+                        #day.item
+                            Day
+                        #section.item
+                            Section
+                        #trash.dropzone
+                            = fa_icon "trash"
+                        = t.fields_for :days do |d|
+                            = d.fields_for :sections do |s|
+                                attach fields
+                    = t.submit "CONTINUE", class: "btn btn-primary"
