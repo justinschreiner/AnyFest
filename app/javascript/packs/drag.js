@@ -1,7 +1,9 @@
+// Javascript for the position sections step in the Template form
+
 import interact from "interactjs";
 
-console.log("running");
-// Allows boxes to be dragged
+// Allows sections and days to be dragged
+// From Interact.js documentation https://interactjs.io/
 window.dragMoveListener = function (event) {
   var target, x, y;
   target = event.target;
@@ -13,7 +15,8 @@ window.dragMoveListener = function (event) {
   return target.setAttribute("data-y", y);
 };
 
-// Allows boxes to be resized and dragged
+// Allows days and sections to be resized and dragged
+// From Interact.js documentation https://interactjs.io/
 interact(".drag-drop")
   .resizable({
     edges: { left: true, right: true, bottom: true, top: true },
@@ -41,7 +44,7 @@ interact(".drag-drop")
       },
     },
     modifiers: [
-      // keep the edges inside the parent
+      // keep the edges inside the image the user uploaded
       interact.modifiers.restrictRect({
         restriction: document.querySelector("img"),
       }),
@@ -52,7 +55,7 @@ interact(".drag-drop")
       }),
     ],
 
-    inertia: false,
+    inertia: true,
   })
   .draggable({
     inertia: true,
@@ -67,6 +70,7 @@ interact(".drag-drop")
   });
 
 // Creates new sections or days by dragging out of the sidebar
+// From Interact.js documentation https://interactjs.io/
 interact(".item")
   .draggable({
     inertia: true,
@@ -138,6 +142,7 @@ interact(".item")
   });
 
 // Template image dropzone, accepts days and sections
+// From Interact.js documentation https://interactjs.io/
 interact(".dropzone").dropzone({
   accept: ".drag-drop",
   overlap: 0.75,
@@ -166,6 +171,7 @@ interact(".dropzone").dropzone({
 });
 
 // Day dropzone, only accepts sections
+// From Interact.js documentation https://interactjs.io/
 interact("#day").dropzone({
   accept: ".section-drag",
   overlap: 0.75,
@@ -211,6 +217,7 @@ interact("#day").dropzone({
 });
 
 // Trashcan dropzone, accepts days and sections
+// From Interact.js documentation https://interactjs.io/
 interact("#trash").dropzone({
   accept: ".drag-drop",
   overlap: 0.1,
@@ -271,7 +278,7 @@ window.createDayFormFields = function (box) {
   var imageWidth = imageRect.right - imageRect.left;
   var imageHeight = imageRect.bottom - imageRect.top;
 
-  // Populate hidden fields as a percentage of the image
+  // Populate hidden fields as a percentage of the image, multiply by 10,000 to get around rounding error with ints
   xOffset.setAttribute(
     "value",
     ((barRect.left - imageRect.left) * 10000) / imageWidth
@@ -358,7 +365,7 @@ window.createSectionFormFields = function (box, parent_box) {
   var imageWidth = imageRect.right - imageRect.left;
   var imageHeight = imageRect.bottom - imageRect.top;
 
-  // Populate hidden fields as a percentage of the image
+  // Populate hidden fields as a percentage of the image, multiply by 10,000 to get around rounding error with ints
   xOffset.setAttribute(
     "value",
     ((barRect.left - imageRect.left) * 10000) / imageWidth
