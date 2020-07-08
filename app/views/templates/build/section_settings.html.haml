@@ -10,6 +10,14 @@
                             #form.col
                                 %label{for: "section_name"} Name
                                 = s.text_field :name, class: "form-control input-lg"
+                                -# %label{for: "section_color"} Text Color
+                                -# = s.color_field :text_colors, class: "form-control input-lg"
+                                %label{for: "section_delineator"} Delineator
+                                = s.text_field :delineator, class: "form-control input-lg"
+                                %label{for: "section_delineator_color"} Delineator Color
+                                = s.color_field :delineator_color, class: "form-control input-lg"
+                                %label{for: "section_max_acts"} Maximum Acts
+                                = s.number_field :max_act_count, class: "form-control input-lg"
                             .container.col
                                 = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
                                 %script{type:"text/javascript"}
