@@ -28,7 +28,8 @@ class Templates::BuildController < ApplicationController
     private
     def template_params
       params.require(:template).permit(:name, :background_color, :festival_id, :background_image, :status, 
-        days_attributes: [:id, :x_offset, :y_offset, :width, :height,  
-          sections_attributes: [:id, :x_offset, :y_offset, :width, :height, :name]])
+        days_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
+          sections_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
+            :act_type, :text_colors, :delineator, :delineator_color, :max_act_count]])
     end
 end
