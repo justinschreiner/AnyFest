@@ -196,7 +196,7 @@ body {
     #preview {
       img {
         width: 20vw;
-        height: 40vh;
+        height: auto;
         object-fit: contain;
       }
     }
@@ -254,7 +254,7 @@ body {
     #preview {
       img {
         width: 30vw;
-        height: 60vh;
+        height: auto;
       }
     }
     .btn {
@@ -264,35 +264,34 @@ body {
 
   #section-settings {
     #instance {
-      height: 40vh;
+      height: auto;
+      overflow: visible;
       width: 80%;
       background-color: #fff;
       border: 2px solid #ff6b6b;
       border-radius: 5em;
       margin-bottom: 5%;
-      padding: 2% 10%;
+      padding: 5% 10%;
 
+      .col {
+        padding: 0;
+      }
       #form {
         color: #1a535c;
-        width: 40%;
-        float: left;
-      }
-      #container {
-        width: 40%;
-        float: right;
       }
       img {
         position: absolute;
       }
-      #surrounding-day,
-      #section {
+      .surrounding-day,
+      .section {
         border: 1px solid #000;
         position: absolute;
       }
-      #surrounding-day {
+      .surrounding-day {
         background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1;
       }
-      #section {
+      .section {
         background-color: rgba(0, 255, 0, 0.8);
       }
     }

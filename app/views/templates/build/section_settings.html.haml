@@ -1,11 +1,19 @@
+= javascript_pack_tag "makeSection"
 #section-settings
     - @template.days.each do |day|
         = day.x_offset
         - day.sections.each do |section|
-            #instance
-                #form
-                #container
-                    = image_tag(@template.background_image, style: "height: 35%; width: 25%", class: "preview_image")
-                    #surrounding-day(style= "height: #{(day.height * 35.0) / 10000.0}%; width: #{(day.width * 25.0) / 10000.0}%; margin-top: #{(day.y_offset * 35.0) / 10000.0}%; margin-left: #{(day.x_offset * 25.0) / 10000.0}%;")
-                    #section(style= "height: #{(section.height * 35.0) / 10000.0}%; width: #{(section.width * 25.0) / 10000.0}%; margin-top: #{(section.y_offset * 35.0) / 10000.0}%; margin-left: #{(section.x_offset * 25.0) / 10000.0}%;")
-                
+            #instance.row
+                #form.col
+                #container.col
+                    = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
+                    %script{type:"text/javascript"}
+                        var dayHeight = "#{day.height}";
+                        var dayWidth = "#{day.width}";
+                        var dayXOffset = "#{day.x_offset}";
+                        var dayYOffset = "#{day.y_offset}";
+                        var sectionHeight = "#{section.height}";
+                        var sectionWidth = "#{section.width}";
+                        var sectionXOffset = "#{section.x_offset}";
+                        var sectionYOffset = "#{section.y_offset}";
+                        makeBoxes(dayHeight, dayWidth, dayXOffset, dayYOffset, sectionHeight, sectionWidth, sectionXOffset, sectionYOffset);

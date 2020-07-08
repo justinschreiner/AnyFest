@@ -4,6 +4,7 @@ import interact from "interactjs";
 // Allows sections and days to be dragged
 // From Interact.js documentation https://interactjs.io/
 document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("running");
   window.dragMoveListener = function (event) {
     var target, x, y;
     target = event.target;
