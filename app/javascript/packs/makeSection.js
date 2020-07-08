@@ -1,3 +1,5 @@
+var index = 0;
+
 window.makeBoxes = function (
   dayHeight,
   dayWidth,
@@ -9,8 +11,9 @@ window.makeBoxes = function (
   sectionYOffset
 ) {
   window.addEventListener("load", (event) => {
-    var image = document.getElementsByTagName("img")[0];
-    var container = document.getElementById("container");
+    console.log(index);
+    var image = document.getElementsByClassName("preview_image")[0];
+    var container = document.getElementsByClassName("container")[index];
 
     var day = document.createElement("div");
     var section = document.createElement("div");
@@ -49,5 +52,10 @@ window.makeBoxes = function (
 
     container.appendChild(day);
     container.appendChild(section);
+    index++;
   });
+};
+
+window.resetIndex = function () {
+  index = 0;
 };
