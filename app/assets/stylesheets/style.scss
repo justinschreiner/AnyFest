@@ -276,8 +276,27 @@ body {
       .col {
         padding: 0;
       }
+      .row {
+        padding: 0 1vw;
+      }
       #form {
         color: #1a535c;
+
+        #text-color {
+          width: 20%;
+        }
+        #delineator-color,
+        #delineator {
+          width: 40%;
+        }
+        #text-color,
+        #delineator-color {
+          padding: 0.5vh 0.5vw;
+        }
+        #delineator {
+          padding: 0.5vh 0.2vw;
+          padding-left: 1em;
+        }
       }
       img {
         position: absolute;

@@ -3,7 +3,6 @@
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         - @template.days.each do |day|
             = t.fields_for :days, day do |d| 
-                = day.x_offset
                 - day.sections.each do |section|
                     = d.fields_for :sections, section do |s|
                         #instance.row
@@ -11,13 +10,16 @@
                                 %label{for: "section_name"} Name
                                 = s.text_field :name, class: "form-control input-lg", id: "name"
                                 %label{for: "section_color"} Text Color
-                                = s.color_field :text_colors, multiple: true, class: "form-control", id: "color"
-                                %label{for: "section_delineator"} Delineator
-                                = s.select :delineator, ['·', '/'],class: "form-control", id: "delineator"
-                                %label{for: "section_delineator_color"} Delineator Color
-                                = s.color_field :delineator_color, multiple: true, class: "form-control input-lg",  id: "delineator-color"
+                                = s.color_field :delineator_color, multiple: true, class: "form-control input-lg",  id: "text-color"
+                                .row
+                                    .col
+                                        %label{for: "section_delineator"} Delineator
+                                        = s.select :delineator, ['·', '/'], {}, class: "form-control", id: "delineator"
+                                    .col
+                                        %label{for: "section_delineator_color"} Delineator Color
+                                        = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"
                                 %label{for: "section_max_acts"} Maximum # of Acts
-                                = s.number_field :max_act_count, class: "form-control input-lg", id: "max_acts"
+                                = s.number_field :max_act_count, min: 1, class: "form-control input-lg", id: "max_acts"
                             .container.col
                                 = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
                                 %script{type:"text/javascript"}
