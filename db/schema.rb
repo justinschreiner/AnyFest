@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_151827) do
+ActiveRecord::Schema.define(version: 2020_07_09_143345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2020_06_23_151827) do
   create_table "sections", force: :cascade do |t|
     t.string "name"
     t.string "act_type"
-    t.string "text_colors", default: [], array: true
+    t.string "text_colors", default: "{}"
     t.boolean "alternating_colors"
     t.string "delineator"
     t.string "delineator_color"
