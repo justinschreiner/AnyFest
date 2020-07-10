@@ -263,10 +263,6 @@ body {
   }
 
   #section-settings {
-    h2 {
-      color: #1a535c;
-      margin-bottom: 5vh;
-    }
     #instance {
       height: auto;
       overflow: visible;
@@ -277,6 +273,12 @@ body {
       margin-bottom: 5%;
       padding: 5% 10%;
 
+      h2 {
+        a {
+          color: #1a535c;
+          margin-bottom: 3vh;
+        }
+      }
       .col {
         padding: 0;
       }
@@ -300,6 +302,11 @@ body {
         #delineator {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
+        }
+        .btn {
+          position: absolute;
+          left: 0;
+          bottom: 0;
         }
       }
       img {
