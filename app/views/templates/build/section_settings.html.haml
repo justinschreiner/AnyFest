@@ -7,14 +7,14 @@
                     #instance
                         #dayHeading
                             %h2.mb-0
-                                %a{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
+                                %a#dayAccordionHeader{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                     Day Settings
-                        #collapseDay.collapse.show{"aria-labelledby" => "dayHeading", "data-parent" => "#accordionDay"}
+                        #collapseDay.collapse.show{"aria-labelledby": "dayHeading", "data-parent": "#accordionDay"}
                             .form-content.row
                                 .form.col
                                     %label{for: "section_name"} Name
                                     = d.text_field :name, class: "form-control input-lg", id: "name"
-                                    %a.btn.btn-primary{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
+                                    %a.btn.btn-primary#innerDayCollapse{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                         HIDE
                                 .container.col
                                     = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
@@ -23,16 +23,17 @@
                                         var dayWidth = "#{day.width}";
                                         var dayXOffset = "#{day.x_offset}";
                                         var dayYOffset = "#{day.y_offset}";
-                                        makeDay(dayHeight, dayWidth, dayXOffset, dayYOffset); 
+                                        makeDay(dayHeight, dayWidth, dayXOffset, dayYOffset);
+                                        makeDayIdUnique(); 
                 - day.sections.each do |section|
                     = d.fields_for :sections, section do |s|
                         #accordionSection.accordion
                             #instance
                                 #sectionHeading
                                     %h2.mb-0
-                                        %a{"aria-controls" => "collapseSection", "aria-expanded" => "true", "href" => "#collapseSection", "data-toggle" => "collapse", :type => "button"}
+                                        %a#sectionAccordionHeader{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                             Section Settings
-                                #collapseSection.collapse.show{"aria-labelledby" => "sectionHeading", "data-parent" => "#accordionSection"}
+                                #collapseSection.collapse.show{"aria-labelledby": "sectionHeading", "data-parent": "#accordionSection"}
                                     .form-content.row
                                         .form.col
                                             %label{for: "section_name"} Name
@@ -48,7 +49,7 @@
                                                     = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"
                                             %label{for: "section_max_acts"} Maximum # of Acts
                                             = s.number_field :max_act_count, min: 1, class: "form-control input-lg", id: "max_acts"
-                                            %a.btn.btn-primary{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
+                                            %a.btn.btn-primary#innerSectionCollapse{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                                 HIDE
                                         .container.col
                                             = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
@@ -62,6 +63,7 @@
                                                 var sectionXOffset = "#{section.x_offset}";
                                                 var sectionYOffset = "#{section.y_offset}";
                                                 makeBoxes(dayHeight, dayWidth, dayXOffset, dayYOffset, sectionHeight, sectionWidth, sectionXOffset, sectionYOffset);
+                                                makeSectionIdUnique();
         %script{type:"text/javascript"}
             resetIndex();
         = t.submit "CONTINUE", class: "btn btn-primary"
