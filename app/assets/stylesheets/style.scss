@@ -263,6 +263,10 @@ body {
   }
 
   #section-settings {
+    h2 {
+      color: #1a535c;
+      margin-bottom: 5vh;
+    }
     #instance {
       height: auto;
       overflow: visible;
@@ -279,7 +283,7 @@ body {
       .row {
         padding: 0 1vw;
       }
-      #form {
+      .form {
         color: #1a535c;
 
         #text-color {
@@ -302,7 +306,8 @@ body {
         position: absolute;
       }
       .surrounding-day,
-      .section {
+      .section,
+      .solo-day {
         border: 1px solid #000;
         position: absolute;
       }
@@ -310,7 +315,8 @@ body {
         background-color: rgba(0, 0, 0, 0.3);
         z-index: 1;
       }
-      .section {
+      .section,
+      .solo-day {
         background-color: rgba(0, 255, 0, 0.8);
       }
     }
