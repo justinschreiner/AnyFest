@@ -265,7 +265,7 @@ body {
   #section-settings {
     #instance {
       height: auto;
-      overflow: visible;
+      overflow: auto;
       width: 80%;
       background-color: #fff;
       border: 2px solid #ff6b6b;
@@ -288,6 +288,9 @@ body {
       .form {
         color: #1a535c;
 
+        .container {
+          position: relative;
+        }
         #text-color {
           width: 20%;
         }

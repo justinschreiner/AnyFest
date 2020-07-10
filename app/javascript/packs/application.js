@@ -9,7 +9,6 @@ require("@rails/activestorage").start();
 require("channels");
 
 require("interactjs");
-// require("jquery");
 require("../template");
 
 import "bootstrap";

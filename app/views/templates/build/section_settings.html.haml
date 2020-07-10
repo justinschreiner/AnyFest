@@ -1,4 +1,4 @@
-= javascript_pack_tag "makeSection"
+= javascript_pack_tag "sectionSettings"
 #section-settings
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         - @template.days.each do |day|
@@ -38,8 +38,14 @@
                                         .form.col
                                             %label{for: "section_name"} Name
                                             = s.text_field :name, class: "form-control input-lg", id: "name"
+                                            .row
+                                                %label{for: "section_alternating_colors"} Alternating Text Colors?
+                                                = s.check_box :alternating_colors, class: "form-check-input",  id: "alternating-color", onchange: "collapseAddColor(this)"
                                             %label{for: "section_color"} Text Color
                                             = s.color_field :text_colors, class: "form-control input-lg",  id: "text-color"
+                                            .collapse#colors
+                                                =link_to "javascript: justin();" do |d|
+                                                    = fa_icon "plus-square"
                                             .row
                                                 .col
                                                     %label{for: "section_delineator"} Delineator

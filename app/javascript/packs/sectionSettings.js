@@ -151,9 +151,29 @@ window.makeSectionIdUnique = function () {
     button.setAttribute("aria-controls", "collapseSection" + index.toString());
     button.setAttribute("href", "#collapseSection" + index.toString());
     button.setAttribute("id", "innerSectionCollapse" + index.toString());
+
+    var checkBox = document.getElementById("alternating-color");
+    checkBox.setAttribute("data-id", (index + 5).toString());
+
+    var colorContent = document.getElementById("colors");
+    colorContent.setAttribute("id", (index + 5).toString());
   });
 };
 
 window.resetIndex = function () {
   index = 0;
+};
+
+window.collapseAddColor = function (self) {
+  var id = self.getAttribute("data-id");
+  var content = document.getElementById(id);
+  if (content.classList.contains("show")) {
+    content.classList.remove("show");
+  } else {
+    content.classList.add("show");
+  }
+};
+
+window.justin = function () {
+  console.log("justin");
 };
