@@ -3,39 +3,19 @@
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         - @template.days.each do |day|
             = t.fields_for :days, day do |d|
-                #instance
-                    %h2 Day Settings
-                    .form-content.row
-                        .form.col
-                            %label{for: "section_name"} Name
-                            = d.text_field :name, class: "form-control input-lg", id: "name"
-                        .container.col
-                            = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
-                            %script{type:"text/javascript"}
-                                var dayHeight = "#{day.height}";
-                                var dayWidth = "#{day.width}";
-                                var dayXOffset = "#{day.x_offset}";
-                                var dayYOffset = "#{day.y_offset}";
-                                makeDay(dayHeight, dayWidth, dayXOffset, dayYOffset); 
-                - day.sections.each do |section|
-                    = d.fields_for :sections, section do |s|
-                        #instance
-                            %h2 Section Settings
+                #accordionDay.accordion
+                    #instance
+                        #dayHeading
+                            %h2.mb-0
+                                %a{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
+                                    Day Settings
+                        #collapseDay.collapse.show{"aria-labelledby" => "dayHeading", "data-parent" => "#accordionDay"}
                             .form-content.row
                                 .form.col
                                     %label{for: "section_name"} Name
-                                    = s.text_field :name, class: "form-control input-lg", id: "name"
-                                    %label{for: "section_color"} Text Color
-                                    = s.color_field :text_colors, class: "form-control input-lg",  id: "text-color"
-                                    .row
-                                        .col
-                                            %label{for: "section_delineator"} Delineator
-                                            = s.select :delineator, ['·', '/'], {}, class: "form-control", id: "delineator"
-                                        .col
-                                            %label{for: "section_delineator_color"} Delineator Color
-                                            = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"
-                                    %label{for: "section_max_acts"} Maximum # of Acts
-                                    = s.number_field :max_act_count, min: 1, class: "form-control input-lg", id: "max_acts"
+                                    = d.text_field :name, class: "form-control input-lg", id: "name"
+                                    %a.btn.btn-primary{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
+                                        HIDE
                                 .container.col
                                     = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
                                     %script{type:"text/javascript"}
@@ -43,11 +23,45 @@
                                         var dayWidth = "#{day.width}";
                                         var dayXOffset = "#{day.x_offset}";
                                         var dayYOffset = "#{day.y_offset}";
-                                        var sectionHeight = "#{section.height}";
-                                        var sectionWidth = "#{section.width}";
-                                        var sectionXOffset = "#{section.x_offset}";
-                                        var sectionYOffset = "#{section.y_offset}";
-                                        makeBoxes(dayHeight, dayWidth, dayXOffset, dayYOffset, sectionHeight, sectionWidth, sectionXOffset, sectionYOffset);
+                                        makeDay(dayHeight, dayWidth, dayXOffset, dayYOffset); 
+                - day.sections.each do |section|
+                    = d.fields_for :sections, section do |s|
+                        #accordionSection.accordion
+                            #instance
+                                #sectionHeading
+                                    %h2.mb-0
+                                        %a{"aria-controls" => "collapseSection", "aria-expanded" => "true", "href" => "#collapseSection", "data-toggle" => "collapse", :type => "button"}
+                                            Section Settings
+                                #collapseSection.collapse.show{"aria-labelledby" => "sectionHeading", "data-parent" => "#accordionSection"}
+                                    .form-content.row
+                                        .form.col
+                                            %label{for: "section_name"} Name
+                                            = s.text_field :name, class: "form-control input-lg", id: "name"
+                                            %label{for: "section_color"} Text Color
+                                            = s.color_field :text_colors, class: "form-control input-lg",  id: "text-color"
+                                            .row
+                                                .col
+                                                    %label{for: "section_delineator"} Delineator
+                                                    = s.select :delineator, ['·', '/'], {}, class: "form-control", id: "delineator"
+                                                .col
+                                                    %label{for: "section_delineator_color"} Delineator Color
+                                                    = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"
+                                            %label{for: "section_max_acts"} Maximum # of Acts
+                                            = s.number_field :max_act_count, min: 1, class: "form-control input-lg", id: "max_acts"
+                                            %a.btn.btn-primary{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
+                                                HIDE
+                                        .container.col
+                                            = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
+                                            %script{type:"text/javascript"}
+                                                var dayHeight = "#{day.height}";
+                                                var dayWidth = "#{day.width}";
+                                                var dayXOffset = "#{day.x_offset}";
+                                                var dayYOffset = "#{day.y_offset}";
+                                                var sectionHeight = "#{section.height}";
+                                                var sectionWidth = "#{section.width}";
+                                                var sectionXOffset = "#{section.x_offset}";
+                                                var sectionYOffset = "#{section.y_offset}";
+                                                makeBoxes(dayHeight, dayWidth, dayXOffset, dayYOffset, sectionHeight, sectionWidth, sectionXOffset, sectionYOffset);
         %script{type:"text/javascript"}
             resetIndex();
         = t.submit "CONTINUE", class: "btn btn-primary"
