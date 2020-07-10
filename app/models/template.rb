@@ -31,6 +31,15 @@ class Template < ApplicationRecord
                 unless section.name.present?
                     self.errors.add(:base, "Section name field can't be blank.")
                 end
+                unless section.text_colors.present?
+                    self.errors.add(:base, "Text color field can't be blank.")
+                end
+                unless section.delineator.present?
+                    self.errors.add(:base, "Delineator field can't be blank.")
+                end
+                unless section.delineator_color.present?
+                    self.errors.add(:base, "Delineator color field can't be blank.")
+                end
                 unless section.max_act_count.present?
                     self.errors.add(:base, "Maximum acts field can't be blank.")
                 end
