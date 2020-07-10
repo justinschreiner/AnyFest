@@ -27,6 +27,9 @@ class Template < ApplicationRecord
 
     def nested_validations
         self.days.each do |day|
+            unless day.name.present?
+                self.errors.add(:base, "Day name field can't be blank.")
+            end
             day.sections.each do |section|
                 unless section.name.present?
                     self.errors.add(:base, "Section name field can't be blank.")
