@@ -10,6 +10,8 @@ require("channels");
 
 require("interactjs");
 require("../template");
+require("../drag");
+require("../sectionSettings");
 
 import "bootstrap";
 
