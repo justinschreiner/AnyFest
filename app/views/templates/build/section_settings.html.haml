@@ -41,11 +41,12 @@
                                             .row
                                                 %label{for: "section_alternating_colors"} Alternating Text Colors?
                                                 = s.check_box :alternating_colors, class: "form-check-input",  id: "alternating-color", onchange: "collapseAddColor(this)"
-                                            %label{for: "section_color"} Text Color
-                                            = s.color_field :text_colors, class: "form-control input-lg text-color",  id: "text-color"
-                                            .collapse#colors
-                                                =link_to "javascript: justin();" do |d|
-                                                    = fa_icon "plus-square"
+                                            .color-fields    
+                                                %label{for: "section_color"} Text Color
+                                                = s.color_field :text_colors, class: "form-control input-lg text-color",  id: "text-color"
+                                                .collapse#colors
+                                                    %button.add-button{ onclick: "addColorField(this)" }
+                                                        = fa_icon "plus-square"
                                             .row
                                                 .col
                                                     %label{for: "section_delineator"} Delineator

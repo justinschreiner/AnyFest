@@ -291,6 +291,14 @@ body {
         .container {
           position: relative;
         }
+        .add-button {
+          border: none;
+          background-color: #fff;
+          i {
+            color: #1a535c;
+            font-size: 2em;
+          }
+        }
         #text-color {
           width: 20%;
         }

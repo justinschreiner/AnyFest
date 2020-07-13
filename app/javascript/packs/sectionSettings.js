@@ -213,6 +213,20 @@ window.collapseAddColor = function (self) {
   }
 };
 
-window.justin = function () {
-  console.log("justin");
+window.addColorField = function (item) {
+  colorSection = item.parentNode.parentNode;
+
+  var label = colorSection.children[0];
+  var field = colorSection.children[1];
+  var button = colorSection.lastChild;
+
+  labelClone = label.cloneNode(true);
+  fieldClone = field.cloneNode(true);
+  buttonClone = button.cloneNode(true);
+
+  colorSection.removeChild(button);
+
+  colorSection.appendChild(labelClone);
+  colorSection.appendChild(fieldClone);
+  colorSection.appendChild(buttonClone);
 };
