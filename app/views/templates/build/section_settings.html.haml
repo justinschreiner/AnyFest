@@ -18,8 +18,6 @@
                                             HIDE
                                     .container.col{"data-target": "daybox.output"}
                                         = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
-                                        -# %script{type:"text/javascript"}
-                                        -# makeDayIdUnique();
                 - day.sections.each do |section|
                     = d.fields_for :sections, section do |s|
                         #accordionSection.accordion
@@ -56,9 +54,4 @@
                                                     HIDE
                                             .container.col{"data-target": "sectionbox.output"}
                                                 = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
-                                                -# %script{type:"text/javascript"}
-                                                -#     makeSectionIdUnique();
-                                                -#     prepColorFields();
-        %script{type:"text/javascript"}
-            resetIndex();
         = t.submit "CONTINUE", class: "btn btn-primary"
