@@ -4,6 +4,7 @@ class Template < ApplicationRecord
     has_many :days
     has_one_attached :background_image
     accepts_nested_attributes_for :days, allow_destroy: true
+    has_many :lineups
 
     validates :festival_id, :name, :background_image, presence: true, if: :active_or_create?
     validates :days,                                  presence: true, if: :active_or_position?

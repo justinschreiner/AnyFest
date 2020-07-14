@@ -1,4 +1,4 @@
-class LineupController < ApplicationController
+class LineupsController < ApplicationController
     def show
         @lineup = Lineup.find(params[:id])
     end
