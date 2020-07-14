@@ -4,10 +4,10 @@ export default class extends Controller {
   static targets = ["output"];
 
   connect() {
-    dayHeight = this.data.get("height");
-    dayHeight = this.data.get("height");
-    dayHeight = this.data.get("height");
-    dayHeight = this.data.get("height");
+    var dayHeight = this.data.get("height");
+    var dayWidth = this.data.get("width");
+    var dayYOffset = this.data.get("y-offset");
+    var dayXOffset = this.data.get("x-offset");
 
     var image = document.getElementsByClassName("preview_image")[0];
     var container = this.outputTarget;
@@ -39,6 +39,5 @@ export default class extends Controller {
 
     // Append the day box to the image
     container.appendChild(day);
-    console.log("controller:", container, day);
   }
 }
