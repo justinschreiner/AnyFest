@@ -106,5 +106,19 @@ export default class extends Controller {
 
     var colorContent = document.getElementById("colors");
     colorContent.setAttribute("id", (index + 5).toString());
+
+    // Add '[]' to the end of the 'name' attribute for text color fields
+    // This allows rails to accept multiple inputs for color fields
+    var colorFieldCount = document.getElementsByClassName("text-color").length;
+    for (var i = 0; i < colorFieldCount; i++) {
+      var tempColorField = document.getElementsByClassName("text-color")[i];
+      var currentName = tempColorField.getAttribute("name");
+      if (
+        currentName.substr(currentName.length - 2, currentName.length - 1) !=
+        "[]"
+      ) {
+        tempColorField.setAttribute("name", currentName + "[]");
+      }
+    }
   }
 }
