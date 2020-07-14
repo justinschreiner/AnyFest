@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_09_143345) do
+ActiveRecord::Schema.define(version: 2020_07_14_194248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,14 @@ ActiveRecord::Schema.define(version: 2020_07_09_143345) do
   create_table "festivals", force: :cascade do |t|
     t.string "name"
     t.string "location"
+  end
+
+  create_table "lineups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "template_id"
+    t.bigint "user_id"
+    t.index ["template_id"], name: "index_lineups_on_template_id"
+    t.index ["user_id"], name: "index_lineups_on_user_id"
   end
 
   create_table "sections", force: :cascade do |t|
@@ -92,6 +100,8 @@ ActiveRecord::Schema.define(version: 2020_07_09_143345) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "days", "templates"
+  add_foreign_key "lineups", "templates"
+  add_foreign_key "lineups", "users"
   add_foreign_key "sections", "days"
   add_foreign_key "templates", "festivals"
   add_foreign_key "templates", "users"
