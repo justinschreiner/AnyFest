@@ -9,21 +9,22 @@
                                 %a#dayAccordionHeader{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                     Day Settings
                         #collapseDay.collapse.show{"aria-labelledby": "dayHeading", "data-parent": "#accordionDay"}
-                            .form-content.row
-                                .form.col
-                                    %label{for: "section_name"} Name
-                                    = d.text_field :name, class: "form-control input-lg", id: "name"
-                                    %a.btn.btn-primary#innerDayCollapse{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
-                                        HIDE
-                                .container.col
-                                    = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
-                                    %script{type:"text/javascript"}
-                                        var dayHeight = "#{day.height}";
-                                        var dayWidth = "#{day.width}";
-                                        var dayXOffset = "#{day.x_offset}";
-                                        var dayYOffset = "#{day.y_offset}";
-                                        makeDay(dayHeight, dayWidth, dayXOffset, dayYOffset);
-                                        makeDayIdUnique(); 
+                            = content_tag :div, nil, data: {controller: "daybox", daybox_height: day.height, daybox_width: day.width, daybox_x_offset: day.x_offset, daybox_y_offset: day.y_offset} do
+                                .form-content.row
+                                    .form.col
+                                        %label{for: "section_name"} Name
+                                        = d.text_field :name, class: "form-control input-lg", id: "name"
+                                        %a.btn.btn-primary#innerDayCollapse{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
+                                            HIDE
+                                    .container.col{"data-target": "daybox.output"}
+                                        = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
+                                        -# %script{type:"text/javascript"}
+                                        -#     var dayHeight = "#{day.height}";
+                                        -#     var dayWidth = "#{day.width}";
+                                        -#     var dayXOffset = "#{day.x_offset}";
+                                        -#     var dayYOffset = "#{day.y_offset}";
+                                            -# makeDay(dayHeight, dayWidth, dayXOffset, dayYOffset);
+                                            -# makeDayIdUnique();
                 - day.sections.each do |section|
                     = d.fields_for :sections, section do |s|
                         #accordionSection.accordion
@@ -68,7 +69,7 @@
                                                 var sectionWidth = "#{section.width}";
                                                 var sectionXOffset = "#{section.x_offset}";
                                                 var sectionYOffset = "#{section.y_offset}";
-                                                makeBoxes(dayHeight, dayWidth, dayXOffset, dayYOffset, sectionHeight, sectionWidth, sectionXOffset, sectionYOffset);
+                                                -# makeBoxes(dayHeight, dayWidth, dayXOffset, dayYOffset, sectionHeight, sectionWidth, sectionXOffset, sectionYOffset);
                                                 makeSectionIdUnique();
                                                 prepColorFields();
         %script{type:"text/javascript"}
