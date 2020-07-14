@@ -230,9 +230,6 @@ window.deleteSectionWithoutDay = function (box) {
   }
 };
 
-// $(document).on("ready turbolinks:load", function (event) {
-console.log("running");
-
 // Allows days and sections to be resized and dragged
 // From Interact.js documentation https://interactjs.io/
 interact(".drag-drop")

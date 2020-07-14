@@ -4,6 +4,8 @@ export default class extends Controller {
   static targets = ["output"];
 
   connect() {
+    // Make Boxes
+    // Get data from view
     var dayHeight = this.data.get("dayheight");
     var dayWidth = this.data.get("daywidth");
     var dayYOffset = this.data.get("day-y-offset");
@@ -59,5 +61,50 @@ export default class extends Controller {
     // Append the new boxes to the image
     container.appendChild(day);
     container.appendChild(section);
+
+    // Make Unique Id's for accordions
+    // Create a unique index for this section
+    var index = Date.now() + Math.round(Math.random() * 100000);
+
+    // Add this index to identifying attributes of this accordion
+    var accordionContainer = document.getElementById("accordionSection");
+    accordionContainer.setAttribute(
+      "id",
+      "accordionSection" + index.toString()
+    );
+
+    var sectionHeading = document.getElementById("sectionHeading");
+    sectionHeading.setAttribute("id", "sectionHeading" + index.toString());
+
+    var headerContent = document.getElementById("sectionAccordionHeader");
+    headerContent.setAttribute(
+      "id",
+      "sectionAccordionHeader" + index.toString()
+    );
+    headerContent.setAttribute(
+      "aria-controls",
+      "collapseSection" + index.toString()
+    );
+    headerContent.setAttribute("href", "#collapseSection" + index.toString());
+
+    var content = document.getElementById("collapseSection");
+    content.setAttribute("id", "collapseSection" + index.toString());
+    content.setAttribute(
+      "aria-labelledby",
+      "sectionHeading" + index.toString()
+    );
+    content.setAttribute("data-parent", "#accordionSection" + index.toString());
+
+    var button = document.getElementById("innerSectionCollapse");
+    button.setAttribute("aria-controls", "collapseSection" + index.toString());
+    button.setAttribute("href", "#collapseSection" + index.toString());
+    button.setAttribute("id", "innerSectionCollapse" + index.toString());
+
+    // Give the 'add color' button inside of this accordion reference its own unique index
+    var checkBox = document.getElementById("alternating-color");
+    checkBox.setAttribute("data-id", (index + 5).toString());
+
+    var colorContent = document.getElementById("colors");
+    colorContent.setAttribute("id", (index + 5).toString());
   }
 }

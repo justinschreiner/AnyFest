@@ -99,7 +99,6 @@ window.makeDay = function (dayHeight, dayWidth, dayXOffset, dayYOffset) {
     // Append the day box to the image
     container.appendChild(day);
     index++;
-    console.log("section:", day);
   });
 };
 
