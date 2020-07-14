@@ -12,7 +12,7 @@
                             = content_tag :div, nil, data: {controller: "daybox", daybox_height: day.height, daybox_width: day.width, daybox_x_offset: day.x_offset, daybox_y_offset: day.y_offset} do
                                 .form-content.row
                                     .form.col
-                                        %label{for: "section_name"} Name
+                                        = d.label :name
                                         = d.text_field :name, class: "form-control input-lg", id: "name"
                                         %a.btn.btn-primary#innerDayCollapse{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                             HIDE
@@ -30,25 +30,25 @@
                                     = content_tag :div, nil, data: {controller: "sectionbox", sectionbox_dayHeight: day.height, sectionbox_dayWidth: day.width, sectionbox_day_x_offset: day.x_offset, sectionbox_day_y_offset: day.y_offset, sectionbox_sectionHeight: section.height, sectionbox_sectionWidth: section.width, sectionbox_section_x_offset: section.x_offset, sectionbox_section_y_offset: section.y_offset} do
                                         .form-content.row
                                             .form.col
-                                                %label{for: "section_name"} Name
+                                                = s.label :name
                                                 = s.text_field :name, class: "form-control input-lg", id: "name"
                                                 .row
-                                                    %label{for: "section_alternating_colors"} Alternating Text Colors?
+                                                    = s.label :alternating_colors
                                                     = s.check_box :alternating_colors, class: "form-check-input",  id: "alternating-color", onchange: "collapseAddColor(this)"
                                                 .color-fields    
-                                                    %label{for: "section_color"} Text Color
+                                                    = s.label :text_colors
                                                     = s.color_field :text_colors, class: "form-control input-lg text-color",  id: "text-color"
                                                     .collapse#colors
                                                         %button.add-button{ onclick: "addColorField(this)" }
                                                             = fa_icon "plus-square"
                                                 .row
                                                     .col
-                                                        %label{for: "section_delineator"} Delineator
+                                                        = s.label :delineator
                                                         = s.select :delineator, ['·', '/'], {}, class: "form-control", id: "delineator"
                                                     .col
-                                                        %label{for: "section_delineator_color"} Delineator Color
+                                                        = s.label :delineator_color
                                                         = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"
-                                                %label{for: "section_max_acts"} Maximum # of Acts
+                                                = s.label :max_act_count
                                                 = s.number_field :max_act_count, min: 1, class: "form-control input-lg", id: "max_acts"
                                                 %a.btn.btn-primary#innerSectionCollapse{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                                     HIDE

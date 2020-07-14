@@ -4,16 +4,16 @@
             = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |f|
                 .form-group
                     %h2
-                        %label{for: "template_festival_id"} Festival
+                        = s.label :festival_id
                     Don't see your festival?
                     = link_to "Add it", new_festival_path
                     = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
                 .form-group
                     %h2
-                        %label{for: "template_name"} Name
+                        = s.label :name
                     = f.text_field :name, class: "form-control input-lg"
                 %h2 
-                    %label{for: "template_background_image"} Background Image
+                    = s.label :background_image
                 #file
                     = f.file_field :background_image, {onchange: "previewFile()"}
                 // stretch goal: be able to choose a solid color for a background if you don't have an image
