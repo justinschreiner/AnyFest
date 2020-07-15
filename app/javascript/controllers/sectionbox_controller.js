@@ -112,42 +112,50 @@ export default class extends Controller {
         button.setAttribute("href", "#collapseSection" + index.toString());
         button.setAttribute("id", "innerSectionCollapse" + index.toString());
 
-        // Give the 'add color' button inside of this accordion reference its own unique index
-        // var checkBox = document.getElementById("alternating-color");
-        // checkBox.setAttribute("data-id", (index + 5).toString());
+        if (document.getElementById("alternating-color") > 0) {
+          // If on section settings page
+          // Give the 'add color' button inside of this accordion reference its own unique index
+          var checkBox = document.getElementById("alternating-color");
+          checkBox.setAttribute("data-id", (index + 5).toString());
 
-        // var colorContent = document.getElementById("colors");
-        // colorContent.setAttribute("id", (index + 5).toString());
+          var colorContent = document.getElementById("colors");
+          colorContent.setAttribute("id", (index + 5).toString());
 
-        // // Add '[]' to the end of the 'name' attribute for text color fields
-        // // This allows rails to accept multiple inputs for color fields
-        var colorFieldCount = document.getElementsByClassName("text-color")
-          .length;
-        for (var i = 0; i < colorFieldCount; i++) {
-          var tempColorField = document.getElementsByClassName("text-color")[i];
-          var currentName = tempColorField.getAttribute("name");
-          if (
-            currentName.substr(
-              currentName.length - 2,
-              currentName.length - 1
-            ) != "[]"
-          ) {
-            tempColorField.setAttribute("name", currentName + "[]");
+          // Add '[]' to the end of the 'name' attribute for text color fields
+          // This allows rails to accept multiple inputs for color fields
+          var colorFieldCount = document.getElementsByClassName("text-color")
+            .length;
+          for (var i = 0; i < colorFieldCount; i++) {
+            var tempColorField = document.getElementsByClassName("text-color")[
+              i
+            ];
+            var currentName = tempColorField.getAttribute("name");
+            if (
+              currentName.substr(
+                currentName.length - 2,
+                currentName.length - 1
+              ) != "[]"
+            ) {
+              tempColorField.setAttribute("name", currentName + "[]");
+            }
           }
-        }
-
-        var actCount = document.getElementsByClassName("acts").length;
-        console.log(actCount);
-        for (var i = 0; i < actCount; i++) {
-          var tempAct = document.getElementsByClassName("acts")[i];
-          var currentName = tempAct.getAttribute("name");
-          if (
-            currentName.substr(
-              currentName.length - 2,
-              currentName.length - 1
-            ) != "[]"
-          ) {
-            tempAct.setAttribute("name", currentName + "[]");
+        } else {
+          // On lineup form page
+          // Add '[]' to the end of the 'name' attribute for act fields
+          // This allows rails to accept multiple inputs for act fields
+          var actCount = document.getElementsByClassName("acts").length;
+          console.log(actCount);
+          for (var i = 0; i < actCount; i++) {
+            var tempAct = document.getElementsByClassName("acts")[i];
+            var currentName = tempAct.getAttribute("name");
+            if (
+              currentName.substr(
+                currentName.length - 2,
+                currentName.length - 1
+              ) != "[]"
+            ) {
+              tempAct.setAttribute("name", currentName + "[]");
+            }
           }
         }
       });
