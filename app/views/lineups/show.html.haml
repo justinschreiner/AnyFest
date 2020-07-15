@@ -5,7 +5,8 @@
                 = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "image")
             - @lineup.section_acts.each do |section_act|
                 - section = Section.find(section_act.section_id)
-                = content_tag :div, nil, data: {controller: "lineup", lineup_sectionHeight: section.height, lineup_sectionWidth: section.width, lineup_section_x_offset: section.x_offset, lineup_section_y_offset: section.y_offset, lineup_sectionDelineator: section.delineator, lineup_acts: section_act.acts}
+                = section.text_colors
+                = content_tag :div, nil, data: {controller: "lineup", lineup_sectionHeight: section.height, lineup_sectionWidth: section.width, lineup_section_x_offset: section.x_offset, lineup_section_y_offset: section.y_offset, lineup_sectionDelineator: section.delineator, lineup_section_text_colors: section.text_colors, lineup_acts: section_act.acts}
         .info.col
             %h1 
                 = @lineup.name

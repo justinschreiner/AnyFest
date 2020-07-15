@@ -1,8 +1,6 @@
 import { Controller } from "stimulus";
 
 export default class extends Controller {
-  //   static targets = ["output"];
-
   connect() {
     document.getElementsByTagName("img")[0].addEventListener("load", (e) => {
       // Make Boxes
@@ -12,6 +10,7 @@ export default class extends Controller {
       var sectionYOffset = this.data.get("section-y-offset");
       var sectionXOffset = this.data.get("section-x-offset");
       var sectionDelineator = this.data.get("sectiondelineator");
+      var sectionTextColors = JSON.parse(this.data.get("sectionTextColors"));
       var acts = JSON.parse(this.data.get("acts"));
 
       var image = document.getElementsByTagName("img")[0];
@@ -37,7 +36,14 @@ export default class extends Controller {
 
       var innerText = "";
       for (var i = 0; i < acts.length; i++) {
-        innerText += acts[i];
+        var numColors = sectionTextColors.length;
+        var numIndex = i % numColors;
+        innerText +=
+          "<span style= 'color: " +
+          sectionTextColors[numIndex] +
+          ";'> " +
+          acts[i] +
+          " </span>";
 
         if (i < acts.length - 1) {
           innerText += " ";
@@ -45,6 +51,7 @@ export default class extends Controller {
           innerText += " ";
         }
       }
+      console.log(innerText);
 
       section.innerHTML = innerText;
       // Append the new boxes to the image
