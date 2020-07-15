@@ -15,7 +15,7 @@ export default class extends Controller {
       var acts = JSON.parse(this.data.get("acts"));
 
       var image = document.getElementsByTagName("img")[0];
-      var container = document.getElementsByClassName("img-container")[0];
+      var container = document.getElementsByClassName("text")[0];
 
       // Make the divs that will be the boxes
       var section = document.createElement("div");

@@ -3,6 +3,7 @@
         .container.col{"data-target": "lineup.output"}
             .img-container
                 = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "image")
+                .text
             - @lineup.section_acts.each do |section_act|
                 - section = Section.find(section_act.section_id)
                 = section.text_colors
