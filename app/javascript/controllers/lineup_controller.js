@@ -11,6 +11,7 @@ export default class extends Controller {
       var sectionXOffset = this.data.get("section-x-offset");
       var sectionDelineator = this.data.get("sectiondelineator");
       var sectionTextColors = JSON.parse(this.data.get("sectionTextColors"));
+      var sectionDelineatorColor = this.data.get("sectionDelineatorColor");
       var acts = JSON.parse(this.data.get("acts"));
 
       var image = document.getElementsByTagName("img")[0];
@@ -46,12 +47,14 @@ export default class extends Controller {
           " </span>";
 
         if (i < acts.length - 1) {
-          innerText += " ";
-          innerText += sectionDelineator;
-          innerText += " ";
+          innerText +=
+            "<span style= 'color: " +
+            sectionDelineatorColor +
+            ";'> " +
+            sectionDelineator +
+            " </span>";
         }
       }
-      console.log(innerText);
 
       section.innerHTML = innerText;
       // Append the new boxes to the image
