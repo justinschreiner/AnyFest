@@ -39,6 +39,7 @@ class LineupsController < ApplicationController
     
     private
     def lineup_params
-        params.require(:lineup).permit(:name, :template_id, :user_id)
+        params.require(:lineup).permit(:name, :template_id, :user_id, 
+          section_acts_attributes: [:id, :section_id, :lineup_id, :acts, acts: []])
     end
 end
