@@ -1,3 +1,9 @@
-new lineup
+%h1 Add new lineup
+= @template.name
+= form_with model: [@template, @lineup], local: true do |f|
+    = f.label :name
+    = f.text_field :name, class: "form-control input-lg"
 
-= @lineup.template_id
+    = f.hidden_field :template_id, value: @template.id
+
+    = f.submit "CREATE", class: "btn btn-primary"

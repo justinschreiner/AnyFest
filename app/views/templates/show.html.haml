@@ -6,4 +6,4 @@
     #image
         - if(@template.background_image.attached?)
             =image_tag(@template.background_image.variant(resize_to_limit: [300, 400]))
-    = link_to "Make Lineup", new_lineup_path
+    = link_to "Make Lineup", new_template_lineup_path(@template)

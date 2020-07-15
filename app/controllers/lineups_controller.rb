@@ -1,20 +1,21 @@
 class LineupsController < ApplicationController
     def show
-        @lineup = Lineup.find(params[:id])
+      @lineup = Lineup.find(params[:id])
     end
     
     def new
-        @lineup = Lineup.new
+      @lineup = current_user.lineups.new
+      @template = Template.find(params[:template_id])
     end
     
     def create
-        @lineup = Lineup.new(festival_params)
-    
-        if @festival.save
-          redirect_to action: 'show'
-        else
-          render action: 'new'
-        end
+      @lineup = current_user.lineups.new(lineup_params)
+      @template = Template.find(params[:template_id])
+      if @lineup.save
+        redirect_to action: 'show', id: @lineup
+      else
+        render action: 'new'
+      end
     end
     
     def edit
@@ -37,7 +38,7 @@ class LineupsController < ApplicationController
     end
     
     private
-    def festival_params
-        params.require(:festival).permit(:name, :location)
+    def lineup_params
+        params.require(:lineup).permit(:name, :template_id, :user_id)
     end
 end
