@@ -336,6 +336,18 @@ body {
     }
   }
 
+  #show-lineup {
+    .container {
+      color: black;
+    }
+    .section {
+      position: absolute;
+    }
+    img {
+      position: absolute;
+    }
+  }
+
   #show-template {
     #image {
       padding-top: 30px;

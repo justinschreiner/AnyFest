@@ -1,6 +1,7 @@
 class LineupsController < ApplicationController
     def show
       @lineup = Lineup.find(params[:id])
+      @template = Template.find(params[:template_id])
     end
     
     def new
