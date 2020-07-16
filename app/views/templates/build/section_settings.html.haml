@@ -1,4 +1,4 @@
-#section-settings
+#section-settings.section-settings
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         - @template.days.each do |day|
             = t.fields_for :days, day do |d|

@@ -112,11 +112,13 @@ export default class extends Controller {
         button.setAttribute("href", "#collapseSection" + index.toString());
         button.setAttribute("id", "innerSectionCollapse" + index.toString());
 
-        if (document.getElementById("alternating-color") > 0) {
+        if (document.getElementsByClassName("section-settings").length > 0) {
           // If on section settings page
           // Give the 'add color' button inside of this accordion reference its own unique index
           var checkBox = document.getElementById("alternating-color");
+          checkBox.setAttribute("id", "alternating-color" + index.toString());
           checkBox.setAttribute("data-id", (index + 5).toString());
+          console.log(checkBox);
 
           var colorContent = document.getElementById("colors");
           colorContent.setAttribute("id", (index + 5).toString());
@@ -144,7 +146,6 @@ export default class extends Controller {
           // Add '[]' to the end of the 'name' attribute for act fields
           // This allows rails to accept multiple inputs for act fields
           var actCount = document.getElementsByClassName("acts").length;
-          console.log(actCount);
           for (var i = 0; i < actCount; i++) {
             var tempAct = document.getElementsByClassName("acts")[i];
             var currentName = tempAct.getAttribute("name");
