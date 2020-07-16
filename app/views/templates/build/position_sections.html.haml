@@ -9,7 +9,15 @@
                         = image_tag(@template.background_image, class: "dropzone", id: "preview_image")
                 #form.col-3.order-1
                     %h3 Add Sections
-                    .container 
+                    .container#item-container
+                        %h5#color-label Box Color 
+                        .btn-group.btn-group-toggle{"data-toggle": "buttons"}
+                            %label.btn.btn-primary.active
+                                %input{type: "radio", name: "options", id: "dark", autocomplete: "off", onclick: "darkButton()"}
+                                    Dark
+                            %label.btn.btn-primary
+                                %input{type: "radio", name: "options", id: "light", autocomplete: "off", onclick: "lightButton()"}
+                                    Light
                         #day.item
                             Day
                         #section.item

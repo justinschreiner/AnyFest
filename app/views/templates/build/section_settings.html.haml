@@ -44,7 +44,7 @@
                                                 .row
                                                     .col
                                                         = s.label :delineator
-                                                        = s.select :delineator, ['·', '/'], {}, class: "form-control", id: "delineator"
+                                                        = s.select :delineator, ['·', '/', '|', ''], {}, class: "form-control", id: "delineator"
                                                     .col
                                                         = s.label :delineator_color
                                                         = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"

@@ -2,6 +2,8 @@
 
 import interact from "interactjs";
 const position = { x: 300, y: 300 };
+var colors = ["#000", "#ffff"];
+
 // Allows sections and days to be dragged
 // From Interact.js documentation https://interactjs.io/
 window.dragMoveListener = function (event) {
@@ -410,12 +412,12 @@ interact("#day").dropzone({
   },
   ondragenter: function (event) {
     // feedback the possibility of a drop
-    event.target.style.border = "2px solid #fff";
+    event.target.style.borderColor = colors[1];
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
   },
   ondragleave: function (event) {
     // remove the drop feedback style
-    event.target.style.border = "2px solid #000";
+    event.target.style.borderColor = colors[0];
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   },
   ondrop: function (event) {
@@ -435,7 +437,7 @@ interact("#day").dropzone({
   },
   ondropdeactivate: function (event) {
     // remove active dropzone feedback
-    event.target.style.border = "2px solid #000";
+    event.target.style.borderColor = colors[0];
     event.relatedTarget.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
   },
 });
@@ -483,4 +485,44 @@ window.onmousedown = function () {
 };
 window.onmouseup = function () {
   mouseDown = 0;
+};
+
+window.lightButton = function () {
+  var items = document.getElementsByClassName("item");
+  for (var i = 0; i < items.length; i++) {
+    items[i].style.borderColor = "#ffff";
+  }
+
+  var boxes = document.getElementsByClassName("drag-drop");
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].style.borderColor = "#ffff";
+  }
+
+  var container = document.getElementById("item-container");
+  container.style.backgroundColor = "#444";
+
+  var colorLabel = document.getElementById("color-label");
+  colorLabel.style.color = "#ffff";
+
+  colors = ["#ffff", "#000"];
+};
+
+window.darkButton = function () {
+  var items = document.getElementsByClassName("item");
+  for (var i = 0; i < items.length; i++) {
+    items[i].style.borderColor = "#000";
+  }
+
+  var boxes = document.getElementsByClassName("drag-drop");
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].style.borderColor = "#000";
+  }
+
+  var container = document.getElementById("item-container");
+  container.style.backgroundColor = "#ffff";
+
+  var colorLabel = document.getElementById("color-label");
+  colorLabel.style.color = "#1a535c";
+
+  colors = ["#000", "#ffff"];
 };
