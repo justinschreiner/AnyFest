@@ -2,8 +2,8 @@ import { Controller } from "stimulus";
 
 export default class extends Controller {
   connect() {
+    // Wait for the image to load to the page
     document.getElementsByTagName("img")[0].addEventListener("load", (e) => {
-      // Make Boxes
       // Get data from view
       var sectionHeight = this.data.get("sectionheight");
       var sectionWidth = this.data.get("sectionwidth");
@@ -17,11 +17,12 @@ export default class extends Controller {
       var image = document.getElementsByTagName("img")[0];
       var container = document.getElementsByClassName("text")[0];
 
-      // Make the divs that will be the boxes
+      // Make the div that will be the container for text
       var section = document.createElement("div");
 
       section.setAttribute("class", "section");
 
+      // Make the box the right size, bring it to the front, and start the text small
       section.setAttribute(
         "style",
         "height: " +
@@ -35,6 +36,7 @@ export default class extends Controller {
           "%; z-index: 2; font-size: 1px;"
       );
 
+      // Fill the section with the text from the lineup form
       var innerText = "";
       for (var i = 0; i < acts.length; i++) {
         var numColors = sectionTextColors.length;
@@ -46,6 +48,7 @@ export default class extends Controller {
           acts[i] +
           " </span>";
 
+        // Add the delineator between acts
         if (i < acts.length - 1) {
           innerText +=
             "<span style= 'color: " +
@@ -56,48 +59,95 @@ export default class extends Controller {
         }
       }
       section.innerHTML = innerText;
+
       // Append the new boxes to the image
       container.appendChild(section);
+
+      // Scale the font to the section
       fitText(section);
+
+      // Get rid of extra delineators
+      fixDelineator(section, sectionDelineator);
     });
   }
 }
 
-function fitText(outputSelector) {
+function fitText(outputDiv) {
   // max font size in pixels
   const maxFontSize = 50;
-  // get the DOM output element by its selector
-  let outputDiv = outputSelector;
-  // get element's width
-  let width = outputDiv.clientWidth;
-  // get content's width
-  let contentWidth = outputDiv.scrollWidth;
+
   // get fontSize
   let fontSize = parseInt(outputDiv.style.fontSize);
-  // if content's width is bigger then elements width - overflow
-  if (contentWidth > width) {
-    fontSize = Math.ceil((fontSize * width) / contentWidth, 10);
+
+  // if content's width or height is bigger then elements width or height- overflow
+  // scroll___ => content size; client____ => element size
+  if (
+    outputDiv.scrollWidth > outputDiv.clientWidth ||
+    outputDiv.scrollHeight > outputDiv.clientHeight
+  ) {
+    fontSize = Math.ceil((fontSize * width) / outputDiv.scrollWidth, 10);
     fontSize = fontSize > maxFontSize ? (fontSize = maxFontSize) : fontSize - 1;
     outputDiv.style.fontSize = fontSize + "px";
   } else {
-    // content is smaller then width... let's resize in 1 px until it fits
+    // resize incrementally by 1 px until text fits
     while (
-      contentWidth <= width &&
+      outputDiv.scrollWidth <= outputDiv.clientWidth &&
       fontSize < maxFontSize &&
       outputDiv.scrollHeight <= outputDiv.clientHeight
     ) {
       fontSize = Math.ceil(fontSize) + 1;
       fontSize = fontSize > maxFontSize ? (fontSize = maxFontSize) : fontSize;
       outputDiv.style.fontSize = fontSize + "px";
-      // update widths
-      width = outputDiv.clientWidth;
-      contentWidth = outputDiv.scrollWidth;
     }
+    // if it's overflowed, go back to the last size before it overflowed
     if (
-      contentWidth > width ||
+      outputDiv.scrollWidth > outputDiv.clientWidth ||
       outputDiv.scrollHeight > outputDiv.clientHeight
     ) {
       outputDiv.style.fontSize = fontSize - 1 + "px";
+    }
+  }
+}
+
+// Get rid of extra delineators at the beginning or ending of each line
+function fixDelineator(container, delineator) {
+  // All names/delineators are wrapped in span tags, get them all
+  var spans = container.getElementsByTagName("span");
+  var prev = spans[0];
+  var cur = spans[1];
+  var sectionOffsetLeft = prev.offsetLeft;
+  var indexArr = [];
+
+  // Make an array with the indexes of all delineators which come before/after a line break
+  for (var i = 1; i < spans.length - 1; i++) {
+    if (prev.offsetTop < cur.offsetTop) {
+      if (cur.innerText == delineator + " ") {
+        indexArr.push(i);
+      } else if (prev.innerText == delineator + " ") {
+        indexArr.push(i - 1);
+      }
+    }
+
+    // increment index
+    prev = cur;
+    cur = spans[i + 1];
+  }
+
+  // Go through the array of indexes
+  for (var j = 0; j < indexArr.length; j++) {
+    // If we aren't checking the last row in this section
+    if (j < indexArr.length - 1) {
+      // If the delineator either starts or finishes a line
+      if (
+        spans[indexArr[j]].offsetLeft == sectionOffsetLeft ||
+        spans[indexArr[j]].offsetLeft >= container.clientWidth * 0.9
+      ) {
+        spans[indexArr[j]].innerText = "";
+      }
+    }
+    // This is the last row for the section
+    else {
+      spans[indexArr[j]].innerText = "";
     }
   }
 }
