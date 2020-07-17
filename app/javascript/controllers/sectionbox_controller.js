@@ -30,36 +30,22 @@ export default class extends Controller {
         section.classList.add("section");
 
         // Make the boxes the right size based on their size in the db
-        day.setAttribute(
-          "style",
-          "height: " +
-            ((dayHeight * image.height) / 10000.0).toString() +
-            "px; width: " +
-            ((dayWidth * 100.0) / 10000.0).toString() +
-            "%; margin-top: " +
-            ((dayYOffset * image.height) / 10000.0).toString() +
-            "px; margin-left: " +
-            ((dayXOffset * 100.0) / 10000.0).toString() +
-            "%; z-index: 1;"
-        );
-        section.setAttribute(
-          "style",
-          "height: " +
-            ((sectionHeight * image.height) / 10000.0).toString() +
-            "px; width: " +
-            ((sectionWidth * 100.0) / 10000.0).toString() +
-            "%; margin-top: " +
-            ((sectionYOffset * image.height) / 10000.0).toString() +
-            "px; margin-left: " +
-            ((sectionXOffset * 100.0) / 10000.0).toString() +
-            "%; z-index: 2;"
-        );
+        day.style.height = `${(dayHeight * image.height) / 10000.0}px`;
+        day.style.width = `${(dayWidth * 100.0) / 10000.0}%`;
+        day.style.marginTop = `${(dayYOffset * image.height) / 10000.0}px`;
+        day.style.marginLeft = `${(dayXOffset * 100.0) / 10000.0}%`;
+        day.style.zIndex = "1";
 
-        // Setting the size of the form container
-        container.setAttribute(
-          "style",
-          "height: " + image.height.toString() + "px;" //workaround for now, probably a more efficient way to do this
-        );
+        section.style.height = `${(sectionHeight * image.height) / 10000.0}px`;
+        section.style.width = `${(sectionWidth * 100.0) / 10000.0}%`;
+        section.style.marginTop = `${
+          (sectionYOffset * image.height) / 10000.0
+        }px`;
+        section.style.marginLeft = `${(sectionXOffset * 100.0) / 10000.0}%`;
+        section.style.zIndex = "2";
+
+        // Adjust the container for the form
+        container.style.height = `${image.height}px`; //workaround for now, probably a more efficient way to do this
 
         // Append the new boxes to the image
         container.appendChild(day);

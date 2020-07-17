@@ -23,24 +23,14 @@ export default class extends Controller {
         day.classList.add("solo-day");
 
         // Make the day box the right size based off of the sizes in the db
-        day.setAttribute(
-          "style",
-          "height: " +
-            ((dayHeight * image.height) / 10000.0).toString() +
-            "px; width: " +
-            ((dayWidth * 100.0) / 10000.0).toString() +
-            "%; margin-top: " +
-            ((dayYOffset * image.height) / 10000.0).toString() +
-            "px; margin-left: " +
-            ((dayXOffset * 100.0) / 10000.0).toString() +
-            "%; z-index: 1;"
-        );
+        day.style.height = `${(dayHeight * image.height) / 1000.0}px`;
+        day.style.width = `${(dayWidth * 100.0) / 1000.0}%`;
+        day.style.marginTop = `${(dayYOffset * image.height) / 1000.0}px`;
+        day.style.marginLeft = `${(dayXOffset * 100.0) / 1000.0}%`;
+        day.style.zIndex = "1";
 
         // Adjust the container for the form
-        container.setAttribute(
-          "style",
-          "height: " + image.height.toString() + "px;" //workaround for now, probably a more efficient way to do this
-        );
+        container.style.height = `${image.height}px`; //workaround for now, probably a more efficient way to do this
 
         // Append the day box to the image
         container.appendChild(day);
@@ -71,7 +61,7 @@ export default class extends Controller {
         headerContent.setAttribute("href", "#collapseDay" + index.toString());
 
         var content = document.getElementById("collapseDay");
-        content.id = (collapseDay" + index.toString());
+        content.id = "collapseDay" + index.toString();
         content.setAttribute(
           "aria-labelledby",
           "dayHeading" + index.toString()
