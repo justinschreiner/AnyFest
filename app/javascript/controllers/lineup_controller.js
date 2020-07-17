@@ -3,72 +3,74 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   connect() {
     // Wait for the image to load to the page
-    document.getElementByClassName("image")[0].addEventListener("load", (e) => {
-      // Get data from view
-      var sectionHeight = this.data.get("sectionheight");
-      var sectionWidth = this.data.get("sectionwidth");
-      var sectionYOffset = this.data.get("section-y-offset");
-      var sectionXOffset = this.data.get("section-x-offset");
-      var sectionDelineator = this.data.get("sectiondelineator");
-      var sectionTextColors = JSON.parse(this.data.get("sectionTextColors"));
-      var sectionDelineatorColor = this.data.get("sectionDelineatorColor");
-      var acts = JSON.parse(this.data.get("acts"));
+    document
+      .getElementsByClassName("image")[0]
+      .addEventListener("load", (e) => {
+        // Get data from view
+        var sectionHeight = this.data.get("sectionheight");
+        var sectionWidth = this.data.get("sectionwidth");
+        var sectionYOffset = this.data.get("section-y-offset");
+        var sectionXOffset = this.data.get("section-x-offset");
+        var sectionDelineator = this.data.get("sectiondelineator");
+        var sectionTextColors = JSON.parse(this.data.get("sectionTextColors"));
+        var sectionDelineatorColor = this.data.get("sectionDelineatorColor");
+        var acts = JSON.parse(this.data.get("acts"));
 
-      var image = document.getElementByClassName("image")[0];
-      var container = document.getElementsByClassName("text")[0];
+        var image = document.getElementsByClassName("image")[0];
+        var container = document.getElementsByClassName("text")[0];
 
-      // Make the div that will be the container for text
-      var section = document.createElement("div");
+        // Make the div that will be the container for text
+        var section = document.createElement("div");
 
-      section.setAttribute("class", "section");
+        section.setAttribute("class", "section");
 
-      // Make the box the right size, bring it to the front, and start the text small
-      section.setAttribute(
-        "style",
-        "height: " +
-          ((sectionHeight * image.height) / 10000.0).toString() +
-          "px; width: " +
-          ((sectionWidth * 100.0) / 10000.0).toString() +
-          "%; margin-top: " +
-          ((sectionYOffset * image.height) / 10000.0).toString() +
-          "px; margin-left: " +
-          ((sectionXOffset * 100.0) / 10000.0).toString() +
-          "%; z-index: 2; font-size: 1px;"
-      );
+        // Make the box the right size, bring it to the front, and start the text small
+        section.setAttribute(
+          "style",
+          "height: " +
+            ((sectionHeight * image.height) / 10000.0).toString() +
+            "px; width: " +
+            ((sectionWidth * 100.0) / 10000.0).toString() +
+            "%; margin-top: " +
+            ((sectionYOffset * image.height) / 10000.0).toString() +
+            "px; margin-left: " +
+            ((sectionXOffset * 100.0) / 10000.0).toString() +
+            "%; z-index: 2; font-size: 1px;"
+        );
 
-      // Fill the section with the text from the lineup form
-      var innerText = "";
-      for (var i = 0; i < acts.length; i++) {
-        var numColors = sectionTextColors.length;
-        var numIndex = i % numColors;
-        innerText +=
-          "<span style= 'color: " +
-          sectionTextColors[numIndex] +
-          ";'> " +
-          acts[i] +
-          " </span>";
-
-        // Add the delineator between acts
-        if (i < acts.length - 1) {
+        // Fill the section with the text from the lineup form
+        var innerText = "";
+        for (var i = 0; i < acts.length; i++) {
+          var numColors = sectionTextColors.length;
+          var numIndex = i % numColors;
           innerText +=
             "<span style= 'color: " +
-            sectionDelineatorColor +
+            sectionTextColors[numIndex] +
             ";'> " +
-            sectionDelineator +
+            acts[i] +
             " </span>";
+
+          // Add the delineator between acts
+          if (i < acts.length - 1) {
+            innerText +=
+              "<span style= 'color: " +
+              sectionDelineatorColor +
+              ";'> " +
+              sectionDelineator +
+              " </span>";
+          }
         }
-      }
-      section.innerHTML = innerText;
+        section.innerHTML = innerText;
 
-      // Append the new boxes to the image
-      container.appendChild(section);
+        // Append the new boxes to the image
+        container.appendChild(section);
 
-      // Scale the font to the section
-      fitText(section);
+        // Scale the font to the section
+        fitText(section);
 
-      // Get rid of extra delineators
-      fixDelineator(section, sectionDelineator);
-    });
+        // Get rid of extra delineators
+        fixDelineator(section, sectionDelineator);
+      });
   }
 }
 

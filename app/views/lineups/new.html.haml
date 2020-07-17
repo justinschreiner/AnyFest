@@ -28,5 +28,5 @@
                                             %a.btn.btn-primary#innerSectionCollapse{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                                 HIDE
                                         .container.col{"data-target": "sectionbox.output"}
-                                            = image_tag(@template.background_image, style: "height: auto; width: 100%", class: "preview_image")
+                                            = image_tag(@template.background_image, class: "image img-fluid")
         = f.submit "CREATE", class: "btn btn-primary"
