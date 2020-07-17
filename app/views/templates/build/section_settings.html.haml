@@ -9,7 +9,7 @@
                                 %a#dayAccordionHeader{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                     Day Settings
                         #collapseDay.collapse.show{"aria-labelledby": "dayHeading", "data-parent": "#accordionDay"}
-                            = content_tag :div, nil, data: {controller: "daybox", daybox_height: day.height, daybox_width: day.width, daybox_x_offset: day.x_offset, daybox_y_offset: day.y_offset} do
+                            %div{ data: {controller: "daybox", daybox_height: day.height, daybox_width: day.width, daybox_x_offset: day.x_offset, daybox_y_offset: day.y_offset}}
                                 .form-content.row
                                     .form.col
                                         = d.label :name
