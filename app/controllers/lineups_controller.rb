@@ -1,17 +1,15 @@
 class LineupsController < ApplicationController
+  before_action :find_template, only: [:show, :new, :create]
     def show
       @lineup = Lineup.find(params[:id])
-      @template = Template.find(params[:template_id])
     end
     
     def new
       @lineup = current_user.lineups.new
-      @template = Template.find(params[:template_id])
     end
     
     def create
       @lineup = current_user.lineups.new(lineup_params)
-      @template = Template.find(params[:template_id])
       if @lineup.save
         redirect_to action: 'show', id: @lineup
       else
@@ -42,5 +40,9 @@ class LineupsController < ApplicationController
     def lineup_params
         params.require(:lineup).permit(:name, :template_id, :user_id, 
           section_acts_attributes: [:id, :section_id, :lineup_id, :acts, acts: []])
+    end
+
+    def find_template
+      @template = Template.find(params[:template_id])
     end
 end
