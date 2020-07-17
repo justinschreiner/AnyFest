@@ -38,9 +38,6 @@ class Template < ApplicationRecord
                 unless section.text_colors.present?
                     self.errors.add(:base, "Text color field can't be blank.")
                 end
-                unless section.delineator.present?
-                    self.errors.add(:base, "Delineator field can't be blank.")
-                end
                 unless section.delineator_color.present?
                     self.errors.add(:base, "Delineator color field can't be blank.")
                 end
