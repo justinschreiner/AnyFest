@@ -38,7 +38,7 @@ window.createDayFormFields = function (box) {
 
   // Prepare variables for setting height and width
   var barRect = box.getBoundingClientRect();
-  var image = document.getElementsByTagName("img")[0];
+  var image = document.getElementsByClassName("preview_image")[0];
   var imageRect = image.getBoundingClientRect();
   var imageWidth = imageRect.right - imageRect.left;
   var imageHeight = imageRect.bottom - imageRect.top;
@@ -125,7 +125,7 @@ window.createSectionFormFields = function (box, parent_box) {
 
   // Prepare variables for setting height and width
   var barRect = box.getBoundingClientRect();
-  var image = document.getElementsByTagName("img")[0];
+  var image = document.getElementsByClassName("preview_image")[0];
   var imageRect = image.getBoundingClientRect();
   var imageWidth = imageRect.right - imageRect.left;
   var imageHeight = imageRect.bottom - imageRect.top;
@@ -180,7 +180,7 @@ window.updateDayFormFields = function (box) {
 
   // Prepare variables for setting height and width
   var barRect = box.getBoundingClientRect();
-  var image = document.getElementsByTagName("img")[0];
+  var image = document.getElementsByClassName("preview_image")[0];
   var imageRect = image.getBoundingClientRect();
   var imageWidth = imageRect.right - imageRect.left;
   var imageHeight = imageRect.bottom - imageRect.top;

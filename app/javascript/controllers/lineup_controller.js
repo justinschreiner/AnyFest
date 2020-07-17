@@ -3,7 +3,7 @@ import { Controller } from "stimulus";
 export default class extends Controller {
   connect() {
     // Wait for the image to load to the page
-    document.getElementsByTagName("img")[0].addEventListener("load", (e) => {
+    document.getElementByClassName("image")[0].addEventListener("load", (e) => {
       // Get data from view
       var sectionHeight = this.data.get("sectionheight");
       var sectionWidth = this.data.get("sectionwidth");
@@ -14,7 +14,7 @@ export default class extends Controller {
       var sectionDelineatorColor = this.data.get("sectionDelineatorColor");
       var acts = JSON.parse(this.data.get("acts"));
 
-      var image = document.getElementsByTagName("img")[0];
+      var image = document.getElementByClassName("image")[0];
       var container = document.getElementsByClassName("text")[0];
 
       // Make the div that will be the container for text

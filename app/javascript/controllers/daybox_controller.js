@@ -5,7 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.element
-      .getElementsByTagName("img")[0]
+      .getElementsByClassName("preview_image")[0]
       .addEventListener("load", (e) => {
         // Make Box
         // Get data from view
