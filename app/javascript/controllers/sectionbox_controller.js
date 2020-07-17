@@ -26,8 +26,8 @@ export default class extends Controller {
         var day = document.createElement("div");
         var section = document.createElement("div");
 
-        day.setAttribute("class", "surrounding-day");
-        section.setAttribute("class", "section");
+        day.classList.add("surrounding-day");
+        section.classList.add("section");
 
         // Make the boxes the right size based on their size in the db
         day.setAttribute(
@@ -77,7 +77,7 @@ export default class extends Controller {
         );
 
         var sectionHeading = document.getElementById("sectionHeading");
-        sectionHeading.setAttribute("id", "sectionHeading" + index.toString());
+        sectionHeading.id = "sectionHeading" + index.toString();
 
         var headerContent = document.getElementById("sectionAccordionHeader");
         headerContent.setAttribute(
@@ -94,7 +94,7 @@ export default class extends Controller {
         );
 
         var content = document.getElementById("collapseSection");
-        content.setAttribute("id", "collapseSection" + index.toString());
+        content.id = "collapseSection" + index.toString();
         content.setAttribute(
           "aria-labelledby",
           "sectionHeading" + index.toString()
@@ -110,18 +110,18 @@ export default class extends Controller {
           "collapseSection" + index.toString()
         );
         button.setAttribute("href", "#collapseSection" + index.toString());
-        button.setAttribute("id", "innerSectionCollapse" + index.toString());
+        button.id = "innerSectionCollapse" + index.toString();
 
         if (document.getElementsByClassName("section-settings").length > 0) {
           // If on section settings page
           // Give the 'add color' button inside of this accordion reference its own unique index
           var checkBox = document.getElementById("alternating-color");
-          checkBox.setAttribute("id", "alternating-color" + index.toString());
+          checkBox.id = "alternating-color" + index.toString();
           checkBox.setAttribute("data-id", (index + 5).toString());
           console.log(checkBox);
 
           var colorContent = document.getElementById("colors");
-          colorContent.setAttribute("id", (index + 5).toString());
+          colorContent.id = (index + 5).toString();
 
           // Add '[]' to the end of the 'name' attribute for text color fields
           // This allows rails to accept multiple inputs for color fields

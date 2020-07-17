@@ -20,7 +20,7 @@ export default class extends Controller {
         // Create the div that will represent the day
         var day = document.createElement("div");
 
-        day.setAttribute("class", "solo-day");
+        day.classList.add("solo-day");
 
         // Make the day box the right size based off of the sizes in the db
         day.setAttribute(
@@ -57,7 +57,7 @@ export default class extends Controller {
         );
 
         var dayHeading = document.getElementById("dayHeading");
-        dayHeading.setAttribute("id", "dayHeading" + index.toString());
+        dayHeading.id = "dayHeading" + index.toString();
 
         var headerContent = document.getElementById("dayAccordionHeader");
         headerContent.setAttribute(
@@ -71,7 +71,7 @@ export default class extends Controller {
         headerContent.setAttribute("href", "#collapseDay" + index.toString());
 
         var content = document.getElementById("collapseDay");
-        content.setAttribute("id", "collapseDay" + index.toString());
+        content.id = (collapseDay" + index.toString());
         content.setAttribute(
           "aria-labelledby",
           "dayHeading" + index.toString()
@@ -81,7 +81,7 @@ export default class extends Controller {
         var button = document.getElementById("innerDayCollapse");
         button.setAttribute("aria-controls", "collapseDay" + index.toString());
         button.setAttribute("href", "#collapseDay" + index.toString());
-        button.setAttribute("id", "innerDayCollapse" + index.toString());
+        button.id = "innerDayCollapse" + index.toString();
       });
   }
 }
