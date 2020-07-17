@@ -7,13 +7,15 @@ export default class extends Controller {
       .getElementsByClassName("image")[0]
       .addEventListener("load", (e) => {
         // Get data from view
-        var sectionHeight = this.data.get("sectionheight");
-        var sectionWidth = this.data.get("sectionwidth");
+        var sectionHeight = this.data.get("section-height");
+        var sectionWidth = this.data.get("section-width");
         var sectionYOffset = this.data.get("section-y-offset");
         var sectionXOffset = this.data.get("section-x-offset");
-        var sectionDelineator = this.data.get("sectiondelineator");
-        var sectionTextColors = JSON.parse(this.data.get("sectionTextColors"));
-        var sectionDelineatorColor = this.data.get("sectionDelineatorColor");
+        var sectionDelineator = this.data.get("section-delineator");
+        var sectionTextColors = JSON.parse(
+          this.data.get("section-text-colors")
+        );
+        var sectionDelineatorColor = this.data.get("section-delineator-color");
         var acts = JSON.parse(this.data.get("acts"));
 
         var image = document.getElementsByClassName("image")[0];

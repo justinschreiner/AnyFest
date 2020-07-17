@@ -9,13 +9,13 @@ export default class extends Controller {
       .addEventListener("load", (e) => {
         // Make Boxes
         // Get data from view
-        var dayHeight = this.data.get("dayheight");
-        var dayWidth = this.data.get("daywidth");
+        var dayHeight = this.data.get("day-height");
+        var dayWidth = this.data.get("day-width");
         var dayYOffset = this.data.get("day-y-offset");
         var dayXOffset = this.data.get("day-x-offset");
 
-        var sectionHeight = this.data.get("sectionheight");
-        var sectionWidth = this.data.get("sectionwidth");
+        var sectionHeight = this.data.get("section-height");
+        var sectionWidth = this.data.get("section-width");
         var sectionYOffset = this.data.get("section-y-offset");
         var sectionXOffset = this.data.get("section-x-offset");
 

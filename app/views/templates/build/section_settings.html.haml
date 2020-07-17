@@ -27,7 +27,7 @@
                                         %a#sectionAccordionHeader{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                             Section Settings
                                 #collapseSection.collapse.show{"aria-labelledby": "sectionHeading", "data-parent": "#accordionSection"}
-                                    = content_tag :div, nil, data: {controller: "sectionbox", sectionbox_dayHeight: day.height, sectionbox_dayWidth: day.width, sectionbox_day_x_offset: day.x_offset, sectionbox_day_y_offset: day.y_offset, sectionbox_sectionHeight: section.height, sectionbox_sectionWidth: section.width, sectionbox_section_x_offset: section.x_offset, sectionbox_section_y_offset: section.y_offset} do
+                                    %div{ data: {controller: "sectionbox", sectionbox_day_height: day.height, sectionbox_day_width: day.width, sectionbox_day_x_offset: day.x_offset, sectionbox_day_y_offset: day.y_offset, sectionbox_section_height: section.height, sectionbox_section_width: section.width, sectionbox_section_x_offset: section.x_offset, sectionbox_section_y_offset: section.y_offset}}
                                         .form-content.row
                                             .form.col
                                                 = s.label :name
