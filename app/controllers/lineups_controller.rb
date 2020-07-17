@@ -1,7 +1,7 @@
 class LineupsController < ApplicationController
   before_action :find_template, only: [:show, :new, :create]
     def show
-      @lineup = Lineup.find(params[:id])
+      @lineup = current_user.lineups.find(params[:id])
     end
     
     def new
@@ -18,7 +18,7 @@ class LineupsController < ApplicationController
     end
     
     def edit
-        @lineup = Lineup.find(params[:id])
+      @lineup = current_user.lineups.find(params[:id])
     end
     
     def update
