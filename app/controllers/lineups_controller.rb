@@ -22,18 +22,18 @@ class LineupsController < ApplicationController
     end
     
     def update
-        @lineup = Lineup.find(params[:id])
-    
-        if @lineup.update_attributes(lineup_params)
-          redirect_to action: 'show', id: @lineup
-        else
-          render action: 'edit'
-        end
+      @lineup = current_user.lineups.find(params[:id])
+  
+      if @lineup.update_attributes(lineup_params)
+        redirect_to action: 'show', id: @lineup
+      else
+        render action: 'edit'
+      end
     end
     
     def destroy
-        Lineup.find(params[:id]).destroy
-        redirect_to controller: 'templates', action: 'list'
+      current_user.lineups.find(params[:id]).destroy
+      redirect_to controller: 'templates', action: 'list'
     end
     
     private
