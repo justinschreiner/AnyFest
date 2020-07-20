@@ -1,4 +1,3 @@
-= javascript_pack_tag 'drag' # including only here because it doesn't run properly when declared globaly
 #position-sections
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         %h1 Create Sections for your Template
@@ -7,10 +6,18 @@
                 #preview.col-8.order-2
                     %h3 Preview 
                     - if(@template.background_image.attached?)
-                        = image_tag(@template.background_image, class: "dropzone", id: "preview_image")
+                        = image_tag(@template.background_image, class: "dropzone preview_image", id: "preview_image")
                 #form.col-3.order-1
                     %h3 Add Sections
-                    .container 
+                    .container#item-container
+                        %h5#color-label Box Color 
+                        .btn-group.btn-group-toggle{"data-toggle": "buttons"}
+                            %label.btn.btn-primary.active
+                                %input{type: "radio", name: "options", id: "dark", autocomplete: "off", onclick: "darkButton()"}
+                                    Dark
+                            %label.btn.btn-primary
+                                %input{type: "radio", name: "options", id: "light", autocomplete: "off", onclick: "lightButton()"}
+                                    Light
                         #day.item
                             Day
                         #section.item

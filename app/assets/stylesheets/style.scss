@@ -91,7 +91,7 @@ body {
     border: 2px solid #ff6b6b;
     border-radius: 3vh;
     color: #1a535c;
-    width: 30vw;
+    width: 80%;
     margin: 1em 0;
     font-size: 1vw;
     padding: 0.5vw 2vh;
@@ -196,7 +196,7 @@ body {
     #preview {
       img {
         width: 20vw;
-        height: 40vh;
+        height: auto;
         object-fit: contain;
       }
     }
@@ -211,6 +211,12 @@ body {
         height: 50vh;
         justify-content: center;
         text-align: center;
+
+        h5 {
+          color: #1a535c;
+          margin-bottom: 0;
+          margin-top: 1vh;
+        }
 
         .drag-drop,
         .item {
@@ -254,11 +260,102 @@ body {
     #preview {
       img {
         width: 30vw;
-        height: 60vh;
+        height: auto;
       }
     }
-    .btn {
-      margin-top: 2em;
+
+    input {
+      &.btn {
+        margin-top: 2em;
+      }
+    }
+  }
+
+  #section-settings,
+  #new-lineup {
+    #instance {
+      height: auto;
+      overflow: auto;
+      width: 80%;
+      background-color: #fff;
+      border: 2px solid #ff6b6b;
+      border-radius: 5em;
+      margin-bottom: 5%;
+      padding: 5% 10%;
+
+      h2 {
+        a {
+          color: #1a535c;
+          margin-bottom: 3vh;
+        }
+      }
+      .col {
+        padding: 0;
+      }
+      .row {
+        padding: 0 1vw;
+      }
+      .form {
+        color: #1a535c;
+
+        .container {
+          position: relative;
+        }
+        .add-button {
+          border: none;
+          background-color: #fff;
+          i {
+            color: #1a535c;
+            font-size: 2em;
+          }
+        }
+        #text-color {
+          width: 20%;
+        }
+        #delineator-color,
+        #delineator {
+          width: 40%;
+        }
+        #text-color,
+        #delineator-color {
+          padding: 0.5vh 0.5vw;
+        }
+        #delineator {
+          padding: 0.5vh 0.2vw;
+          padding-left: 1em;
+        }
+      }
+      img {
+        position: absolute;
+      }
+      .surrounding-day,
+      .section,
+      .solo-day {
+        border: 1px solid #000;
+        position: absolute;
+      }
+      .surrounding-day {
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+      }
+      .section,
+      .solo-day {
+        background-color: rgba(0, 255, 0, 0.8);
+      }
+    }
+  }
+
+  #show-lineup {
+    .section {
+      position: absolute;
+    }
+    img {
+      position: absolute;
+    }
+    .text {
+      text-align: justify;
+      text-align-last: center;
+      font-weight: 900;
     }
   }
 

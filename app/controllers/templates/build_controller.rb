@@ -1,7 +1,7 @@
 class Templates::BuildController < ApplicationController
     include Wicked::Wizard
   
-    steps :create_template, :position_sections #, :section_settings
+    steps :create_template, :position_sections, :section_settings
   
     def show
       @template = Template.find(params[:template_id])
@@ -28,7 +28,8 @@ class Templates::BuildController < ApplicationController
     private
     def template_params
       params.require(:template).permit(:name, :background_color, :festival_id, :background_image, :status, 
-        days_attributes: [:id, :x_offset, :y_offset, :width, :height,  
-          sections_attributes: [:id, :x_offset, :y_offset, :width, :height]])
+        days_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
+          sections_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
+            :act_type, :alternating_colors, :text_colors, :delineator, :delineator_color, :max_act_count, text_colors: []]])
     end
 end

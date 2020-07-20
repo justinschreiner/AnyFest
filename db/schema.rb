@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_23_151827) do
+ActiveRecord::Schema.define(version: 2020_07_15_173009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,10 +51,26 @@ ActiveRecord::Schema.define(version: 2020_06_23_151827) do
     t.string "location"
   end
 
+  create_table "lineups", force: :cascade do |t|
+    t.string "name"
+    t.bigint "template_id"
+    t.bigint "user_id"
+    t.index ["template_id"], name: "index_lineups_on_template_id"
+    t.index ["user_id"], name: "index_lineups_on_user_id"
+  end
+
+  create_table "section_acts", force: :cascade do |t|
+    t.string "acts", default: [], array: true
+    t.bigint "lineup_id"
+    t.bigint "section_id"
+    t.index ["lineup_id"], name: "index_section_acts_on_lineup_id"
+    t.index ["section_id"], name: "index_section_acts_on_section_id"
+  end
+
   create_table "sections", force: :cascade do |t|
     t.string "name"
     t.string "act_type"
-    t.string "text_colors", default: [], array: true
+    t.string "text_colors", default: "{}"
     t.boolean "alternating_colors"
     t.string "delineator"
     t.string "delineator_color"
@@ -92,6 +108,10 @@ ActiveRecord::Schema.define(version: 2020_06_23_151827) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "days", "templates"
+  add_foreign_key "lineups", "templates"
+  add_foreign_key "lineups", "users"
+  add_foreign_key "section_acts", "lineups"
+  add_foreign_key "section_acts", "sections"
   add_foreign_key "sections", "days"
   add_foreign_key "templates", "festivals"
   add_foreign_key "templates", "users"

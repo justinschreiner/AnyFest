@@ -3,10 +3,12 @@ class Template < ApplicationRecord
     belongs_to :user
     has_many :days
     has_one_attached :background_image
-    accepts_nested_attributes_for :days
+    accepts_nested_attributes_for :days, allow_destroy: true
+    has_many :lineups
 
     validates :festival_id, :name, :background_image, presence: true, if: :active_or_create?
-    validates :days,                                  presence: true, if: :position_or_create?
+    validates_associated :days,                                       if: :active_or_position?
+    validates_associated :days,                                       if: :active_or_settings?
 
     def active?
         status == 'active'
@@ -16,11 +18,11 @@ class Template < ApplicationRecord
         (status == "create_template") || active?
     end
 
-    def position_or_create?
+    def active_or_position?
         (status == "position_sections") || active?
     end
 
-    def settings_or_create?
+    def active_or_settings?
         (status == "section_settings") || active?
     end
 end

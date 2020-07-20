@@ -1,10 +1,10 @@
 %h1 Add new Festival
 = form_with model: @festival, local: true do |f|
   %p
-    %label{for: "name"} name
+    = s.label :name
     = f.text_field :name, class: "form-control input-lg"
   %p
-    %label{for: "location"} location
+    = s.label :location
     = f.text_field :location, class: "form-control input-lg"
 
   = f.submit "CREATE", class: "btn btn-primary"
