@@ -346,16 +346,29 @@ body {
   }
 
   #show-lineup {
-    .section {
-      position: absolute;
+    .col {
+      margin: 0 2vw;
     }
-    img {
-      position: absolute;
+    .container {
+      .section {
+        position: absolute;
+      }
+      img {
+        position: absolute;
+      }
+      .text {
+        text-align: justify;
+        text-align-last: center;
+        font-weight: 900;
+      }
     }
-    .text {
-      text-align: justify;
-      text-align-last: center;
-      font-weight: 900;
+    .info {
+      h2 {
+        margin-top: 5vh;
+      }
+      .prompt {
+        margin-top: 10vh;
+      }
     }
   }
 
