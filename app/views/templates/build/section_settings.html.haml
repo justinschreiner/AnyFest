@@ -48,6 +48,9 @@
                                                         "data-content": '<div class="sora"> SORA </div><div class="oswald"> OSWALD </div><div class="signika"> SIGNIKA </div><div class="nunito"> NUNITO </div><div class="work-sans"> WORK SANS </div><div class="heebo"> HEEBO </div><div class="roboto-slab"> ROBOTO SLAB </div><div class="rokkitt"> ROKKITT </div>', "data-html": "true"}
                                                             = fa_icon "info-circle"
                                                         = s.select :font, @fonts, {}, class: "form-control font"
+                                                    .col
+                                                        = s.label :weight
+                                                        = s.select :weight, @weights, {}, class: "form-control weight"
                                                 .row
                                                     .col
                                                         = s.label :delineator

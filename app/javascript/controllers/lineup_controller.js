@@ -12,7 +12,8 @@ export default class extends Controller {
         var sectionYOffset = this.data.get("section-y-offset");
         var sectionXOffset = this.data.get("section-x-offset");
         var sectionDelineator = this.data.get("section-delineator");
-        var sectionFont = this.data.get("font");
+        var sectionFont = this.data.get("section-font");
+        var sectionWeight = this.data.get("section-weight");
         var sectionTextColors = JSON.parse(
           this.data.get("section-text-colors")
         );
@@ -52,7 +53,9 @@ export default class extends Controller {
             sectionTextColors[numIndex] +
             "; font-family: " +
             sectionFont +
-            "; font-weight: 900;'> " +
+            "; font-weight: " +
+            sectionWeight +
+            ";'> " +
             acts[i] +
             " </span>";
 

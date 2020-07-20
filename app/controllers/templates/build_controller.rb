@@ -7,6 +7,7 @@ class Templates::BuildController < ApplicationController
       @template = Template.find(params[:template_id])
       @festivals = Festival.all
       @fonts = { "Sora" => '"Sora", sans-serif', "Oswald" => '"Oswald", sans-serif', "Signika" => '"Signika", sans-serif', "Nunito" => '"Nunito", sans-serif', "Work Sans" => '"Work Sans", sans-serif', "Heebo" => '"Heebo", sans-serif', "Roboto Slab" => '"Roboto Slab"', "Rokkitt" => '"Rokkitt"' }
+      @weights = { "Regular" => "400", "Bold" => "700", "Extra Bold" => "900"}
       render_wizard
     end
   
@@ -31,6 +32,6 @@ class Templates::BuildController < ApplicationController
       params.require(:template).permit(:name, :background_color, :festival_id, :background_image, :status, 
         days_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
           sections_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
-            :act_type, :alternating_colors, :text_colors, :delineator, :delineator_color, :max_act_count, :font, text_colors: []]])
+            :act_type, :alternating_colors, :text_colors, :delineator, :delineator_color, :max_act_count, :font, :weight, text_colors: []]])
     end
 end
