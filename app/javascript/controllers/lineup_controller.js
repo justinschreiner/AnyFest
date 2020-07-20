@@ -52,7 +52,7 @@ export default class extends Controller {
             sectionTextColors[numIndex] +
             "; font-family: " +
             sectionFont +
-            "'> " +
+            "; font-weight: 100;'> " +
             acts[i] +
             " </span>";
 
