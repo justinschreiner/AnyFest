@@ -6,6 +6,7 @@ class Templates::BuildController < ApplicationController
     def show
       @template = Template.find(params[:template_id])
       @festivals = Festival.all
+      @fonts = { "Sora" => "'Sora', sans-serif", "Oswald" => "'Oswald', sans-serif", "Signika" => "'Signika', sans-serif", "Nunito" => "'Nunito', sans-serif", "Work Sans" => "'Work Sans', sans-serif", "Heebo" => "'Heebo', sans-serif", "Roboto Slab" => "'Roboto Slab', sans-serif", "Rokkitt" => "'Rokkitt', sans-serif" }
       render_wizard
     end
   

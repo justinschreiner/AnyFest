@@ -309,18 +309,18 @@ body {
             font-size: 2em;
           }
         }
-        #text-color {
+        .text-color {
           width: 20%;
         }
-        #delineator-color,
-        #delineator {
+        .delineator-color,
+        .delineator {
           width: 40%;
         }
-        #text-color,
-        #delineator-color {
+        .text-color,
+        .delineator-color {
           padding: 0.5vh 0.5vw;
         }
-        #delineator {
+        .delineator {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
         }
