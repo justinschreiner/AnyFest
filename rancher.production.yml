@@ -1,0 +1,11 @@
+rancher:
+    environment_id: 1st1016
+    service_names:
+      - app/web
+  s2i:  
+    builder:
+      image: brandnewbox/bnb-ruby:2.7-postgresql
+      context: ./devops
+    target_image: alpine:3.5
+    flags: -e RAILS_ENV=production -e DEVISE_SECRET_KEY=923be4b2363388f609b5bb8b79838aece651d5067d1b2cf581759efae6ab169323e574039285a6bea7b683fe85eaeedd79c2a838edaf8b21ae327dbaf3f6f040
+    registry_host: 596395833517.dkr.ecr.us-east-1.amazonaws.com
