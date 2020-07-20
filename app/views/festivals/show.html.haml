@@ -1,4 +1,25 @@
-%h1#name
-    = @festival.name
-%h2#location
-    = @festival.location
+#show-festival
+    %h1#name
+        %b
+            = @festival.name
+    %h4#location
+        = @festival.location
+    %h2 Search
+    = search_form_for(@q, url: festival_path(@festival)) do |f|
+        = f.search_field :name_cont, class: "form-control input-lg"
+        = f.submit "SEARCH", class: "btn btn-primary"
+    %h3#search-lineups
+        %b Lineups
+    - if (params[:q]).present?
+        #lineup-results
+            - @lineups.each do |l|
+                %li
+                    = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
+                        = image_tag(l.template.background_image, class: "preview-image")
+    %h3#search-templates
+        %b Templates
+    #template-results
+        - @templates.each do |t|
+            %li
+                = link_to template_path(t) do
+                    = image_tag(t.background_image, class: "preview-image")

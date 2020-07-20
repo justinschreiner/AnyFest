@@ -6,6 +6,10 @@ class FestivalsController < ApplicationController
 
   def show
     @festival = Festival.find(params[:id])
+    @q = Lineup.ransack(params[:q])
+    @qt = Template.ransack(params[:q])
+    @lineups = @q.result(distinct: true)
+    @templates = @qt.result(distinct: true)
   end
 
   def new

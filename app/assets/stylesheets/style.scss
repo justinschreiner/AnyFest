@@ -385,4 +385,20 @@ body {
       }
     }
   }
+
+  #show-festival {
+    #template-results,
+    #lineup-results {
+      li {
+        display: inline-block;
+      }
+      .preview-image {
+        width: 12vw;
+        max-height: 16vw;
+        margin: 2em;
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
+    }
+  }
 }
