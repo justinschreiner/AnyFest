@@ -29,6 +29,6 @@ window.addColorField = function (item) {
   colorSection.appendChild(buttonClone);
 };
 
-$(function () {
+window.addEventListener("DOMContentLoaded", (event) => {
   $('[data-toggle="popover"]').popover();
 });

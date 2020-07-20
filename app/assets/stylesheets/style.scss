@@ -324,6 +324,15 @@ body {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
         }
+        .font-popover {
+          color: #ff6b6b;
+          margin-left: 1vw;
+          font-size: 1.2em;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
       img {
         position: absolute;

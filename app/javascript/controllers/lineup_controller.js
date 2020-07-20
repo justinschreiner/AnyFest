@@ -12,6 +12,7 @@ export default class extends Controller {
         var sectionYOffset = this.data.get("section-y-offset");
         var sectionXOffset = this.data.get("section-x-offset");
         var sectionDelineator = this.data.get("section-delineator");
+        var sectionFont = this.data.get("font");
         var sectionTextColors = JSON.parse(
           this.data.get("section-text-colors")
         );
@@ -40,6 +41,7 @@ export default class extends Controller {
             "%; z-index: 2; font-size: 1px;"
         );
 
+        console.log(sectionWidth, sectionFont);
         // Fill the section with the text from the lineup form
         var innerText = "";
         for (var i = 0; i < acts.length; i++) {
@@ -48,7 +50,9 @@ export default class extends Controller {
           innerText +=
             "<span style= 'color: " +
             sectionTextColors[numIndex] +
-            ";'> " +
+            "; font-family: " +
+            sectionFont +
+            "'> " +
             acts[i] +
             " </span>";
 
