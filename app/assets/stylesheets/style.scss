@@ -373,11 +373,15 @@ body {
   }
 
   #show-template {
-    #image {
-      padding-top: 30px;
-      img {
-        border-radius: 10%;
-        border: 2px solid #ff6b6b;
+    .col {
+      margin: 0 2vw;
+    }
+    .info {
+      h2 {
+        margin-top: 5vh;
+      }
+      .prompt {
+        margin-top: 10vh;
       }
     }
   }
