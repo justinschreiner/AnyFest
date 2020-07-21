@@ -83,7 +83,7 @@ function fitText(outputDiv) {
   // get fontSize
   let fontSize = parseInt(outputDiv.style.fontSize);
 
-  // if content's width or height is bigger then elements width or height- overflow
+  // if content's width or height is bigger then elements width or height: overflow
   // scroll___ => content size; client____ => element size
   if (
     outputDiv.scrollWidth > outputDiv.clientWidth ||
@@ -95,9 +95,11 @@ function fitText(outputDiv) {
   } else {
     // resize incrementally by 1 px until text fits
     while (
-      outputDiv.scrollWidth <= outputDiv.clientWidth &&
+      Math.floor(outputDiv.scrollWidth) <=
+        Math.ceil(outputDiv.getBoundingClientRect().width) &&
       fontSize < maxFontSize &&
-      outputDiv.scrollHeight <= outputDiv.clientHeight
+      Math.floor(outputDiv.scrollHeight) <=
+        Math.ceil(outputDiv.getBoundingClientRect().height)
     ) {
       fontSize = Math.ceil(fontSize) + 1;
       fontSize = fontSize > maxFontSize ? (fontSize = maxFontSize) : fontSize;
