@@ -374,7 +374,15 @@ interact(".dropzone").dropzone({
   overlap: 0.75,
 
   // listen for drop related events:
-  ondropactivate: function (event) {},
+  ondropactivate: function (event) {
+    if (
+      event.relatedTarget.classList.contains("section-drag") &&
+      event.relatedTarget.getAttribute("data-id") != null &&
+      event.relatedTarget.classList.contains("in-day") == false
+    ) {
+      deleteSectionWithoutDay(event.relatedTarget);
+    }
+  },
   ondragenter: function (event) {},
   ondragleave: function (event) {},
   ondrop: function (event) {
@@ -407,6 +415,7 @@ interact("#day").dropzone({
     if (event.relatedTarget.getAttribute("data-id") != null) {
       if (event.target.getAttribute("data-id") != null) {
         deleteSectionFormFields(event.relatedTarget, event.target);
+        event.relatedTarget.classList.remove("in-day");
       }
     }
   },
@@ -426,12 +435,14 @@ interact("#day").dropzone({
         createDayFormFields(event.relatedTarget);
       } else {
         createSectionFormFields(event.relatedTarget, event.target);
+        event.relatedTarget.classList.add("in-day");
       }
     } else {
       if (event.relatedTarget.classList.contains("day-drop")) {
         updateDayFormFields(event.relatedTarget);
       } else {
         createSectionFormFields(event.relatedTarget, event.target);
+        event.relatedTarget.classList.add("in-day");
       }
     }
   },
