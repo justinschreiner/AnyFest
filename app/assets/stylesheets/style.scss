@@ -27,9 +27,15 @@ body {
     }
   }
   #home,
-  #logout {
+  #logout,
+  #user {
     font-size: 1.2em;
     margin-left: 1vw;
+  }
+
+  #user {
+    float: right;
+    margin-right: 1vw;
   }
 
   a {
@@ -399,6 +405,26 @@ body {
         border-radius: 10%;
         border: 2px solid #ff6b6b;
       }
+    }
+  }
+  #show-user {
+    #templates,
+    #lineups {
+      li {
+        display: inline-block;
+      }
+      .preview-image {
+        width: 12vw;
+        max-height: 16vw;
+        margin: 2em;
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
+    }
+
+    #my-templates,
+    #new-link {
+      display: inline-block;
     }
   }
 }
