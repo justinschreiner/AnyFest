@@ -120,38 +120,36 @@ function fixDelineator(container, delineator) {
   var prev = spans[0];
   var cur = spans[1];
   var sectionOffsetLeft = prev.offsetLeft;
-  var indexArr = [];
+  var linesIndexArr = [[]];
+  var tempArr = [prev];
 
-  // Make an array with the indexes of all delineators which come before/after a line break
-  for (var i = 1; i < spans.length - 1; i++) {
-    if (prev.offsetTop < cur.offsetTop) {
-      if (cur.innerText == delineator + " ") {
-        indexArr.push(i);
-      } else if (prev.innerText == delineator + " ") {
-        indexArr.push(i - 1);
-      }
+  // Make an array of arrays that hold indexes of spans on the same line
+  for (var i = 1; i < spans.length; i++) {
+    if (prev.getBoundingClientRect().top == cur.getBoundingClientRect().top) {
+      tempArr.push(cur);
+    } else {
+      linesIndexArr.push(tempArr);
+      tempArr = [cur];
     }
-
-    // increment index
     prev = cur;
     cur = spans[i + 1];
   }
-
-  // Go through the array of indexes
-  for (var j = 0; j < indexArr.length; j++) {
-    // If we aren't checking the last row in this section
-    if (j < indexArr.length - 1) {
-      // If the delineator either starts or finishes a line
-      if (
-        spans[indexArr[j]].offsetLeft == sectionOffsetLeft ||
-        spans[indexArr[j]].offsetLeft >= container.clientWidth * 0.9
-      ) {
-        spans[indexArr[j]].innerText = "";
-      }
+  linesIndexArr.push(tempArr);
+  for (var i = 0; i < linesIndexArr.length; i++) {
+    if (linesIndexArr[i].length == 0) {
+      continue;
     }
-    // This is the last row for the section
-    else {
-      spans[indexArr[j]].innerText = "";
+    if (
+      linesIndexArr[i][linesIndexArr[i].length - 1].innerText ==
+      `${delineator} `
+    ) {
+      linesIndexArr[i][linesIndexArr[i].length - 1].innerText = "";
+    }
+    if (
+      linesIndexArr[i][0].innerText == `${delineator} ` &&
+      linesIndexArr[i][0].offsetLeft == sectionOffsetLeft
+    ) {
+      linesIndexArr[i][0].innerText = "";
     }
   }
 }
