@@ -6,9 +6,11 @@ class Template < ApplicationRecord
     accepts_nested_attributes_for :days, allow_destroy: true
     has_many :lineups
 
-    validates :festival_id, :name, :background_image, presence: true, if: :active_or_create?
-    validates_associated :days,                                       if: :active_or_position?
-    validates_associated :days,                                       if: :active_or_settings?
+    validates :festival_id,      presence: {message: "select one"},      if: :active_or_create?
+    validates :name,             presence: {message: "can't be blank"},  if: :active_or_create?
+    validates :background_image, presence: {message: "upload an image"}, if: :active_or_create?
+    validates_associated :days,                                          if: :active_or_position?
+    validates_associated :days,                                          if: :active_or_settings?
 
     def active?
         status == 'active'

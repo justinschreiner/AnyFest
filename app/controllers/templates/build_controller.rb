@@ -6,17 +6,19 @@ class Templates::BuildController < ApplicationController
     def show
       @template = Template.find(params[:template_id])
       @festivals = Festival.all
+
       render_wizard
     end
   
     def update
       @template = Template.find(params[:template_id])
-      
+      @festivals = Festival.all
+
       # updating the status to the wizard step, will help for knowing what validations should have taken place to this point
       params[:template][:status] = step.to_s
       params[:template][:status] = "active" if step == steps.last
       
-      @template.update_attributes(template_params)
+      @template.update(template_params)      
       render_wizard @template
     end  
 
