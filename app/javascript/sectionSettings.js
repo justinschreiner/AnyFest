@@ -4,7 +4,6 @@
 window.collapseAddColor = function (self) {
   var id = self.getAttribute("data-id");
   var content = document.getElementById(id);
-  console.log(self, content);
   if (content.classList.contains("show")) {
     content.classList.remove("show");
   } else {
@@ -29,3 +28,7 @@ window.addColorField = function (item) {
   colorSection.appendChild(fieldClone);
   colorSection.appendChild(buttonClone);
 };
+
+window.addEventListener("DOMContentLoaded", (event) => {
+  $('[data-toggle="popover"]').popover();
+});
