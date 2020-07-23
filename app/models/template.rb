@@ -10,6 +10,8 @@ class Template < ApplicationRecord
     validates :name,             presence: {message: "can't be blank"},  if: :active_or_create?
     validates :background_image, presence: {message: "upload an image"}, if: :active_or_create?
     validates_associated :days,                                          if: :active_or_position?
+    validate :has_one_day_minimum,                                       if: :active_or_position?
+    validate :has_one_section_minimum,                                       if: :active_or_position?
     validates_associated :days,                                          if: :active_or_settings?
 
     def active?
@@ -26,5 +28,15 @@ class Template < ApplicationRecord
 
     def active_or_settings?
         (status == "section_settings") || active?
+    end
+
+    def has_one_day_minimum
+        self.errors.add(:days, "include at least one day") unless self.days.present?
+    end
+
+    def has_one_section_minimum
+        self.days.each do |day|
+            self.errors.add(:days, "days must include at least one section") unless day.sections.present?
+        end
     end
 end

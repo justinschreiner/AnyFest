@@ -215,9 +215,25 @@ body {
         background-color: #fff;
         border-radius: 5vh;
         border: 3px solid #ff6b6b;
-        height: 50vh;
         justify-content: center;
         text-align: center;
+        padding: 1em;
+
+        #dark-button {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+        #light-button {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+
+        .btn {
+          &.active {
+            background-color: darken(#ffe66d, 20);
+            box-shadow: none;
+          }
+        }
 
         h5 {
           color: #1a535c;
@@ -243,7 +259,7 @@ body {
 
         .item {
           width: 80%;
-          height: 20%;
+          height: 30%;
           margin-left: 10%;
           margin-top: 25%;
 
@@ -262,6 +278,10 @@ body {
           font-size: 2.5vh;
           margin-top: 25%;
         }
+      }
+
+      .errors {
+        color: #ff6b6b;
       }
     }
     #preview {

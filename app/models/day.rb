@@ -3,14 +3,19 @@ class Day < ApplicationRecord
     has_many :sections
     accepts_nested_attributes_for :sections,  allow_destroy: true
 
-    validates_associated :sections, presence: true, if: :active_position_or_settings?
+    validates_associated :sections, if: :active_position_or_settings?
+    validates :height, presence: true, if: :active_or_position?
     validates :name, presence: true, if: :active_or_settings?
 
     def active_position_or_settings?
-        (template.status == "section_settings") || (template.status == "position_sections") || template.active?
+        template.active_or_settings?  || template.active_or_position?
     end
 
     def active_or_settings?
-        (template.status == "section_settings") || template.active?
+        template.active_or_settings?
+    end
+
+    def active_or_position?
+        template.active_or_position?
     end
 end

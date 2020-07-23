@@ -15,8 +15,8 @@ class Templates::BuildController < ApplicationController
       @festivals = Festival.all
 
       # updating the status to the wizard step, will help for knowing what validations should have taken place to this point
-      params[:template][:status] = step.to_s
-      params[:template][:status] = "active" if step == steps.last
+      @template.status = step.to_s
+      @template.status = "active" if step == steps.last
       
       @template.update(template_params)      
       render_wizard @template
@@ -29,7 +29,7 @@ class Templates::BuildController < ApplicationController
 
     private
     def template_params
-      params.require(:template).permit(:name, :background_color, :festival_id, :background_image, :status, 
+      params.fetch(:template, {}).permit(:name, :background_color, :festival_id, :background_image, :status, 
         days_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
           sections_attributes: [:id, :x_offset, :y_offset, :width, :height, :name, 
             :act_type, :alternating_colors, :text_colors, :delineator, :delineator_color, :max_act_count, text_colors: []]])

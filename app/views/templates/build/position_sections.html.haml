@@ -1,5 +1,5 @@
 #position-sections
-    = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
+    = form_with model: @template, id: "form-input", url: wizard_path, method: :put, local: true do |t|
         %h1 Create Sections for your Template
         .row-container
             .row
@@ -12,10 +12,10 @@
                     .container#item-container
                         %h5#color-label Box Color 
                         .btn-group.btn-group-toggle{"data-toggle": "buttons"}
-                            %label.btn.btn-primary.active
+                            %label.btn.btn-primary.active#dark-button
                                 %input{type: "radio", name: "options", id: "dark", autocomplete: "off", onclick: "darkButton()"}
                                     Dark
-                            %label.btn.btn-primary
+                            %label.btn.btn-primary#light-button
                                 %input{type: "radio", name: "options", id: "light", autocomplete: "off", onclick: "lightButton()"}
                                     Light
                         #day.item
@@ -28,3 +28,7 @@
                             = d.fields_for :sections do |s|
                                 attach fields
                     = t.submit "CONTINUE", class: "btn btn-primary"
+                    .errors
+                        - if @template.errors[:days].any?
+                            -@template.errors[:days].each do |msg|
+                                %p= "*#{msg}"
