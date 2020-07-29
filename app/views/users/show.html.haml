@@ -1,7 +1,7 @@
 #show-user
     %h1
         %b= current_user.email
-    - if(current_user.is_admin?)
+    - if current_user.is_admin?
         #trestle
             = link_to "Trestle", trestle.root_path, class: "btn btn-primary"
     %h2 My Mock Lineups
