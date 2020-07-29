@@ -336,20 +336,29 @@ body {
             font-size: 2em;
           }
         }
-        #text-color {
+        .text-color {
           width: 20%;
         }
-        #delineator-color,
-        #delineator {
+        .delineator-color,
+        .delineator {
           width: 40%;
         }
-        #text-color,
-        #delineator-color {
+        .text-color,
+        .delineator-color {
           padding: 0.5vh 0.5vw;
         }
-        #delineator {
+        .delineator {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
+        }
+        .font-popover {
+          color: #ff6b6b;
+          margin-left: 1vw;
+          font-size: 1.2em;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
       }
       img {
@@ -382,7 +391,6 @@ body {
     .text {
       text-align: justify;
       text-align-last: center;
-      font-weight: 900;
     }
   }
 
@@ -395,4 +403,41 @@ body {
       }
     }
   }
+}
+
+.sora {
+  font-family: "Sora", sans-serif;
+  font-weight: 900;
+}
+.oswald {
+  font-family: "Oswald", sans-serif;
+  font-weight: 900;
+}
+.signika {
+  font-family: "Signika", sans-serif;
+  font-weight: 900;
+}
+.signika {
+  font-family: "Signika", sans-serif;
+  font-weight: 900;
+}
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+}
+.work-sans {
+  font-family: "Work+Sans", sans-serif;
+  font-weight: 900;
+}
+.heebo {
+  font-family: "Heebo", sans-serif;
+  font-weight: 900;
+}
+.roboto-slab {
+  font-family: "Roboto+Slab";
+  font-weight: 900;
+}
+.rokkitt {
+  font-family: "Rokkitt";
+  font-weight: 900;
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_15_173009) do
+ActiveRecord::Schema.define(version: 2020_07_20_143410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 2020_07_15_173009) do
     t.integer "width"
     t.integer "height"
     t.bigint "day_id"
+    t.string "font"
+    t.integer "weight"
     t.index ["day_id"], name: "index_sections_on_day_id"
   end
 
