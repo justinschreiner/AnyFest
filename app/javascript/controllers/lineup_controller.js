@@ -43,11 +43,21 @@ export default class extends Controller {
         for (var i = 0; i < acts.length; i++) {
           var numColors = sectionTextColors.length;
           var numIndex = i % numColors;
-          innerText += `<span style= 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${acts[i]} </span>`;
+
+          // If name has a space in it, wrap each word in its own span - helps with fixSectionDelineator()
+          var tempName = acts[i];
+          if (tempName.includes(" ")) {
+            tempName = tempName.split(" ");
+            for (var j = 0; j < tempName.length; j++) {
+              innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName[j]} </span>`;
+            }
+          } else {
+            innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName} </span>`;
+          }
 
           // Add the delineator between acts
           if (i < acts.length - 1) {
-            innerText += `<span style= 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
+            innerText += `<span style = 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
           }
         }
         section.innerHTML = innerText;
@@ -109,13 +119,15 @@ function fixDelineator(container, delineator) {
   var spans = container.getElementsByTagName("span");
   var prev = spans[0];
   var cur = spans[1];
-  var sectionOffsetLeft = prev.offsetLeft;
   var linesIndexArr = [[]];
   var tempArr = [prev];
 
   // Make an array of arrays that hold indexes of spans on the same line
   for (var i = 1; i < spans.length; i++) {
-    if (prev.getBoundingClientRect().top == cur.getBoundingClientRect().top) {
+    if (
+      Math.ceil(prev.getBoundingClientRect().top) >=
+      Math.floor(cur.getBoundingClientRect().top)
+    ) {
       tempArr.push(cur);
     } else {
       linesIndexArr.push(tempArr);
@@ -124,21 +136,22 @@ function fixDelineator(container, delineator) {
     prev = cur;
     cur = spans[i + 1];
   }
+
   linesIndexArr.push(tempArr);
+
   for (var i = 0; i < linesIndexArr.length; i++) {
     if (linesIndexArr[i].length == 0) {
       continue;
     }
+    // if the end of a line is the delineator, get rid of that delineator
     if (
       linesIndexArr[i][linesIndexArr[i].length - 1].innerText ==
       `${delineator} `
     ) {
       linesIndexArr[i][linesIndexArr[i].length - 1].innerText = "";
     }
-    if (
-      linesIndexArr[i][0].innerText == `${delineator} ` &&
-      linesIndexArr[i][0].offsetLeft == sectionOffsetLeft
-    ) {
+    // if the beginning of a line is the delineator, get rid of the delineator
+    else if (linesIndexArr[i][0].innerText == `${delineator} `) {
       linesIndexArr[i][0].innerText = "";
     }
   }
