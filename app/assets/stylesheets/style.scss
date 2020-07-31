@@ -355,6 +355,10 @@ body {
   }
 
   #show-lineup {
+    .container {
+      padding: 0;
+      height: auto;
+    }
     .section {
       position: absolute;
     }

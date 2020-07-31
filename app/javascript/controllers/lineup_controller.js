@@ -60,6 +60,9 @@ export default class extends Controller {
 
         // Get rid of extra delineators
         fixDelineator(section, sectionDelineator);
+
+        // Adjust conatiner div's size so that html2canvas works properly
+        fixLineup();
       });
   }
 }
@@ -142,4 +145,12 @@ function fixDelineator(container, delineator) {
       spans[indexArr[j]].innerText = "";
     }
   }
+}
+
+function fixLineup() {
+  var lineup = document.getElementById("lineup");
+  var img = document.getElementsByClassName("image")[0];
+  var imgRect = img.getBoundingClientRect();
+  lineup.style.height = `${imgRect.height}px`;
+  lineup.style.width = `${imgRect.width}px`;
 }

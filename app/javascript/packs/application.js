@@ -12,6 +12,7 @@ require("interactjs");
 require("../template");
 require("../drag");
 require("../sectionSettings");
+require("../lineup");
 
 import "bootstrap";
 
