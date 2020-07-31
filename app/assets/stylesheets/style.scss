@@ -355,6 +355,10 @@ body {
   }
 
   #show-lineup {
+    a {
+      color: #ff6b6b;
+      text-decoration: none;
+    }
     .container {
       padding: 0;
       height: auto;
