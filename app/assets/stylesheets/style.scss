@@ -86,6 +86,15 @@ body {
     cursor: pointer;
   }
 
+  a {
+    &:hover {
+      cursor: pointer;
+    }
+    #popover-icon {
+      color: #ff6b6b;
+    }
+  }
+
   .form-control {
     background-color: white;
     border: 2px solid #ff6b6b;
@@ -184,6 +193,10 @@ body {
 
   #template-form {
     #form {
+      h2,
+      #popover {
+        display: inline-block;
+      }
       #image {
         #file {
           margin: 1em 0;
