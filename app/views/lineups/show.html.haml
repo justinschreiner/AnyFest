@@ -7,8 +7,11 @@
                     - @lineup.section_acts.each do |section_act|
                         - section = section_act.section
                         %div{ data: {controller: "lineup", lineup_section_height: section.height, lineup_section_width: section.width, lineup_section_x_offset: section.x_offset, lineup_section_y_offset: section.y_offset, lineup_section_delineator: section.delineator, lineup_section_text_colors: section.text_colors, lineup_section_delineator_color: section.delineator_color, lineup_acts: section_act.acts, lineup_section_font: section.font, lineup_section_weight: section.weight}}
+                    %script{type: 'text/javascript'}
+                        window.addEventListener("load", (event) => {prepDownloadLink();});
         .info.col#right
             %h1 
                 = @lineup.name
-            %button#download{ onclick: "download()" }
-                download
+            %button#download.btn.btn-primary
+                %a#download-link{download: "myImage.png", href: "" }
+                    download

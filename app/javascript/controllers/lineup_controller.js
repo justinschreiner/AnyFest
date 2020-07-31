@@ -1,4 +1,5 @@
 import { Controller } from "stimulus";
+import html2canvas from "html2canvas";
 
 export default class extends Controller {
   connect() {
@@ -62,7 +63,10 @@ export default class extends Controller {
         fixDelineator(section, sectionDelineator);
 
         // Adjust conatiner div's size so that html2canvas works properly
-        fixLineup();
+        fixLineupDiv();
+
+        // Change the href of the download button to the file containing the lineup image
+        // prepDownloadLink();
       });
   }
 }
@@ -147,10 +151,19 @@ function fixDelineator(container, delineator) {
   }
 }
 
-function fixLineup() {
+function fixLineupDiv() {
   var lineup = document.getElementById("lineup");
   var img = document.getElementsByClassName("image")[0];
   var imgRect = img.getBoundingClientRect();
   lineup.style.height = `${imgRect.height}px`;
   lineup.style.width = `${imgRect.width}px`;
 }
+
+// function prepDownloadLink() {
+//   var img = document.getElementById("lineup");
+//   var link = document.getElementById("download-link");
+//   html2canvas(img).then(function (canvas) {
+//     var imgFile = canvas.toDataURL("image/png");
+//     link.href = imgFile;
+//   });
+// }
