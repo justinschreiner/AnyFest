@@ -8,9 +8,17 @@
                     - if(@template.background_image.attached?)
                         = image_tag(@template.background_image, class: "dropzone preview_image", id: "preview_image")
                 #form.col-3.order-1
-                    %h3 Add Sections
+                    %h3#sections-header Add Sections
+                    %a#popover{class: "overview-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                    "data-content": "<div><b>Days:</b> Should contain at least one section.  These help to organize the template. </div><div><b>Sections:</b> Should be placed inside of days. Make different sections for each part of the lineup that has different formatting. Ex: Headliners, sub-headliners, etc.</div>", "data-html": "true"}
+                        #popover-icon
+                            = fa_icon "info-circle"
                     .container#item-container
                         %h5#color-label Box Color 
+                        %a#popover{class: "box-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                        "data-content": "Change this setting if you are having trouble seeing the boxes on your template.  This setting not affect the template itself."}
+                            #popover-icon
+                                = fa_icon "info-circle"
                         .btn-group.btn-group-toggle{"data-toggle": "buttons"}
                             %label.btn.btn-primary.active
                                 %input{type: "radio", name: "options", id: "dark", autocomplete: "off", onclick: "darkButton()"}

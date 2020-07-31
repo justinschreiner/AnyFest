@@ -92,6 +92,9 @@ body {
     }
     #popover-icon {
       color: #ff6b6b;
+      .fa {
+        font-size: 1.5vh !important;
+      }
     }
   }
 
@@ -216,6 +219,11 @@ body {
   }
 
   #position-sections {
+    #sections-header,
+    #popover {
+      display: inline-block;
+    }
+
     #form {
       .container {
         background-color: #fff;
@@ -229,6 +237,11 @@ body {
           color: #1a535c;
           margin-bottom: 0;
           margin-top: 1vh;
+        }
+
+        #color-label,
+        #popover {
+          display: inline-block;
         }
 
         .drag-drop,
@@ -296,6 +309,11 @@ body {
       margin-bottom: 5%;
       padding: 5% 10%;
 
+      .label,
+      #popover {
+        display: inline-block;
+      }
+
       h2 {
         a {
           color: #1a535c;
@@ -336,15 +354,6 @@ body {
         .delineator {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
-        }
-        .font-popover {
-          color: #ff6b6b;
-          margin-left: 1vw;
-          font-size: 1.2em;
-
-          &:hover {
-            cursor: pointer;
-          }
         }
       }
       img {
