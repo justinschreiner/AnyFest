@@ -64,9 +64,6 @@ export default class extends Controller {
 
         // Adjust conatiner div's size so that html2canvas works properly
         fixLineupDiv();
-
-        // Change the href of the download button to the file containing the lineup image
-        // prepDownloadLink();
       });
   }
 }

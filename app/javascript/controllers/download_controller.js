@@ -13,6 +13,7 @@ export default class extends Controller {
           var imgFile = canvas.toDataURL("image/png");
           link.href = imgFile;
         });
+        document.getElementById("download").classList.remove("disabled");
       });
   }
 }
