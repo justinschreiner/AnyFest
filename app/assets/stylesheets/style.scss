@@ -90,7 +90,7 @@ body {
     &:hover {
       cursor: pointer;
     }
-    #popover-icon {
+    .popover-icon {
       color: #ff6b6b;
       .fa {
         font-size: 1.5vh !important;
@@ -196,10 +196,6 @@ body {
 
   #template-form {
     #form {
-      h2,
-      #popover {
-        display: inline-block;
-      }
       #image {
         #file {
           margin: 1em 0;
@@ -219,11 +215,6 @@ body {
   }
 
   #position-sections {
-    #sections-header,
-    #popover {
-      display: inline-block;
-    }
-
     #form {
       .container {
         background-color: #fff;
@@ -308,11 +299,6 @@ body {
       border-radius: 5em;
       margin-bottom: 5%;
       padding: 5% 10%;
-
-      .label,
-      #popover {
-        display: inline-block;
-      }
 
       h2 {
         a {
