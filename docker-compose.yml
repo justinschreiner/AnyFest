@@ -7,7 +7,9 @@ services:
     volumes:
       - .:/app:cached
       - bundle_cache:/usr/local/bundle:cached
+      - node_cache:/app/node_modules
     ports:
       - "3000:3000"
 volumes:
   bundle_cache:
+  node_cache:
