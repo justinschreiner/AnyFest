@@ -62,7 +62,7 @@ export default class extends Controller {
         // Get rid of extra delineators
         fixDelineator(section, sectionDelineator);
 
-        // Adjust conatiner div's size so that html2canvas works properly
+        // Adjust container div's size so that html2canvas works properly
         fixLineupDiv();
       });
   }
@@ -155,12 +155,3 @@ function fixLineupDiv() {
   lineup.style.height = `${imgRect.height}px`;
   lineup.style.width = `${imgRect.width}px`;
 }
-
-// function prepDownloadLink() {
-//   var img = document.getElementById("lineup");
-//   var link = document.getElementById("download-link");
-//   html2canvas(img).then(function (canvas) {
-//     var imgFile = canvas.toDataURL("image/png");
-//     link.href = imgFile;
-//   });
-// }
