@@ -1,10 +1,12 @@
 %h1 Add new Festival
 = form_with model: @festival, local: true do |f|
   %p
-    = s.label :name
+    = f.label :name
     = f.text_field :name, class: "form-control input-lg"
+    = error_messages(f, :name)
   %p
-    = s.label :location
+    = f.label :location
     = f.text_field :location, class: "form-control input-lg"
+    = error_messages(f, :location)
 
   = f.submit "CREATE", class: "btn btn-primary"
