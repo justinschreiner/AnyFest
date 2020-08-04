@@ -30,5 +30,6 @@ window.addColorField = function (item) {
 };
 
 window.addEventListener("DOMContentLoaded", (event) => {
+  // initialize popover function
   $('[data-toggle="popover"]').popover();
 });

@@ -369,14 +369,31 @@ body {
   }
 
   #show-lineup {
+    a {
+      color: #ff6b6b;
+      text-decoration: none;
+    }
+    .container {
+      padding: 0;
+      height: auto;
+    }
+    .section {
+      position: absolute;
+    }
+    .text {
+      text-align: justify;
+      text-align-last: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
     .col {
       margin: 0 2vw;
     }
     .container {
       .section {
-        position: absolute;
-      }
-      img {
         position: absolute;
       }
       .text {
@@ -397,92 +414,92 @@ body {
         text-align-last: center;
       }
     }
+  }
 
-    #show-template {
-      .col {
-        margin: 0 2vw;
+  #show-template {
+    .col {
+      margin: 0 2vw;
+    }
+    .info {
+      h2 {
+        margin-top: 5vh;
       }
-      .info {
-        h2 {
-          margin-top: 5vh;
-        }
-        .prompt {
-          margin-top: 10vh;
-        }
+      .prompt {
+        margin-top: 10vh;
       }
     }
+  }
 
-    #show-festival {
-      #template-results,
-      #lineup-results {
-        li {
-          display: inline-block;
-        }
-        .preview-image {
-          width: 12vw;
-          max-height: 16vw;
-          margin: 2em;
-          border-radius: 10%;
-          border: 2px solid #ff6b6b;
-        }
-      }
-    }
-    #show-user {
-      #templates,
-      #lineups {
-        li {
-          display: inline-block;
-        }
-        .preview-image {
-          width: 12vw;
-          max-height: 16vw;
-          margin: 2em;
-          border-radius: 10%;
-          border: 2px solid #ff6b6b;
-        }
-      }
-
-      #my-templates,
-      #new-link {
+  #show-festival {
+    #template-results,
+    #lineup-results {
+      li {
         display: inline-block;
       }
+      .preview-image {
+        width: 12vw;
+        max-height: 16vw;
+        margin: 2em;
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
     }
   }
+  #show-user {
+    #templates,
+    #lineups {
+      li {
+        display: inline-block;
+      }
+      .preview-image {
+        width: 12vw;
+        max-height: 16vw;
+        margin: 2em;
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
+    }
 
-  .sora {
-    font-family: "Sora", sans-serif;
-    font-weight: 900;
+    #my-templates,
+    #new-link {
+      display: inline-block;
+    }
   }
-  .oswald {
-    font-family: "Oswald", sans-serif;
-    font-weight: 900;
-  }
-  .signika {
-    font-family: "Signika", sans-serif;
-    font-weight: 900;
-  }
-  .signika {
-    font-family: "Signika", sans-serif;
-    font-weight: 900;
-  }
-  .nunito {
-    font-family: "Nunito", sans-serif;
-    font-weight: 900;
-  }
-  .work-sans {
-    font-family: "Work+Sans", sans-serif;
-    font-weight: 900;
-  }
-  .heebo {
-    font-family: "Heebo", sans-serif;
-    font-weight: 900;
-  }
-  .roboto-slab {
-    font-family: "Roboto+Slab";
-    font-weight: 900;
-  }
-  .rokkitt {
-    font-family: "Rokkitt";
-    font-weight: 900;
-  }
+}
+
+.sora {
+  font-family: "Sora", sans-serif;
+  font-weight: 900;
+}
+.oswald {
+  font-family: "Oswald", sans-serif;
+  font-weight: 900;
+}
+.signika {
+  font-family: "Signika", sans-serif;
+  font-weight: 900;
+}
+.signika {
+  font-family: "Signika", sans-serif;
+  font-weight: 900;
+}
+.nunito {
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
+}
+.work-sans {
+  font-family: "Work+Sans", sans-serif;
+  font-weight: 900;
+}
+.heebo {
+  font-family: "Heebo", sans-serif;
+  font-weight: 900;
+}
+.roboto-slab {
+  font-family: "Roboto+Slab";
+  font-weight: 900;
+}
+.rokkitt {
+  font-family: "Rokkitt";
+  font-weight: 900;
 }

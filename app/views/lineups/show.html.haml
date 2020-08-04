@@ -1,16 +1,19 @@
 #show-lineup
     .page-content.row
-        .container.col{"data-target": "lineup.output"}
-            .img-container
+        .container.col#lineup
+            .img-container.position-relative
                 = image_tag(@template.background_image, class: "image img-fluid")
                 .text
                     - @lineup.section_acts.each do |section_act|
                         - section = section_act.section
-                        %div{ data: {controller: "lineup", lineup_section_height: section.height, lineup_section_width: section.width, lineup_section_x_offset: section.x_offset, lineup_section_y_offset: section.y_offset, lineup_section_delineator: section.delineator, lineup_section_text_colors: section.text_colors, lineup_section_delineator_color: section.delineator_color, lineup_acts: section_act.acts}}
-        .info.col
+                        %div{ data: {controller: "lineup", lineup_section_height: section.height, lineup_section_width: section.width, lineup_section_x_offset: section.x_offset, lineup_section_y_offset: section.y_offset, lineup_section_delineator: section.delineator, lineup_section_text_colors: section.text_colors, lineup_section_delineator_color: section.delineator_color, lineup_acts: section_act.acts, lineup_section_font: section.font, lineup_section_weight: section.weight }}
+                    %div{ data: { controller: "download" }}
+        .info.col#right
             %h1 
                 %b= @lineup.name
-            %h2= current_user.email
+            %button#download.btn.btn-primary.disabled
+                %a#download-link{download: "myImage.png", href: "" }
+                    DOWNLOAD
             .prompt
                 %h3
                     Like what you see? Use this template to create another mock lineup!
