@@ -12,7 +12,11 @@
                             %div{ data: {controller: "daybox", daybox_height: day.height, daybox_width: day.width, daybox_x_offset: day.x_offset, daybox_y_offset: day.y_offset}}
                                 .form-content.row
                                     .form.col
-                                        = d.label :name
+                                        .label.d-inline-block= d.label :name
+                                        %a.d-inline-block{class: "day-name-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                                        "data-content": "Name this day. Ex: Saturday"}
+                                            .popover-icon
+                                                = fa_icon "info-circle"
                                         = d.text_field :name, class: "form-control input-lg", id: "name"
                                         %a.btn.btn-primary#innerDayCollapse{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                             HIDE
@@ -30,26 +34,53 @@
                                     %div{ data: {controller: "sectionbox", sectionbox_day_height: day.height, sectionbox_day_width: day.width, sectionbox_day_x_offset: day.x_offset, sectionbox_day_y_offset: day.y_offset, sectionbox_section_height: section.height, sectionbox_section_width: section.width, sectionbox_section_x_offset: section.x_offset, sectionbox_section_y_offset: section.y_offset}}
                                         .form-content.row
                                             .form.col
-                                                = s.label :name
-                                                = s.text_field :name, class: "form-control input-lg", id: "name"
+                                                .label.d-inline-block= s.label :name
+                                                %a.d-inline-block{class: "sec-name-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                                                "data-content": "Name this section. Ex: Saturday Headliners"}
+                                                    .popover-icon
+                                                        = fa_icon "info-circle"
+                                                = s.text_field :name, class: "form-control input-lg name"
                                                 .row
-                                                    = s.label :alternating_colors
-                                                    = s.check_box :alternating_colors, class: "form-check-input",  id: "alternating-color", onchange: "collapseAddColor(this)"
+                                                    .label.d-inline-block= s.label :alternating_colors
+                                                    %a.d-inline-block{class: "alt-colors-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                                                    "data-content": "Check this box if this section uses alternating text colors.  Then add colors in the order you'd like them to alternate in."}
+                                                        .popover-icon
+                                                            = fa_icon "info-circle"
+                                                    = s.check_box :alternating_colors, class: "form-check-input alternating-color", onchange: "collapseAddColor(this)", id: "alternating-color"
                                                 .color-fields    
                                                     = s.label :text_colors
-                                                    = s.color_field :text_colors, class: "form-control input-lg text-color",  id: "text-color"
+                                                    = s.color_field :text_colors, class: "form-control input-lg text-color"
                                                     .collapse#colors
                                                         %button.add-button{ onclick: "addColorField(this)" }
                                                             = fa_icon "plus-square"
                                                 .row
                                                     .col
-                                                        = s.label :delineator
-                                                        = s.select :delineator, ['·', '/', '|', ''], {}, class: "form-control", id: "delineator"
+                                                        .d-inline-block= s.label :font
+                                                        %a.d-inline-block{class: "font-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                                                        "data-content": '<div class="sora"> SORA </div><div class="oswald"> OSWALD </div><div class="signika"> SIGNIKA </div><div class="nunito"> NUNITO </div><div class="work-sans"> WORK SANS </div><div class="heebo"> HEEBO </div><div class="roboto-slab"> ROBOTO SLAB </div><div class="rokkitt"> ROKKITT </div>', "data-html": "true"}
+                                                            .popover-icon
+                                                                = fa_icon "info-circle"
+                                                        = s.select :font, @fonts, {}, class: "form-control font"
+                                                    .col
+                                                        = s.label :weight
+                                                        = s.select :weight, @weights, {}, class: "form-control weight"
+                                                .row
+                                                    .col
+                                                        .d-inline-block= s.label :delineator
+                                                        %a.d-inline-block{class: "delineator-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                                                        "data-content": "This symbol will be placed between each artist."}
+                                                            .popover-icon
+                                                                = fa_icon "info-circle"
+                                                        = s.select :delineator, ['·', '/', '|', ''], {}, class: "form-control delineator"
                                                     .col
                                                         = s.label :delineator_color
-                                                        = s.color_field :delineator_color, class: "form-control input-lg",  id: "delineator-color"
-                                                = s.label :max_act_count
-                                                = s.number_field :max_act_count, min: 1, class: "form-control input-lg", id: "max_acts"
+                                                        = s.color_field :delineator_color, class: "form-control input-lg delineator-color"
+                                                .d-inline-block= s.label :max_act_count
+                                                %a.d-inline-block{class: "max-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                                                "data-content": "Enter the maximum number of acts that should be allowed in this section."}
+                                                    .popover-icon
+                                                        = fa_icon "info-circle"
+                                                = s.number_field :max_act_count, min: 1, class: "form-control input-lg max_acts"
                                                 %a.btn.btn-primary#innerSectionCollapse{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                                     HIDE
                                             .container.col{"data-target": "sectionbox.output"}

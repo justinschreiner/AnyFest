@@ -92,6 +92,18 @@ body {
     cursor: pointer;
   }
 
+  a {
+    &:hover {
+      cursor: pointer;
+    }
+    .popover-icon {
+      color: #ff6b6b;
+      .fa {
+        font-size: 1.5vh !important;
+      }
+    }
+  }
+
   .form-control {
     background-color: white;
     border: 2px solid #ff6b6b;
@@ -224,6 +236,11 @@ body {
           margin-top: 1vh;
         }
 
+        #color-label,
+        #popover {
+          display: inline-block;
+        }
+
         .drag-drop,
         .item {
           color: #fff;
@@ -315,18 +332,18 @@ body {
             font-size: 2em;
           }
         }
-        #text-color {
+        .text-color {
           width: 20%;
         }
-        #delineator-color,
-        #delineator {
+        .delineator-color,
+        .delineator {
           width: 40%;
         }
-        #text-color,
-        #delineator-color {
+        .text-color,
+        .delineator-color {
           padding: 0.5vh 0.5vw;
         }
-        #delineator {
+        .delineator {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
         }
@@ -375,56 +392,97 @@ body {
       .prompt {
         margin-top: 10vh;
       }
-    }
-  }
-
-  #show-template {
-    .col {
-      margin: 0 2vw;
-    }
-    .info {
-      h2 {
-        margin-top: 5vh;
-      }
-      .prompt {
-        margin-top: 10vh;
+      .text {
+        text-align: justify;
+        text-align-last: center;
       }
     }
-  }
 
-  #show-festival {
-    #template-results,
-    #lineup-results {
-      li {
+    #show-template {
+      .col {
+        margin: 0 2vw;
+      }
+      .info {
+        h2 {
+          margin-top: 5vh;
+        }
+        .prompt {
+          margin-top: 10vh;
+        }
+      }
+    }
+
+    #show-festival {
+      #template-results,
+      #lineup-results {
+        li {
+          display: inline-block;
+        }
+        .preview-image {
+          width: 12vw;
+          max-height: 16vw;
+          margin: 2em;
+          border-radius: 10%;
+          border: 2px solid #ff6b6b;
+        }
+      }
+    }
+    #show-user {
+      #templates,
+      #lineups {
+        li {
+          display: inline-block;
+        }
+        .preview-image {
+          width: 12vw;
+          max-height: 16vw;
+          margin: 2em;
+          border-radius: 10%;
+          border: 2px solid #ff6b6b;
+        }
+      }
+
+      #my-templates,
+      #new-link {
         display: inline-block;
       }
-      .preview-image {
-        width: 12vw;
-        max-height: 16vw;
-        margin: 2em;
-        border-radius: 10%;
-        border: 2px solid #ff6b6b;
-      }
     }
   }
-  #show-user {
-    #templates,
-    #lineups {
-      li {
-        display: inline-block;
-      }
-      .preview-image {
-        width: 12vw;
-        max-height: 16vw;
-        margin: 2em;
-        border-radius: 10%;
-        border: 2px solid #ff6b6b;
-      }
-    }
 
-    #my-templates,
-    #new-link {
-      display: inline-block;
-    }
+  .sora {
+    font-family: "Sora", sans-serif;
+    font-weight: 900;
+  }
+  .oswald {
+    font-family: "Oswald", sans-serif;
+    font-weight: 900;
+  }
+  .signika {
+    font-family: "Signika", sans-serif;
+    font-weight: 900;
+  }
+  .signika {
+    font-family: "Signika", sans-serif;
+    font-weight: 900;
+  }
+  .nunito {
+    font-family: "Nunito", sans-serif;
+    font-weight: 900;
+  }
+  .work-sans {
+    font-family: "Work+Sans", sans-serif;
+    font-weight: 900;
+  }
+  .heebo {
+    font-family: "Heebo", sans-serif;
+    font-weight: 900;
+  }
+  .roboto-slab {
+    font-family: "Roboto+Slab";
+    font-weight: 900;
+  }
+  .rokkitt {
+    font-family: "Rokkitt";
+    font-weight: 900;
   }
 }

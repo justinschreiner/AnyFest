@@ -9,15 +9,23 @@
                     = link_to "Add it", new_festival_path
                     = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
                 .form-group
-                    %h2
+                    %h2#name-label.d-inline-block
                         = f.label :name
+                    %a.d-inline-block{class: "name-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                    "data-content": "Enter a name for your template so others can find it."}
+                        .popover-icon
+                            = fa_icon "info-circle"
                     = f.text_field :name, class: "form-control input-lg"
-                %h2 
+                %h2.d-inline-block
                     = f.label :background_image
+                %a.d-inline-block{class: "name-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
+                "data-content": "Upload an image to use. Blank festival lineups work best!"}
+                    .popover-icon
+                        = fa_icon "info-circle"
                 #file
                     = f.file_field :background_image, {onchange: "previewFile()"}
                 // stretch goal: be able to choose a solid color for a background if you don't have an image
-                = f.submit "Create", class: "btn btn-primary"
+                = f.submit "CREATE", class: "btn btn-primary"
         #preview.col
             %h2
                 Preview

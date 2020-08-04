@@ -12,6 +12,8 @@ export default class extends Controller {
         var sectionYOffset = this.data.get("section-y-offset");
         var sectionXOffset = this.data.get("section-x-offset");
         var sectionDelineator = this.data.get("section-delineator");
+        var sectionFont = this.data.get("section-font");
+        var sectionWeight = this.data.get("section-weight");
         var sectionTextColors = JSON.parse(
           this.data.get("section-text-colors")
         );
@@ -27,39 +29,25 @@ export default class extends Controller {
         section.setAttribute("class", "section");
 
         // Make the box the right size, bring it to the front, and start the text small
-        section.setAttribute(
-          "style",
-          "height: " +
-            ((sectionHeight * image.height) / 10000.0).toString() +
-            "px; width: " +
-            ((sectionWidth * 100.0) / 10000.0).toString() +
-            "%; margin-top: " +
-            ((sectionYOffset * image.height) / 10000.0).toString() +
-            "px; margin-left: " +
-            ((sectionXOffset * 100.0) / 10000.0).toString() +
-            "%; z-index: 2; font-size: 1px;"
-        );
+        section.style.height = `${(sectionHeight * image.height) / 10000.0}px`;
+        section.style.width = `${(sectionWidth * 100.0) / 10000.0}%`;
+        section.style.marginTop = `${
+          (sectionYOffset * image.height) / 10000.0
+        }px`;
+        section.style.marginLeft = `${(sectionXOffset * 100.0) / 10000.0}%`;
+        section.style.zIndex = "2";
+        section.style.fontSize = "1px";
 
         // Fill the section with the text from the lineup form
         var innerText = "";
         for (var i = 0; i < acts.length; i++) {
           var numColors = sectionTextColors.length;
           var numIndex = i % numColors;
-          innerText +=
-            "<span style= 'color: " +
-            sectionTextColors[numIndex] +
-            ";'> " +
-            acts[i] +
-            " </span>";
+          innerText += `<span style= 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${acts[i]} </span>`;
 
           // Add the delineator between acts
           if (i < acts.length - 1) {
-            innerText +=
-              "<span style= 'color: " +
-              sectionDelineatorColor +
-              ";'> " +
-              sectionDelineator +
-              " </span>";
+            innerText += `<span style= 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
           }
         }
         section.innerHTML = innerText;
