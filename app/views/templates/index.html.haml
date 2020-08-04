@@ -23,8 +23,3 @@
   %h1
     Want to make your own Template?
   = link_to "ADD TEMPLATE", new_template_path, class: "btn btn-primary"
-  
-  - if (user_signed_in?)
-    - if (current_user.is_admin?)
-      #trestle
-        = link_to "trestle", trestle.root_path

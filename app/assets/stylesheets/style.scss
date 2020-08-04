@@ -34,9 +34,15 @@ body {
     }
   }
   #home,
-  #logout {
+  #logout,
+  #user {
     font-size: 1.2em;
     margin-left: 1vw;
+  }
+
+  #user {
+    float: right;
+    margin-right: 1vw;
   }
 
   a {
@@ -91,6 +97,18 @@ body {
     border-radius: 10vw;
     text-decoration: none;
     cursor: pointer;
+  }
+
+  a {
+    &:hover {
+      cursor: pointer;
+    }
+    .popover-icon {
+      color: #ff6b6b;
+      .fa {
+        font-size: 1.5vh !important;
+      }
+    }
   }
 
   .form-control {
@@ -248,6 +266,11 @@ body {
           margin-top: 1vh;
         }
 
+        #color-label,
+        #popover {
+          display: inline-block;
+        }
+
         .drag-drop,
         .item {
           color: #fff;
@@ -358,15 +381,6 @@ body {
           padding: 0.5vh 0.2vw;
           padding-left: 1em;
         }
-        .font-popover {
-          color: #ff6b6b;
-          margin-left: 1vw;
-          font-size: 1.2em;
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
       }
       img {
         position: absolute;
@@ -389,25 +403,100 @@ body {
   }
 
   #show-lineup {
-    .section {
-      position: absolute;
+    a {
+      color: #ff6b6b;
+      text-decoration: none;
     }
-    img {
+    .container {
+      padding: 0;
+      height: auto;
+    }
+    .section {
       position: absolute;
     }
     .text {
       text-align: justify;
       text-align-last: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    .col {
+      margin: 0 2vw;
+    }
+    .container {
+      .section {
+        position: absolute;
+      }
+      .text {
+        text-align: justify;
+        text-align-last: center;
+        font-weight: 900;
+      }
+    }
+    .info {
+      h2 {
+        margin-top: 5vh;
+      }
+      .prompt {
+        margin-top: 10vh;
+      }
+      .text {
+        text-align: justify;
+        text-align-last: center;
+      }
     }
   }
 
   #show-template {
-    #image {
-      padding-top: 30px;
-      img {
+    .col {
+      margin: 0 2vw;
+    }
+    .info {
+      h2 {
+        margin-top: 5vh;
+      }
+      .prompt {
+        margin-top: 10vh;
+      }
+    }
+  }
+
+  #show-festival {
+    #template-results,
+    #lineup-results {
+      li {
+        display: inline-block;
+      }
+      .preview-image {
+        width: 12vw;
+        max-height: 16vw;
+        margin: 2em;
         border-radius: 10%;
         border: 2px solid #ff6b6b;
       }
+    }
+  }
+  #show-user {
+    #templates,
+    #lineups {
+      li {
+        display: inline-block;
+      }
+      .preview-image {
+        width: 12vw;
+        max-height: 16vw;
+        margin: 2em;
+        border-radius: 10%;
+        border: 2px solid #ff6b6b;
+      }
+    }
+
+    #my-templates,
+    #new-link {
+      display: inline-block;
     }
   }
 }

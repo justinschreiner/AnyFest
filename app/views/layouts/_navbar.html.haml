@@ -9,3 +9,5 @@
         = link_to destroy_session_path(:user), method: :delete do
             %i.fa.fa-sign-out
             Logout
+    %li#user
+        = link_to current_user.email, user_path(current_user.id)
