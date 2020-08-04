@@ -1,4 +1,7 @@
 class Template < ApplicationRecord
+    FONTS = { "Sora" => '"Sora", sans-serif', "Oswald" => '"Oswald", sans-serif', "Signika" => '"Signika", sans-serif', "Nunito" => '"Nunito", sans-serif', "Work Sans" => '"Work Sans", sans-serif', "Heebo" => '"Heebo", sans-serif', "Roboto Slab" => '"Roboto Slab"', "Rokkitt" => '"Rokkitt"' }
+    FONT_WEIGHTS = { "Regular" => "400", "Bold" => "700", "Extra Bold" => "900"}
+
     belongs_to :festival, required: false # A festival will be required, but setting this as false to be able to pass a template without a festival to Wicked form
     belongs_to :user
     has_many :days

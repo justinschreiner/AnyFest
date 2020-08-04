@@ -28,7 +28,4 @@
                             = d.fields_for :sections do |s|
                                 attach fields
                     = t.submit "CONTINUE", class: "btn btn-primary"
-                    .errors
-                        - if @template.errors[:days].any?
-                            -@template.errors[:days].each do |msg|
-                                %p= "*#{msg}"
+                    = error_messages(t, :days)

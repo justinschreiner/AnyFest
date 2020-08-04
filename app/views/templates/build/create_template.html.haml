@@ -8,26 +8,17 @@
                     Don't see your festival?
                     = link_to "add it", new_festival_path
                     = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
-                    .errors
-                        - if @template.errors[:festival_id].any?
-                            -@template.errors[:festival_id].each do |msg|
-                                %p= "*#{msg}"
+                    = error_messages(f, :festival_id)
                 .form-group
                     %h2
                         = f.label :name
                     = f.text_field :name, class: "form-control input-lg"
-                    .errors
-                        - if @template.errors[:name].any?
-                            -@template.errors[:name].each do |msg|
-                                %p= "*#{msg}"
+                    = error_messages(f, :name)
                 %h2 
                     = f.label :background_image
                 #file
                     = f.file_field :background_image, {onchange: "previewFile()"}
-                .errors
-                    - if @template.errors[:background_image].any?
-                        -@template.errors[:background_image].each do |msg|
-                            %p= "*#{msg}"
+                = error_messages(f, :background_image)
                 // stretch goal: be able to choose a solid color for a background if you don't have an image
                 = f.submit "Create", class: "btn btn-primary"
         #preview.col

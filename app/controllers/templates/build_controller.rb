@@ -6,8 +6,6 @@ class Templates::BuildController < ApplicationController
     def show
       @template = Template.find(params[:template_id])
       @festivals = Festival.all
-      @fonts = { "Sora" => '"Sora", sans-serif', "Oswald" => '"Oswald", sans-serif', "Signika" => '"Signika", sans-serif', "Nunito" => '"Nunito", sans-serif', "Work Sans" => '"Work Sans", sans-serif', "Heebo" => '"Heebo", sans-serif', "Roboto Slab" => '"Roboto Slab"', "Rokkitt" => '"Rokkitt"' }
-      @weights = { "Regular" => "400", "Bold" => "700", "Extra Bold" => "900"}
       render_wizard
     end
   
@@ -19,7 +17,7 @@ class Templates::BuildController < ApplicationController
       @template.status = step.to_s
       @template.status = "active" if step == steps.last
       
-      @template.update(template_params)      
+      @template.update(template_params)
       render_wizard @template
     end  
 
