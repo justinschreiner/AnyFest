@@ -367,11 +367,16 @@ body {
       position: absolute;
     }
     img {
-      position: absolute;
+      // position: absolute;
     }
     .text {
       text-align: justify;
       text-align-last: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
     }
   }
 

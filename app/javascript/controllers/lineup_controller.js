@@ -3,15 +3,12 @@ import html2canvas from "html2canvas";
 
 export default class extends Controller {
   connect() {
+    window.addEventListener("resize", this._debounce(this.resize, 500));
     // Wait for the image to load to the page
     document
       .getElementsByClassName("image")[0]
       .addEventListener("load", (e) => {
         // Get data from view
-        var sectionHeight = this.data.get("section-height");
-        var sectionWidth = this.data.get("section-width");
-        var sectionYOffset = this.data.get("section-y-offset");
-        var sectionXOffset = this.data.get("section-x-offset");
         var sectionDelineator = this.data.get("section-delineator");
         var sectionFont = this.data.get("section-font");
         var sectionWeight = this.data.get("section-weight");
@@ -21,23 +18,13 @@ export default class extends Controller {
         var sectionDelineatorColor = this.data.get("section-delineator-color");
         var acts = JSON.parse(this.data.get("acts"));
 
-        var image = document.getElementsByClassName("image")[0];
-        var container = document.getElementsByClassName("text")[0];
+        var container = document.querySelector(".text");
 
         // Make the div that will be the container for text
         var section = document.createElement("div");
+        this.section = section;
 
-        section.setAttribute("class", "section");
-
-        // Make the box the right size, bring it to the front, and start the text small
-        section.style.height = `${(sectionHeight * image.height) / 10000.0}px`;
-        section.style.width = `${(sectionWidth * 100.0) / 10000.0}%`;
-        section.style.marginTop = `${
-          (sectionYOffset * image.height) / 10000.0
-        }px`;
-        section.style.marginLeft = `${(sectionXOffset * 100.0) / 10000.0}%`;
-        section.style.zIndex = "2";
-        section.style.fontSize = "1px";
+        section.classList.add("section");
 
         // Fill the section with the text from the lineup form
         var innerText = "";
@@ -56,15 +43,53 @@ export default class extends Controller {
         // Append the new boxes to the image
         container.appendChild(section);
 
+        this._updateSectionSize();
+
         // Scale the font to the section
         fitText(section);
 
         // Get rid of extra delineators
         fixDelineator(section, sectionDelineator);
-
-        // Adjust container div's size so that html2canvas works properly
-        fixLineupDiv();
       });
+  }
+
+  resize() {
+    this._updateSectionSize();
+    fitText(this.section);
+  }
+
+  _debounce(func, wait, immediate) {
+    var timeout;
+    return () => {
+      var context = this,
+        args = arguments;
+      var later = function () {
+        timeout = null;
+        if (!immediate) func.apply(context, args);
+      };
+      var callNow = immediate && !timeout;
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+      if (callNow) func.apply(context, args);
+    };
+  }
+
+  _updateSectionSize() {
+    let image = document.querySelector(".image");
+    let sectionHeight = this.data.get("section-height");
+    let sectionWidth = this.data.get("section-width");
+    let sectionYOffset = this.data.get("section-y-offset");
+    let sectionXOffset = this.data.get("section-x-offset");
+
+    // Make the box the right size, bring it to the front, and start the text small
+    this.section.style.height = `${(sectionHeight * image.height) / 10000.0}px`;
+    this.section.style.width = `${(sectionWidth * 100.0) / 10000.0}%`;
+    this.section.style.marginTop = `${
+      (sectionYOffset * image.height) / 10000.0
+    }px`;
+    this.section.style.marginLeft = `${(sectionXOffset * 100.0) / 10000.0}%`;
+    this.section.style.zIndex = "2";
+    this.section.style.fontSize = "1px";
   }
 }
 
@@ -146,12 +171,4 @@ function fixDelineator(container, delineator) {
       spans[indexArr[j]].innerText = "";
     }
   }
-}
-
-function fixLineupDiv() {
-  var lineup = document.getElementById("lineup");
-  var img = document.getElementsByClassName("image")[0];
-  var imgRect = img.getBoundingClientRect();
-  lineup.style.height = `${imgRect.height}px`;
-  lineup.style.width = `${imgRect.width}px`;
 }
