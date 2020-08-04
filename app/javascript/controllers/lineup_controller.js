@@ -1,5 +1,4 @@
 import { Controller } from "stimulus";
-import html2canvas from "html2canvas";
 
 export default class extends Controller {
   connect() {
@@ -23,6 +22,7 @@ export default class extends Controller {
         // Make the div that will be the container for text
         var section = document.createElement("div");
         this.section = section;
+        this.sectionDelineator = sectionDelineator;
 
         section.classList.add("section");
 
@@ -56,6 +56,7 @@ export default class extends Controller {
   resize() {
     this._updateSectionSize();
     fitText(this.section);
+    fixDelineator(this.section, this.sectionDelineator);
   }
 
   _debounce(func, wait, immediate) {
