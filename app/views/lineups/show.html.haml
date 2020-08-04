@@ -10,7 +10,12 @@
                     %div{ data: { controller: "download" }}
         .info.col#right
             %h1 
-                = @lineup.name
+                %b= @lineup.name
             %button#download.btn.btn-primary.disabled
                 %a#download-link{download: "myImage.png", href: "" }
                     DOWNLOAD
+            .prompt
+                %h3
+                    Like what you see? Use this template to create another mock lineup!
+                #link
+                    = link_to "GO", new_template_lineup_path(@template), {class: "btn btn-primary"}

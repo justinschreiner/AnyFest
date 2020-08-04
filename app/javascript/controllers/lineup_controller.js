@@ -22,7 +22,7 @@ export default class extends Controller {
         // Make the div that will be the container for text
         var section = document.createElement("div");
         this.section = section;
-        this.sectionDelineator = sectionDelineator;
+        this.delineator = sectionDelineator;
 
         section.classList.add("section");
 
@@ -35,7 +35,7 @@ export default class extends Controller {
 
           // Add the delineator between acts
           if (i < acts.length - 1) {
-            innerText += `<span style= 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
+            innerText += `<span class = 'delineator' style= 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
           }
         }
         section.innerHTML = innerText;
@@ -56,7 +56,8 @@ export default class extends Controller {
   resize() {
     this._updateSectionSize();
     fitText(this.section);
-    fixDelineator(this.section, this.sectionDelineator);
+    fillDelineators(this.section, this.delineator);
+    fixDelineator(this.section, this.delineator);
   }
 
   _debounce(func, wait, immediate) {
@@ -171,5 +172,12 @@ function fixDelineator(container, delineator) {
     else {
       spans[indexArr[j]].innerText = "";
     }
+  }
+}
+
+function fillDelineators(section, delineator, color, weight) {
+  let delineators = section.getElementsByClassName("delineator");
+  for (let j = 0; j < delineators.length; j++) {
+    delineators[j].innerText = `${delineator}`;
   }
 }
