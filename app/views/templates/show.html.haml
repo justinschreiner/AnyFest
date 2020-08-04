@@ -1,9 +1,16 @@
-#show-template
-    %h1#name
-        = @template.name
-    %h2#festival
-        = @template.festival.name
-    #image
+#show-template.row
+    #image.col
         - if(@template.background_image.attached?)
-            =image_tag(@template.background_image.variant(resize_to_limit: [300, 400]))
-    = link_to "Make Lineup", new_template_lineup_path(@template)
+            =image_tag(@template.background_image, class: "image img-fluid")
+    .info.col
+        %h1#name
+            %b
+                = @template.name
+        %h2#festival
+            = link_to @template.festival.name, festival_path(@template.festival)
+        %h2#user
+            = current_user.email
+        .prompt
+            %h3
+                Like what you see? Use this template to create your own mock lineup!
+        = link_to "GO", new_template_lineup_path(@template), {class: "btn btn-primary"}
