@@ -1,4 +1,7 @@
 class Template < ApplicationRecord
+    include PgSearch::Model
+    pg_search_scope :search_by_name, against: :name
+    
     belongs_to :festival, required: false # A festival will be required, but setting this as false to be able to pass a template without a festival to Wicked form
     belongs_to :user
     has_many :days
