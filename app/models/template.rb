@@ -25,4 +25,7 @@ class Template < ApplicationRecord
     def active_or_settings?
         (status == "section_settings") || active?
     end
+
+    include PgSearch::Model
+    pg_search_scope :search_by_name, against: :name
 end
