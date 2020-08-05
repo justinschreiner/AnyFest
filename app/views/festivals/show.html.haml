@@ -5,17 +5,16 @@
     %h4#location
         = @festival.location
     %h2 Search
-    = search_form_for(@q, url: festival_path(@festival)) do |f|
-        = f.search_field :name_cont, class: "form-control input-lg"
-        = f.submit "SEARCH", class: "btn btn-primary"
+    = form_with method: :get, local: true do |s|
+        = s.text_field :q, class: "form-control d-inline-block"
+        = s.submit "SEARCH", class: "btn btn-primary d-inline-block"
     %h3#search-lineups
         %b Lineups
-    - if (params[:q]).present?
-        #lineup-results
-            - @lineups.each do |l|
-                %li
-                    = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
-                        = image_tag(l.template.background_image, class: "preview-image")
+    #lineup-results
+        - @lineups.each do |l|
+            %li
+                = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
+                    = image_tag(l.template.background_image, class: "preview-image")
     %h3#search-templates
         %b Templates
     #template-results

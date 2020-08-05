@@ -81,3 +81,6 @@ gem 'wicked'
 
 # Allows use of font awesome icons
 gem "font-awesome-rails"
+
+# Allows search queries across multiple models
+gem 'pg_search'
