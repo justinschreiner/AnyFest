@@ -16,7 +16,7 @@
     Make your Lineup now!
   %ul#templates
     - @templates.each do |tem|
-      - if(tem.background_image.attached?)
+      -if tem.active?
         #preview
           = link_to(tem) do
             = image_tag(tem.background_image, size: "210x280")
