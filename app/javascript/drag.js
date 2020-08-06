@@ -341,8 +341,10 @@ interact(".item")
       if (element.id == "day") {
         element.classList.add("dropzone");
         element.classList.add("day-drop");
+        element.style.zIndex = 1;
       } else {
         element.classList.add("section-drag");
+        element.style.zIndex = 2;
       }
 
       // Add the cloned object to the document

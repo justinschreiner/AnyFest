@@ -65,8 +65,8 @@ export default class extends Controller {
 
   resize() {
     this._updateSectionSize();
-    fitText(this.section);
     fillDelineators(this.section, this.delineator);
+    fitText(this.section);
     fixDelineator(this.section, this.delineator);
   }
 
@@ -95,11 +95,13 @@ export default class extends Controller {
 
     // Make the box the right size, bring it to the front, and start the text small
     this.section.style.height = `${(sectionHeight * image.height) / 10000.0}px`;
-    this.section.style.width = `${(sectionWidth * 100.0) / 10000.0}%`;
+    this.section.style.width = `${(sectionWidth * image.width) / 10000.0}px`;
     this.section.style.marginTop = `${
       (sectionYOffset * image.height) / 10000.0
     }px`;
-    this.section.style.marginLeft = `${(sectionXOffset * 100.0) / 10000.0}%`;
+    this.section.style.marginLeft = `${
+      (sectionXOffset * image.width) / 10000.0
+    }px`;
     this.section.style.zIndex = "2";
     this.section.style.fontSize = "1px";
   }
@@ -109,8 +111,8 @@ function fitText(outputDiv) {
   // max font size in pixels
   const maxFontSize = 50;
 
-  // get fontSize
-  let fontSize = parseInt(outputDiv.style.fontSize);
+  // reset/set fontSize to be small, it will grow from here
+  let fontSize = 1;
 
   // if content's width or height is bigger then elements width or height: overflow
   // scroll___ => content size; client____ => element size
@@ -152,12 +154,15 @@ function fixDelineator(container, delineator) {
   var cur = spans[1];
   var linesIndexArr = [[]];
   var tempArr = [prev];
+  let image = document.querySelector(".image");
 
   // Make an array of arrays that hold indexes of spans on the same line
   for (var i = 1; i < spans.length; i++) {
+    // if the new span is more than 5% lower than the previous span
     if (
-      Math.ceil(prev.getBoundingClientRect().top) >=
-      Math.floor(cur.getBoundingClientRect().top)
+      Math.ceil(cur.getBoundingClientRect().top) -
+        Math.floor(prev.getBoundingClientRect().top) <=
+      image.getBoundingClientRect().height * 0.02
     ) {
       tempArr.push(cur);
     } else {
@@ -182,7 +187,7 @@ function fixDelineator(container, delineator) {
       linesIndexArr[i][linesIndexArr[i].length - 1].innerText = "";
     }
     // if the beginning of a line is the delineator, get rid of the delineator
-    else if (linesIndexArr[i][0].innerText == `${delineator} `) {
+    if (linesIndexArr[i][0].innerText == `${delineator} `) {
       linesIndexArr[i][0].innerText = "";
     }
   }
@@ -191,6 +196,6 @@ function fixDelineator(container, delineator) {
 function fillDelineators(section, delineator, color, weight) {
   let delineators = section.getElementsByClassName("delineator");
   for (let j = 0; j < delineators.length; j++) {
-    delineators[j].innerText = `${delineator}`;
+    delineators[j].innerText = `${delineator} `;
   }
 }
