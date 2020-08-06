@@ -19,6 +19,7 @@
         %b Templates
     #template-results
         - @templates.each do |t|
-            %li
-                = link_to template_path(t) do
-                    = image_tag(t.background_image, class: "preview-image")
+            -if t.active?
+                %li
+                    = link_to template_path(t) do
+                        = image_tag(t.background_image, class: "preview-image")

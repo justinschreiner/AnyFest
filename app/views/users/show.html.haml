@@ -13,5 +13,6 @@
     %h4#new-link= link_to "create new", new_template_path
     #templates
         - @templates.each do |t|
-            = link_to template_path(t) do
-                = image_tag(t.background_image, class: "preview-image")
+            -if t.active?
+                = link_to template_path(t) do
+                    = image_tag(t.background_image, class: "preview-image")
