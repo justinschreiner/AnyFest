@@ -13,8 +13,8 @@
       = render "layouts/navbar"
     -if notice != nil || alert != nil
       .alert.alert-warning.fade.show{"role": "alert"}
-        %p.notice= notice
-        %p.alert= alert
+        %p.notice.m-1= notice
+        %p.alert.m-1= alert
     #content
       = yield
     #sidebar
