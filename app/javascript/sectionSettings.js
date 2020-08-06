@@ -29,7 +29,6 @@ window.addColorField = function (item) {
   colorSection.appendChild(buttonClone);
 };
 
-window.addEventListener("DOMContentLoaded", (event) => {
-  // initialize popover function
+document.addEventListener("turbolinks:load", function () {
   $('[data-toggle="popover"]').popover();
 });

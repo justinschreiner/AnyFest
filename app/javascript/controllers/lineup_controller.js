@@ -31,7 +31,17 @@ export default class extends Controller {
         for (var i = 0; i < acts.length; i++) {
           var numColors = sectionTextColors.length;
           var numIndex = i % numColors;
-          innerText += `<span style= 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${acts[i]} </span>`;
+
+          // If name has a space in it, wrap each word in its own span - helps with fixSectionDelineator()
+          var tempName = acts[i];
+          if (tempName.includes(" ")) {
+            tempName = tempName.split(" ");
+            for (var j = 0; j < tempName.length; j++) {
+              innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName[j]} </span>`;
+            }
+          } else {
+            innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName} </span>`;
+          }
 
           // Add the delineator between acts
           if (i < acts.length - 1) {
@@ -102,7 +112,7 @@ function fitText(outputDiv) {
   // get fontSize
   let fontSize = parseInt(outputDiv.style.fontSize);
 
-  // if content's width or height is bigger then elements width or height- overflow
+  // if content's width or height is bigger then elements width or height: overflow
   // scroll___ => content size; client____ => element size
   if (
     outputDiv.scrollWidth > outputDiv.clientWidth ||
@@ -114,9 +124,11 @@ function fitText(outputDiv) {
   } else {
     // resize incrementally by 1 px until text fits
     while (
-      outputDiv.scrollWidth <= outputDiv.clientWidth &&
+      Math.floor(outputDiv.scrollWidth) <=
+        Math.ceil(outputDiv.getBoundingClientRect().width) &&
       fontSize < maxFontSize &&
-      outputDiv.scrollHeight <= outputDiv.clientHeight
+      Math.floor(outputDiv.scrollHeight) <=
+        Math.ceil(outputDiv.getBoundingClientRect().height)
     ) {
       fontSize = Math.ceil(fontSize) + 1;
       fontSize = fontSize > maxFontSize ? (fontSize = maxFontSize) : fontSize;
@@ -138,39 +150,40 @@ function fixDelineator(container, delineator) {
   var spans = container.getElementsByTagName("span");
   var prev = spans[0];
   var cur = spans[1];
-  var sectionOffsetLeft = prev.offsetLeft;
-  var indexArr = [];
+  var linesIndexArr = [[]];
+  var tempArr = [prev];
 
-  // Make an array with the indexes of all delineators which come before/after a line break
-  for (var i = 1; i < spans.length - 1; i++) {
-    if (prev.offsetTop < cur.offsetTop) {
-      if (cur.innerText == delineator + " ") {
-        indexArr.push(i);
-      } else if (prev.innerText == delineator + " ") {
-        indexArr.push(i - 1);
-      }
+  // Make an array of arrays that hold indexes of spans on the same line
+  for (var i = 1; i < spans.length; i++) {
+    if (
+      Math.ceil(prev.getBoundingClientRect().top) >=
+      Math.floor(cur.getBoundingClientRect().top)
+    ) {
+      tempArr.push(cur);
+    } else {
+      linesIndexArr.push(tempArr);
+      tempArr = [cur];
     }
-
-    // increment index
     prev = cur;
     cur = spans[i + 1];
   }
 
-  // Go through the array of indexes
-  for (var j = 0; j < indexArr.length; j++) {
-    // If we aren't checking the last row in this section
-    if (j < indexArr.length - 1) {
-      // If the delineator either starts or finishes a line
-      if (
-        spans[indexArr[j]].offsetLeft == sectionOffsetLeft ||
-        spans[indexArr[j]].offsetLeft >= container.clientWidth * 0.9
-      ) {
-        spans[indexArr[j]].innerText = "";
-      }
+  linesIndexArr.push(tempArr);
+
+  for (var i = 0; i < linesIndexArr.length; i++) {
+    if (linesIndexArr[i].length == 0) {
+      continue;
     }
-    // This is the last row for the section
-    else {
-      spans[indexArr[j]].innerText = "";
+    // if the end of a line is the delineator, get rid of that delineator
+    if (
+      linesIndexArr[i][linesIndexArr[i].length - 1].innerText ==
+      `${delineator} `
+    ) {
+      linesIndexArr[i][linesIndexArr[i].length - 1].innerText = "";
+    }
+    // if the beginning of a line is the delineator, get rid of the delineator
+    else if (linesIndexArr[i][0].innerText == `${delineator} `) {
+      linesIndexArr[i][0].innerText = "";
     }
   }
 }
