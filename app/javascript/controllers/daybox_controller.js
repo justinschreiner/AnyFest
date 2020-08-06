@@ -29,8 +29,6 @@ export default class extends Controller {
         day.style.marginLeft = `${(dayXOffset * image.width) / 10000.0}px`;
         day.style.zIndex = "1";
 
-        console.log(image.width, `${(dayWidth * image.width) / 10000.0}%`);
-
         // Adjust the container for the form
         container.style.height = `${image.height}px`; //workaround for now, probably a more efficient way to do this
 

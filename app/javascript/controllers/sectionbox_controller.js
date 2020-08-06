@@ -106,7 +106,6 @@ export default class extends Controller {
           var checkBox = document.getElementById("alternating-color");
           checkBox.id = "alternating-color" + index.toString();
           checkBox.setAttribute("data-id", (index + 5).toString());
-          console.log(checkBox);
 
           var colorContent = document.getElementById("colors");
           colorContent.id = (index + 5).toString();
