@@ -39,7 +39,7 @@
                                             = s.label :text_colors
                                             = s.color_field :text_colors, class: "form-control input-lg text-color"
                                             .collapse#colors
-                                                %button.add-button{ onclick: "addColorField(this)" }
+                                                %button.add-button{ onclick: "addColorField(this)", type: "button" }
                                                     = fa_icon "plus-square"
                                         .row
                                             .col

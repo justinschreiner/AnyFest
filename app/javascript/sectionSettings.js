@@ -6,6 +6,10 @@ window.collapseAddColor = function (self) {
   var content = document.getElementById(id);
   if (content.classList.contains("show")) {
     content.classList.remove("show");
+    let elements = content.parentNode.children;
+    for (i = elements.length - 1; i > 2; i--) {
+      elements[i].parentNode.removeChild(elements[i]);
+    }
   } else {
     content.classList.add("show");
   }
