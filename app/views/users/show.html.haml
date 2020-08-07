@@ -5,7 +5,7 @@
     %h2.font-weight-bold.mt-5 My Mock Lineups
     - @lineups.each do |l|
         = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
-            = image_tag(l.template.background_image, class: "preview-image d-inline-block mr-4 border border-danger rounded-xl")
+            = image_tag(l.template.background_image, class: "list-preview-image")
     %br
     %h2.font-weight-bold.d-inline-block.mt-5 My Templates
     %h5.d-inline-block= link_to "create new", new_template_path
@@ -13,5 +13,5 @@
         - @templates.each do |t|
             -if t.active?
                 = link_to template_path(t) do
-                    = image_tag(t.background_image, class: "preview-image d-inline-block mr-4 border border-danger rounded-xl")
+                    = image_tag(t.background_image, class: "list-preview-image")
                     

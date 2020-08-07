@@ -9,10 +9,10 @@
     - @lineups.each do |l|
         %li.d-inline-block
             = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
-                = image_tag(l.template.background_image, class: "preview-image mr-4 border border-danger rounded-xl")
+                = image_tag(l.template.background_image, class: "list-preview-image")
     %h3.font-weight-bold.mt-5 Templates
     - @templates.each do |t|
         -if t.active?
             %li.d-inline-block
                 = link_to template_path(t) do
-                    = image_tag(t.background_image, class: "preview-image mr-4 border border-danger rounded-xl")
+                    = image_tag(t.background_image, class: "list-preview-image")

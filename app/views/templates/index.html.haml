@@ -14,6 +14,6 @@
     - @templates.each do |tem|
       -if tem.active?
         = link_to(tem) do
-          = image_tag(tem.background_image, size: "210x280", class: "d-inline-block mr-4 border border-danger rounded-lg")
+          = image_tag(tem.background_image, class: "list-preview-image")
   %h1.font-weight-bold Want to make your own Template?
   = link_to "ADD TEMPLATE", new_template_path, class: "btn btn-primary"
