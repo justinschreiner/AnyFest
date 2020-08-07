@@ -5,6 +5,7 @@ class TemplatesController < ApplicationController
   
   def index
     @q = Festival.ransack(params[:q])
+    @q.sorts = 'name asc' if @q.sorts.empty?
     @festivals = @q.result(distinct: true)
     @templates = Template.all
   end

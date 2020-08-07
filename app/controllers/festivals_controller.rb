@@ -1,6 +1,7 @@
 class FestivalsController < ApplicationController
   def index
     @q = Festival.ransack(params[:q])
+    @q.sorts = 'name asc' if @q.sorts.empty?
     @festivals = @q.result(distinct: true)
   end
 
