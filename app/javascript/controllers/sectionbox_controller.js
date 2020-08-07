@@ -31,17 +31,19 @@ export default class extends Controller {
 
         // Make the boxes the right size based on their size in the db
         day.style.height = `${(dayHeight * image.height) / 10000.0}px`;
-        day.style.width = `${(dayWidth * 100.0) / 10000.0}%`;
+        day.style.width = `${(dayWidth * image.width) / 10000.0}px`;
         day.style.marginTop = `${(dayYOffset * image.height) / 10000.0}px`;
-        day.style.marginLeft = `${(dayXOffset * 100.0) / 10000.0}%`;
+        day.style.marginLeft = `${(dayXOffset * image.width) / 10000.0}px`;
         day.style.zIndex = "1";
 
         section.style.height = `${(sectionHeight * image.height) / 10000.0}px`;
-        section.style.width = `${(sectionWidth * 100.0) / 10000.0}%`;
+        section.style.width = `${(sectionWidth * image.width) / 10000.0}px`;
         section.style.marginTop = `${
           (sectionYOffset * image.height) / 10000.0
         }px`;
-        section.style.marginLeft = `${(sectionXOffset * 100.0) / 10000.0}%`;
+        section.style.marginLeft = `${
+          (sectionXOffset * image.width) / 10000.0
+        }px`;
         section.style.zIndex = "2";
 
         // Adjust the container for the form
@@ -104,7 +106,6 @@ export default class extends Controller {
           var checkBox = document.getElementById("alternating-color");
           checkBox.id = "alternating-color" + index.toString();
           checkBox.setAttribute("data-id", (index + 5).toString());
-          console.log(checkBox);
 
           var colorContent = document.getElementById("colors");
           colorContent.id = (index + 5).toString();

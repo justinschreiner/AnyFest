@@ -24,9 +24,9 @@ export default class extends Controller {
 
         // Make the day box the right size based off of the sizes in the db
         day.style.height = `${(dayHeight * image.height) / 10000.0}px`;
-        day.style.width = `${(dayWidth * 100.0) / 10000.0}%`;
+        day.style.width = `${(dayWidth * image.width) / 10000.0}px`;
         day.style.marginTop = `${(dayYOffset * image.height) / 10000.0}px`;
-        day.style.marginLeft = `${(dayXOffset * 100.0) / 10000.0}%`;
+        day.style.marginLeft = `${(dayXOffset * image.width) / 10000.0}px`;
         day.style.zIndex = "1";
 
         // Adjust the container for the form

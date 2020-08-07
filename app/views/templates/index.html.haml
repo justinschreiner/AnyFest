@@ -12,7 +12,7 @@
   %h1.font-weight-bold Make your Lineup now!
   %ul
     - @templates.each do |tem|
-      - if(tem.background_image.attached?)
+      -if tem.active?
         = link_to(tem) do
           = image_tag(tem.background_image, size: "210x280", class: "d-inline-block mr-4 border border-danger rounded-lg")
   %h1.font-weight-bold Want to make your own Template?
