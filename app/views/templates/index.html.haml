@@ -15,11 +15,13 @@
   %h1
     Make your Lineup now!
   %ul#templates
+    - x = 0
     - @templates.each do |tem|
-      -if tem.active?
+      -if tem.active? && x<6
         #preview
           = link_to(tem) do
             = image_tag(tem.background_image, size: "210x280")
+        - x = x+1
   %h1
     Want to make your own Template?
   = link_to "ADD TEMPLATE", new_template_path, class: "btn btn-primary"

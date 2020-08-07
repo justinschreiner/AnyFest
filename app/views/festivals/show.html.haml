@@ -11,15 +11,20 @@
     %h3#search-lineups
         %b Lineups
     #lineup-results
+        - l = 0
         - @lineups.each do |l|
-            %li
-                = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
-                    = image_tag(l.template.background_image, class: "preview-image")
+            - if l<6
+                %li
+                    = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
+                        = image_tag(l.template.background_image, class: "preview-image")
+            - l = l+1
     %h3#search-templates
         %b Templates
     #template-results
+        - j = 0
         - @templates.each do |t|
-            -if t.active?
+            -if t.active? && j<6
                 %li
                     = link_to template_path(t) do
                         = image_tag(t.background_image, class: "preview-image")
+            -j = j+1
