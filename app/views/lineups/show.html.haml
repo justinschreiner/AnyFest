@@ -1,6 +1,6 @@
 #show-lineup
     .page-content.row
-        .container.col#lineup
+        .col.m-3.p-0#lineup
             .img-container.position-relative
                 = image_tag(@template.background_image, class: "image img-fluid")
                 .text
@@ -8,13 +8,13 @@
                         - section = section_act.section
                         %div{ data: {controller: "lineup", lineup_section_height: section.height, lineup_section_width: section.width, lineup_section_x_offset: section.x_offset, lineup_section_y_offset: section.y_offset, lineup_section_delineator: section.delineator, lineup_section_text_colors: section.text_colors, lineup_section_delineator_color: section.delineator_color, lineup_acts: section_act.acts, lineup_section_font: section.font, lineup_section_weight: section.weight }}
                     %div{ data: { controller: "download" }}
-        .info.col#right
+        .info.m-3.col#right
             %h1 
                 %b= @lineup.name
             %button#download.btn.btn-primary.disabled
-                %a#download-link{download: "myImage.png", href: "" }
+                %a.text-danger.text-decoration-none#download-link{download: "AnyFestLineup.png", href: "" }
                     DOWNLOAD
-            .prompt
+            .prompt.mt-5
                 %h3
                     Like what you see? Use this template to create another mock lineup!
                 #link
