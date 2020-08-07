@@ -94,77 +94,14 @@ body {
   }
 
   #home {
-    #search {
-      .form-control,
-      .btn {
-        display: inline-block;
-      }
-      .form-control {
-        font-size: 1em;
-        border-radius: 10vw;
-        padding: 1vh 1vw;
-        width: 60%;
-      }
-    }
-    #results,
-    #add {
-      padding-left: 3vw;
+    #results {
       list-style-type: none;
-    }
-    #preview {
-      display: inline-block;
-      padding-right: 1vw;
-      img {
-        border-radius: 10%;
-        border: 2px solid #ff6b6b;
-      }
     }
   }
 
   #festivals-index {
-    #search {
-      .form-control,
-      .btn {
-        display: inline-block;
-      }
-      .form-control {
-        font-size: 1em;
-        border-radius: 10vw;
-        padding: 1vh 1vw;
-        width: 60%;
-      }
-    }
-
     li {
       list-style-type: none;
-      font-size: 3vh;
-    }
-  }
-
-  #template-form {
-    #form {
-      #image {
-        #file {
-          margin: 1em 0;
-        }
-      }
-      .btn {
-        margin-top: 2em;
-      }
-      .errors {
-        color: #ff6b6b;
-        margin: 0 1vw;
-      }
-      .form-control {
-        margin-bottom: 0;
-      }
-    }
-    #preview {
-      img {
-        width: 20vw;
-        height: auto;
-        object-fit: contain;
-      }
     }
   }
 
