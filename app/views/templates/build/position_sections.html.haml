@@ -1,24 +1,25 @@
 #position-sections
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put, local: true do |t|
-        %h1 Create Sections for your Template
+        %h1.font-weight-bold Create Sections for your Template
         .row-container
             .row
                 #preview.col-8.order-2
-                    %h3 Preview 
+                    %h3.font-weight-bold Preview
                     - if(@template.background_image.attached?)
                         = image_tag(@template.background_image, class: "dropzone preview_image", id: "preview_image")
                 #form.col-3.order-1
-                    %h3#sections-header.d-inline-block Add Sections
+                    %h3.d-inline-block.font-weight-bold Add Sections
                     %a.d-inline-block{class: "overview-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
                     "data-content": "<div><b>Days:</b> Should contain at least one section.  These help to organize the template. </div><div><b>Sections:</b> Should be placed inside of days. Make different sections for each part of the lineup that has different formatting. Ex: Headliners, sub-headliners, etc.</div>", "data-html": "true"}
                         .popover-icon
                             = fa_icon "info-circle"
-                    .container#item-container
-                        %h5#color-label.d-inline-block Box Color 
+                    .container.bg-primary.text-center.content-center.p-3
+                        %h4.d-inline-block.text-secondary.font-weight-bold Box Color 
                         %a.d-inline-block{class: "box-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
                         "data-content": "Change this setting if you are having trouble seeing the boxes on your template.  This setting not affect the template itself."}
                             .popover-icon
                                 = fa_icon "info-circle"
+                        %br
                         .btn-group.btn-group-toggle{"data-toggle": "buttons"}
                             %label.btn.btn-primary.active#dark-button
                                 %input{type: "radio", name: "options", id: "dark", autocomplete: "off", onclick: "darkButton()"}
@@ -26,14 +27,12 @@
                             %label.btn.btn-primary#light-button
                                 %input{type: "radio", name: "options", id: "light", autocomplete: "off", onclick: "lightButton()"}
                                     Light
-                        #day.item
-                            Day
-                        #section.item
-                            Section
-                        #trash.dropzone
-                            = fa_icon "trash"
+                        #day.item Day
+                        #section.item Section
+                        #trash.dropzone.text-danger.mt-5
+                            %h3= fa_icon "trash"
                         = t.fields_for :days do |d|
                             = d.fields_for :sections do |s|
                                 attach fields
-                    = t.submit "CONTINUE", class: "btn btn-primary"
+                    = t.submit "CONTINUE", class: "btn btn-primary mt-4"
                     = error_messages(t, :days)

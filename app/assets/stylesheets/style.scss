@@ -108,12 +108,8 @@ body {
   #position-sections {
     #form {
       .container {
-        background-color: #fff;
         border-radius: 5vh;
         border: 3px solid #ff6b6b;
-        justify-content: center;
-        text-align: center;
-        padding: 1em;
 
         #dark-button {
           border-top-right-radius: 0;
@@ -123,23 +119,11 @@ body {
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
         }
-
         .btn {
           &.active {
             background-color: darken(#ffe66d, 20);
             box-shadow: none;
           }
-        }
-
-        h5 {
-          color: #1a535c;
-          margin-bottom: 0;
-          margin-top: 1vh;
-        }
-
-        #color-label,
-        #popover {
-          display: inline-block;
         }
 
         .drag-drop,
@@ -173,16 +157,6 @@ body {
           width: 60%;
           height: 13%;
         }
-
-        i {
-          color: #ff6b6b;
-          font-size: 2.5vh;
-          margin-top: 25%;
-        }
-      }
-
-      .errors {
-        color: #ff6b6b;
       }
     }
     #preview {
@@ -191,52 +165,16 @@ body {
         height: auto;
       }
     }
-
-    input {
-      &.btn {
-        margin-top: 2em;
-      }
-    }
   }
 
   #section-settings,
   #new-lineup {
-    #instance {
-      height: auto;
-      overflow: auto;
+    .instance {
       width: 80%;
-      background-color: #fff;
       border: 2px solid #ff6b6b;
       border-radius: 5em;
-      margin-bottom: 5%;
-      padding: 5% 10%;
 
-      h2 {
-        a {
-          color: #1a535c;
-          margin-bottom: 3vh;
-        }
-      }
-      .col {
-        padding: 0;
-      }
-      .row {
-        padding: 0 1vw;
-      }
       .form {
-        color: #1a535c;
-
-        .container {
-          position: relative;
-        }
-        .add-button {
-          border: none;
-          background-color: #fff;
-          i {
-            color: #1a535c;
-            font-size: 2em;
-          }
-        }
         .text-color {
           width: 20%;
         }
@@ -244,17 +182,6 @@ body {
         .delineator {
           width: 40%;
         }
-        .text-color,
-        .delineator-color {
-          padding: 0.5vh 0.5vw;
-        }
-        .delineator {
-          padding: 0.5vh 0.2vw;
-          padding-left: 1em;
-        }
-      }
-      img {
-        position: absolute;
       }
       .surrounding-day,
       .section,

@@ -2,33 +2,33 @@
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
         = t.fields_for :days do |d|
             #accordionDay.accordion
-                #instance
+                .instance.mb-5.p-5.bg-primary
                     #dayHeading
                         %h2.mb-0
-                            %a#dayAccordionHeader{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
+                            %a.text-secondary.mb-4#dayAccordionHeader{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                 Day Settings
                     #collapseDay.collapse.show{"aria-labelledby": "dayHeading", "data-parent": "#accordionDay"}
                         %div{ data: {controller: "daybox", daybox_height: d.object.height, daybox_width: d.object.width, daybox_x_offset: d.object.x_offset, daybox_y_offset: d.object.y_offset}}
                             .form-content.row
-                                .form.col
+                                .form.col.text-secondary
                                     = d.label :name
                                     = d.text_field :name, class: "form-control input-lg", id: "name"
                                     = error_messages(d, :name)
                                     %a.btn.btn-primary#innerDayCollapse{"aria-controls": "collapseDay", "aria-expanded": "true", "href": "#collapseDay", "data-toggle": "collapse", "type": "button"}
                                         HIDE
-                                .container.col{"data-target": "daybox.output"}
-                                    = image_tag(@template.background_image, class: "preview_image image img-fluid")
+                                .position-relative.col{"data-target": "daybox.output"}
+                                    = image_tag(@template.background_image, class: "preview_image image img-fluid position-absolute")
             = d.fields_for :sections do |s|
                 #accordionSection.accordion
-                    #instance
+                    .instance.mb-5.p-5.bg-primary
                         #sectionHeading
                             %h2.mb-0
-                                %a#sectionAccordionHeader{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
+                                %a.text-secondary.mb-4#sectionAccordionHeader{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                     Section Settings
                         #collapseSection.collapse.show{"aria-labelledby": "sectionHeading", "data-parent": "#accordionSection"}
                             %div{ data: {controller: "sectionbox", sectionbox_day_height: d.object.height, sectionbox_day_width: d.object.width, sectionbox_day_x_offset: d.object.x_offset, sectionbox_day_y_offset: d.object.y_offset, sectionbox_section_height: s.object.height, sectionbox_section_width: s.object.width, sectionbox_section_x_offset: s.object.x_offset, sectionbox_section_y_offset: s.object.y_offset}}
                                 .form-content.row
-                                    .form.col
+                                    .form.col.text-secondary
                                         = s.label :name
                                         = s.text_field :name, class: "form-control input-lg name"
                                         = error_messages(s, :name)
@@ -37,10 +37,10 @@
                                             = s.check_box :alternating_colors, class: "form-check-input alternating-color", onchange: "collapseAddColor(this)", id: "alternating-color"
                                         .color-fields    
                                             = s.label :text_colors
-                                            = s.color_field :text_colors, class: "form-control input-lg text-color"
+                                            = s.color_field :text_colors, class: "form-control input-lg text-color p-1"
                                             .collapse#colors
-                                                %button.add-button{ onclick: "addColorField(this)" }
-                                                    = fa_icon "plus-square"
+                                                %button.text-secondary.bg-primary.border-0{ onclick: "addColorField(this)", type: "button"}
+                                                    %h4= fa_icon "plus-square"
                                         .row
                                             .col
                                                 = s.label :font
@@ -57,12 +57,12 @@
                                                 = s.select :delineator, ['·', '/', '|', ''], {}, class: "form-control delineator"
                                             .col
                                                 = s.label :delineator_color
-                                                = s.color_field :delineator_color, class: "form-control input-lg delineator-color"
+                                                = s.color_field :delineator_color, class: "form-control input-lg delineator-color p-1"
                                         = s.label :max_act_count
                                         = s.number_field :max_act_count, min: 1, class: "form-control input-lg max_acts"
                                         = error_messages(s, :max_act_count)
                                         %a.btn.btn-primary#innerSectionCollapse{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}
                                             HIDE
-                                    .container.col{"data-target": "sectionbox.output"}
-                                        = image_tag(@template.background_image, class: "preview_image img-fluid")
+                                    .position-relative.col{"data-target": "sectionbox.output"}
+                                        = image_tag(@template.background_image, class: "preview_image img-fluid position-absolute")
         = t.submit "CONTINUE", class: "btn btn-primary"

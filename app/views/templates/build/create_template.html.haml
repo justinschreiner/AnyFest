@@ -28,6 +28,6 @@
                 %br
                 // stretch goal: be able to choose a solid color for a background if you don't have an image
                 = f.submit "CREATE", class: "btn btn-primary mt-4"
-        #preview.col
+        .col
             %h2.font-weight-bold Preview
-            .img-fluid=image_tag("", alt:"")
+            =image_tag("", alt:"", class: "img-fluid")
