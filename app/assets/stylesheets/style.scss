@@ -14,13 +14,6 @@ body {
   color: #ff6b6b;
 }
 
-h2 {
-  font-weight: 700;
-}
-h5 {
-  font-weight: 700;
-}
-
 .position-bottom {
   position: absolute;
   bottom: 0;
@@ -35,22 +28,6 @@ h5 {
 
 #content {
   padding: 0 10vw;
-
-  h1 {
-    font-size: 3vw;
-    color: white;
-  }
-
-  h2 {
-    font-size: 2.5vw;
-    color: white;
-  }
-
-  h3 {
-    font-size: 2vw;
-    color: white;
-  }
-
   a {
     color: #1a535c;
   }
@@ -107,29 +84,12 @@ h5 {
   }
 
   #big-text {
-    text-align: center;
     font-size: 1em;
-    padding: 0;
-    margin: 0;
     #any {
-      color: #ffe66d;
-      font-size: 7vw;
+      font-size: 5rem;
     }
     #fest {
-      color: #ff6b6b;
-      font-size: 7vw;
-    }
-  }
-
-  #login {
-    margin-left: 20vw;
-    a {
-      margin-top: 1vh;
-      margin-left: 0.25vw;
-      display: inline-block;
-    }
-    .btn {
-      margin-top: 1vh;
+      font-size: 5rem;
     }
   }
 
