@@ -12,8 +12,7 @@
   %h1.font-weight-bold Make your Lineup now!
   %ul
     - @templates.each do |tem|
-      -if tem.active?
-        = link_to(tem) do
-          = image_tag(tem.background_image, class: "list-preview-image")
+      = link_to(tem) do
+        = image_tag(tem.background_image, class: "list-preview-image")
   %h1.font-weight-bold Want to make your own Template?
   = link_to "ADD TEMPLATE", new_template_path, class: "btn btn-primary"

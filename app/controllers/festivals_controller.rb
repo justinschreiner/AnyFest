@@ -1,6 +1,7 @@
 class FestivalsController < ApplicationController
   def index
     @q = Festival.ransack(params[:q])
+    @q.sorts = 'name asc' if @q.sorts.empty?
     @festivals = @q.result(distinct: true)
   end
 
@@ -8,8 +9,8 @@ class FestivalsController < ApplicationController
     @festival = Festival.find(params[:id])
     @query = params[:q]
     if @query.nil?
-      @lineups = @festival.lineups
-      @templates = @festival.templates
+      @lineups = @festival.lineups.limit(6)
+      @templates = @festival.templates.where(status: 'active').limit(6)
     else
       @lineups = @festival.lineups.search_by_name(@query)
       @templates = @festival.templates.search_by_name(@query)

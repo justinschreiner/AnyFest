@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     def show
       @user = User.find(params[:id])
       @lineups = current_user.lineups
-      @templates = current_user.templates
+      @templates = current_user.templates.where(status: 'active')
     end
 
   end

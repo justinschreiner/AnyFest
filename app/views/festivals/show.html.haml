@@ -12,7 +12,6 @@
                 = image_tag(l.template.background_image, class: "list-preview-image")
     %h3.font-weight-bold.mt-5 Templates
     - @templates.each do |t|
-        -if t.active?
-            %li.d-inline-block
-                = link_to template_path(t) do
-                    = image_tag(t.background_image, class: "list-preview-image")
+        %li.d-inline-block
+            = link_to template_path(t) do
+                = image_tag(t.background_image, class: "list-preview-image")

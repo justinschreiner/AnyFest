@@ -17,8 +17,9 @@ class Template < ApplicationRecord
     validates :background_image, presence: {message: "upload an image"}, if: :active_or_create?
     validates_associated :days,                                          if: :active_or_position?
     validate :has_one_day_minimum,                                       if: :active_or_position?
-    validate :has_one_section_minimum,                                       if: :active_or_position?
+    validate :has_one_section_minimum,                                   if: :active_or_position?
     validates_associated :days,                                          if: :active_or_settings?
+
 
     def active?
         status == 'active'
