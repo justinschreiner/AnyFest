@@ -1,13 +1,19 @@
-%ul#navbar
-    %li#anyfest
-        = link_to root_path do
-            %span#any= "Any"
-            %span#fest= "Fest"
-    %li#home
-        = link_to "Home", root_path
-    %li#logout
-        = link_to destroy_session_path(:user), method: :delete do
-            %i.fa.fa-sign-out
-            Logout
-    %li#user
-        = link_to current_user.email, user_path(current_user.id)
+#navbar.position-relative.d-block.bg-secondary.text-primary
+    .position-bottom.mb0
+        %ul.mb-0.align-bottom
+            %li.ml-3.d-inline-block
+                %h2.mb-0.align-bottom.font-weight-bold
+                    = link_to root_path do
+                        %span#any.text-danger.float-left= "Any"
+                        %span#fest.text-warning= "Fest"
+            %li.ml-3.d-inline-block
+                %h5.font-weight-bold
+                    = link_to "Home", root_path
+            %li.ml-3.d-inline-block
+                %h5.font-weight-bold
+                    = link_to destroy_session_path(:user), method: :delete do
+                        %i.fa.fa-sign-out
+                        Logout
+            %li.mr-3.d-inline-block.float-right
+                %h5.font-weight-bold
+                    = link_to current_user.email, user_path(current_user.id)

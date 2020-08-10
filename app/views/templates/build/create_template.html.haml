@@ -1,35 +1,33 @@
-#template-form.container
+#create-template.container
     .row
-        #form.col
+        .col
             = form_with model: @template, id: "form-input", url: wizard_path, method: :put, local: true do |f|
                 .form-group
-                    %h2
-                        = f.label :festival_id
+                    %h2.font-weight-bold= f.label :festival_id
                     Don't see your festival?
                     = link_to "add it", new_festival_path
                     = f.collection_select(:festival_id, @festivals, :id, :name, {prompt: true}, {class: "form-control"})
                     = error_messages(f, :festival_id)
                 .form-group
-                    %h2#name-label.d-inline-block
+                    %h2.d-inline-block.font-weight-bold
                         = f.label :name
                     %a.d-inline-block{class: "name-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
                     "data-content": "Enter a name for your template so others can find it."}
                         .popover-icon
                             = fa_icon "info-circle"
-                    = f.text_field :name, class: "form-control input-lg"
+                    = f.text_field :name, class: "form-control input-lg mt-0"
                     = error_messages(f, :name)
-                %h2.d-inline-block
+                %h2.d-inline-block.font-weight-bold
                     = f.label :background_image
                 %a.d-inline-block{class: "name-popover", "data-container": "body", "data-toggle": "popover", "data-placement": "right", 
                 "data-content": "Upload an image to use. Blank festival lineups work best!"}
                     .popover-icon
                         = fa_icon "info-circle"
-                #file
-                    = f.file_field :background_image, {onchange: "previewFile()"}
+                = f.file_field :background_image, {onchange: "previewFile()"}
                 = error_messages(f, :background_image)
+                %br
                 // stretch goal: be able to choose a solid color for a background if you don't have an image
-                = f.submit "CREATE", class: "btn btn-primary"
-        #preview.col
-            %h2
-                Preview
-            =image_tag("", alt:"")
+                = f.submit "CREATE", class: "btn btn-primary mt-4"
+        .col
+            %h2.font-weight-bold Preview
+            =image_tag("", alt:"", class: "img-fluid")

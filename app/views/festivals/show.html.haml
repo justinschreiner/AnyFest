@@ -1,30 +1,23 @@
 #show-festival
-    %h1#name
-        %b
-            = @festival.name
-    %h4#location
-        = @festival.location
-    %h2 Search
+    %h1.font-weight-bold= @festival.name
+    %h4= @festival.location
+    %h2.font-weight-bold.mt-5 Search
     = form_with method: :get, local: true do |s|
         = s.text_field :q, class: "form-control d-inline-block"
         = s.submit "SEARCH", class: "btn btn-primary d-inline-block"
-    %h3#search-lineups
-        %b Lineups
-    #lineup-results
-        - l = 0
-        - @lineups.each do |l|
-            - if l<6
-                %li
-                    = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
-                        = image_tag(l.template.background_image, class: "preview-image")
-            - l = l+1
-    %h3#search-templates
-        %b Templates
-    #template-results
-        - j = 0
-        - @templates.each do |t|
-            -if t.active? && j<6
-                %li
-                    = link_to template_path(t) do
-                        = image_tag(t.background_image, class: "preview-image")
-            -j = j+1
+    %h3.font-weight-bold.mt-5 Lineups
+    - i = 0
+    - @lineups.each do |l|
+        - if i<6
+            %li.d-inline-block
+                = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
+                    = image_tag(l.template.background_image, class: "list-preview-image")
+            - i = i+1
+    %h3.font-weight-bold.mt-5 Templates
+    - j = 0
+    - @templates.each do |t|
+        -if t.active? && j<6
+            %li.d-inline-block
+                = link_to template_path(t) do
+                    = image_tag(t.background_image, class: "list-preview-image")
+        -j = j+1
