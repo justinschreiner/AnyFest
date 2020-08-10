@@ -1,16 +1,9 @@
 #show-template.row
-    #image.col
+    #image.col.mx-3
         - if(@template.background_image.attached?)
             =image_tag(@template.background_image, class: "image img-fluid")
-    .info.col
-        %h1#name
-            %b
-                = @template.name
-        %h2#festival
-            = link_to @template.festival.name, festival_path(@template.festival)
-        %h2#user
-            = current_user.email
-        .prompt
-            %h3
-                Like what you see? Use this template to create your own mock lineup!
-        = link_to "GO", new_template_lineup_path(@template), {class: "btn btn-primary"}
+    .info.col.mx-3
+        %h1.font-weight-bold= @template.name
+        %h2.font-weight-bold.mt-5= link_to @template.festival.name, festival_path(@template.festival)
+        %h3.mt-5 Like what you see? Use this template to create your own mock lineup!
+        .mt-4= link_to "GO", new_template_lineup_path(@template), {class: "btn btn-primary"}

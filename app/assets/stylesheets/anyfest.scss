@@ -1,3 +1,15 @@
-$secondary: #ff6b6b;
+$primary: #ffff;
+$secondary: #1a535c;
+$danger: #ff6b6b;
+$warning: #ffe66d;
+$blue: #4ecdc4;
+
+.ml-7 {
+  margin-left: 10vw;
+}
+
+.rounded-xl {
+  border-radius: 10%;
+}
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";

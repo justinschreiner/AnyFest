@@ -1,18 +1,17 @@
 #show-user
-    %h1
-        %b= current_user.email
+    %h1.font-weight-bold= current_user.email
     - if current_user.is_admin?
-        #trestle
-            = link_to "Trestle", trestle.root_path, class: "btn btn-primary"
-    %h2 My Mock Lineups
-    #lineups
-        - @lineups.each do |l|
-            = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
-                = image_tag(l.template.background_image, class: "preview-image")
-    %h2#my-templates My Templates
-    %h4#new-link= link_to "create new", new_template_path
-    #templates
+        = link_to "TRESTLE", trestle.root_path, class: "btn btn-primary mt-3"
+    %h2.font-weight-bold.mt-5 My Mock Lineups
+    - @lineups.each do |l|
+        = link_to template_lineup_path(template_id: l.template.id, id: l.id) do
+            = image_tag(l.template.background_image, class: "list-preview-image")
+    %br
+    %h2.font-weight-bold.d-inline-block.mt-5 My Templates
+    %h5.d-inline-block= link_to "create new", new_template_path
+    %br
         - @templates.each do |t|
             -if t.active?
                 = link_to template_path(t) do
-                    = image_tag(t.background_image, class: "preview-image")
+                    = image_tag(t.background_image, class: "list-preview-image")
+                    
