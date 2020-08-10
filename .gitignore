@@ -43,4 +43,3 @@ yarn-debug.log*
 .docker-development-vars
 .DS_Store
 .vscode/settings.json
-/config/secrets.yml
