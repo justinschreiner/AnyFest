@@ -20,7 +20,7 @@ class Template < ApplicationRecord
     validate :has_one_section_minimum,                                   if: :active_or_position?
     validates_associated :days,                                          if: :active_or_settings?
 
-    
+
     def active?
         status == 'active'
     end

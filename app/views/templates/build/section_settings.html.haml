@@ -1,6 +1,6 @@
 #section-settings.section-settings
     = form_with model: @template, id: "form-input", url: wizard_path, method: :put do |t|
-        = t.fields_for :days do |d|
+        = t.fields_for :days, @template.days.sort_by(&:y_offset) do |d|
             #accordionDay.accordion
                 #instance
                     #dayHeading
@@ -18,7 +18,7 @@
                                         HIDE
                                 .container.col{"data-target": "daybox.output"}
                                     = image_tag(@template.background_image, class: "preview_image image img-fluid")
-            = d.fields_for :sections do |s|
+            = d.fields_for :sections, d.object.sections.sort_by(&:y_offset) do |s|
                 #accordionSection.accordion
                     #instance
                         #sectionHeading
