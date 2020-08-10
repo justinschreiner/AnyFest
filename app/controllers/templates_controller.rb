@@ -7,7 +7,7 @@ class TemplatesController < ApplicationController
     @q = Festival.ransack(params[:q])
     @q.sorts = 'name asc' if @q.sorts.empty?
     @festivals = @q.result(distinct: true)
-    @templates = Template.all
+    @templates = Template.where(status: 'active').limit(6)
   end
 
   def show

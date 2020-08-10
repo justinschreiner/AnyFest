@@ -11,11 +11,8 @@
   .d-inline-block= link_to "add a new festival", new_festival_path
   %h1.font-weight-bold Make your Lineup now!
   %ul
-    - x = 0
     - @templates.each do |tem|
-      -if tem.active? && x<6
-        = link_to(tem) do
-          = image_tag(tem.background_image, class: "list-preview-image")
-        - x = x+1
+      = link_to(tem) do
+        = image_tag(tem.background_image, class: "list-preview-image")
   %h1.font-weight-bold Want to make your own Template?
   = link_to "ADD TEMPLATE", new_template_path, class: "btn btn-primary"
