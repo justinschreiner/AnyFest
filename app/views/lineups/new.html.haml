@@ -12,7 +12,7 @@
             - day.sections.each do |section|
                 = f.fields_for :section_acts, SectionAct.new do |s|
                     #accordionSection.accordion
-                        .instance.mb-5.p-10.bg-primary
+                        .instance.mb-5.p-5.bg-primary
                             #sectionHeading
                                 %h2.mb-0
                                     %a.text-secondary.mb-4#sectionAccordionHeader{"aria-controls": "collapseSection", "aria-expanded": "true", "href": "#collapseSection", "data-toggle": "collapse", "type": "button"}

@@ -34,18 +34,20 @@ export default class extends Controller {
 
           // If name has a space in it, wrap each word in its own span - helps with fixSectionDelineator()
           var tempName = acts[i];
-          if (tempName.includes(" ")) {
-            tempName = tempName.split(" ");
-            for (var j = 0; j < tempName.length; j++) {
-              innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName[j]} </span>`;
+          if (tempName != "") {
+            if (tempName.includes(" ")) {
+              tempName = tempName.split(" ");
+              for (var j = 0; j < tempName.length; j++) {
+                innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName[j]} </span>`;
+              }
+            } else {
+              innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName} </span>`;
             }
-          } else {
-            innerText += `<span style = 'color: ${sectionTextColors[numIndex]}; font-family: ${sectionFont}; font-weight: ${sectionWeight};'> ${tempName} </span>`;
-          }
 
-          // Add the delineator between acts
-          if (i < acts.length - 1) {
-            innerText += `<span class = 'delineator' style= 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
+            // Add the delineator between acts
+            if (i < acts.length - 1) {
+              innerText += `<span class = 'delineator' style= 'color: ${sectionDelineatorColor}; font-weight: ${sectionWeight};'> ${sectionDelineator} </span>`;
+            }
           }
         }
         section.innerHTML = innerText;
