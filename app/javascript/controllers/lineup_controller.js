@@ -55,13 +55,7 @@ export default class extends Controller {
         // Append the new boxes to the image
         container.appendChild(section);
 
-        this._updateSectionSize();
-
-        // Scale the font to the section
-        fitText(section);
-
-        // Get rid of extra delineators
-        fixDelineator(section, sectionDelineator);
+        this.resize();
       });
   }
 
