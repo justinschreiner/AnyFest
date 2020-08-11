@@ -1,6 +1,6 @@
 class Section < ApplicationRecord
     belongs_to :day
-    has_one :section_act
+    has_one :section_act, dependent: :destroy
 
     validates :name, :max_act_count, presence: true, if: :active_or_settings?
     validates :height, presence: true, if: :active_or_position?
