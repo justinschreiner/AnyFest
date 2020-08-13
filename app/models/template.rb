@@ -7,10 +7,10 @@ class Template < ApplicationRecord
     
     belongs_to :festival, required: false # A festival will be required, but setting this as false to be able to pass a template without a festival to Wicked form
     belongs_to :user
-    has_many :days
+    has_many :days, dependent: :destroy
     has_one_attached :background_image
-    accepts_nested_attributes_for :days, allow_destroy: true
-    has_many :lineups
+    accepts_nested_attributes_for :days
+    has_many :lineups, dependent: :destroy
 
     validates :festival_id,      presence: {message: "select one"},      if: :active_or_create?
     validates :name,             presence: {message: "can't be blank"},  if: :active_or_create?
