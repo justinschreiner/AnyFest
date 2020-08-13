@@ -60,9 +60,9 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "anyfest_production"
 
-  config.action_mailer.default_url_options = { ENV['SENDGRID_URL_HOST'] }
+  # config.action_mailer.default_url_options = { ENV['SENDGRID_URL_HOST'] }
   config.action_mailer.perform_caching = false
-  config.action_mailer.asset_host = ENV['SENDGRID_ASSET_HOST']
+  # config.action_mailer.asset_host = ENV['SENDGRID_ASSET_HOST']
 
   ActionMailer::Base.smtp_settings = {
     user_name: ENV["SENDGRID_USERNAME"],
