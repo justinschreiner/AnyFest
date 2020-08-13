@@ -60,20 +60,16 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "anyfest_production"
 
+  config.action_mailer.default_url_options = { ENV['SENDGRID_URL_HOST'], protocol: 'https' }
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: ENV["SENDGRID_DOMAIN"] }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {address: "smtp.sendgrid.net", port: 587}
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.default charset: "utf-8"
-
+  config.action_mailer.asset_host = ENV['SENDGRID_ASSET_HOST']
 
   ActionMailer::Base.smtp_settings = {
     user_name: ENV["SENDGRID_USERNAME"],
     password: ENV["SENDGRID_PASSWORD"],
     domain: ENV["SENDGRID_DOMAIN"],
-    address: 'smtp.sendgrid.net',
-    port: '587',
+    address: ENV["SENDGRID_ADDRESS"],
+    port: ENV["SENDGRID_PORT"],
     authentication: :plain,
     enable_starttls_auto: true
   }
