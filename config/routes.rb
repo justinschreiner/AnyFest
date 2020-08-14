@@ -7,4 +7,7 @@ Rails.application.routes.draw do
     resources :lineups
   end
   root "templates#index"
+
+  # for email
+  default_url_options host: "www.anyfest.com"
 end
